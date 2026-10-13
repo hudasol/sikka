@@ -368,6 +368,69 @@ footer {
   font-size: 0.9rem;
 }
 
+a.rule-link {
+  display: inline-block;
+  min-block-size: 24px;
+  min-inline-size: 24px;
+  padding: 2px 4px;
+  margin: 2px;
+  line-height: 20px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.link-button:active {
+  transform: none;
+  box-shadow: none;
+}
+
+tr.selected td,
+tr.selected th {
+  background: var(--surface);
+  outline: 2px solid var(--accent-strong);
+}
+
+dialog.drawer {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+  margin-block: 0;
+  block-size: 100vh;
+  max-block-size: 100vh;
+  inline-size: min(560px, 100vw);
+  border: 2px solid var(--ink);
+  background: var(--raised);
+  color: var(--text);
+  padding: 24px;
+  overflow-y: auto;
+}
+
+dialog.drawer::backdrop {
+  background: rgb(36 19 29 / 0.45);
+}
+
+fieldset {
+  border: 2px solid var(--ink);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--accent-strong);
+}
+
+ul.checklist {
+  list-style: "A1  ";
+}
+
 @media (max-width: 900px) {
   .grid.two {
     grid-template-columns: 1fr;

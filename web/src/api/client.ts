@@ -2,7 +2,7 @@
 // mode it reads the precomputed snapshot shipped in public/snapshot. Nothing else
 // is fetched: no tiles, fonts, analytics or third party services.
 
-import type { Problem, Sample, ValidateResponse } from "./types";
+import type { LineageEntry, LineageItem, Problem, Sample, ValidateResponse } from "./types";
 
 declare const __SIKKA_MODE__: "live" | "static";
 
@@ -28,8 +28,22 @@ export function snapshotUrl(path: string): string {
   return `${import.meta.env.BASE_URL}snapshot${path}.json`;
 }
 
+/** Map a parameterised API path to its static snapshot file. */
+export function staticPath(path: string): string {
+  const [base = path, query = ""] = path.split("?");
+  const params = new URLSearchParams(query);
+  if (base === "/v1/segments/ranking" && params.get("dataset") === "clean") {
+    return "/v1/segments/ranking-clean";
+  }
+  return base;
+}
+
 export function apiUrl(path: string): string {
-  return MODE === "static" ? snapshotUrl(path) : `${LIVE_BASE}${path}`;
+  return MODE === "static" ? snapshotUrl(staticPath(path)) : `${LIVE_BASE}${path}`;
+}
+
+export function lineageBucket(id: string): string {
+  return id.startsWith("CC-") ? id.slice(0, 5) : id.slice(0, 2);
 }
 
 async function parseError(response: Response): Promise<ApiError> {
@@ -87,4 +101,37 @@ export function reportHtmlUrl(reportId: string): string {
 
 export function reportJsonUrl(reportId: string): string {
   return apiUrl(`/v1/reports/${reportId}`);
+}
+
+export async function searchLineage(query: string): Promise<LineageItem[]> {
+  if (MODE === "static") {
+    const index = await getJson<{ items: LineageItem[] }>("/v1/lineage");
+    const needle = query.trim().toUpperCase();
+    return index.items
+      .filter(
+        (i) =>
+          !needle ||
+          i.canonical_id.includes(needle) ||
+          i.record_ids.some((r) => r.toUpperCase().includes(needle)),
+      )
+      .slice(0, 50);
+  }
+  const index = await getJson<{ items: LineageItem[] }>(
+    `/v1/lineage?q=${encodeURIComponent(query)}&limit=50`,
+  );
+  return index.items;
+}
+
+export async function getLineage(id: string): Promise<LineageEntry> {
+  if (MODE === "static") {
+    const bucket = await getJson<Record<string, LineageEntry>>(
+      `/v1/lineage-buckets/${lineageBucket(id)}`,
+    );
+    const entry = bucket[id];
+    if (!entry) {
+      throw new ApiError(404, `no canonical record with id ${id}`);
+    }
+    return entry;
+  }
+  return getJson<LineageEntry>(`/v1/lineage/${encodeURIComponent(id)}`);
 }

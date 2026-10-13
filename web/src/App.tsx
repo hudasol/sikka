@@ -3,7 +3,14 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 
 import { Layout } from "./components/Layout";
 import { SettingsProvider } from "./lib/settings";
+import { Blackspots } from "./pages/Blackspots";
+import { Conformance } from "./pages/Conformance";
+import { Contract } from "./pages/Contract";
+import { Lineage } from "./pages/Lineage";
+import { Method } from "./pages/Method";
 import { Overview } from "./pages/Overview";
+import { Pilot } from "./pages/Pilot";
+import { Tasking } from "./pages/Tasking";
 import { Placeholder } from "./pages/Placeholder";
 import { Validate } from "./pages/Validate";
 
@@ -19,13 +26,13 @@ export function AppRoutes() {
       <Route element={<Layout />}>
         <Route index element={<Overview />} />
         <Route path="validate" element={<Validate />} />
-        <Route path="contract" element={<Placeholder screen="contract" />} />
-        <Route path="conformance" element={<Placeholder screen="conformance" />} />
-        <Route path="blackspots" element={<Placeholder screen="blackspots" />} />
-        <Route path="lineage" element={<Placeholder screen="lineage" />} />
-        <Route path="tasking" element={<Placeholder screen="tasking" />} />
-        <Route path="method" element={<Placeholder screen="method" />} />
-        <Route path="pilot" element={<Placeholder screen="pilot" />} />
+        <Route path="contract" element={<Contract />} />
+        <Route path="conformance" element={<Conformance />} />
+        <Route path="blackspots" element={<Blackspots />} />
+        <Route path="lineage" element={<Lineage />} />
+        <Route path="tasking" element={<Tasking />} />
+        <Route path="method" element={<Method />} />
+        <Route path="pilot" element={<Pilot />} />
         <Route path="*" element={<Placeholder screen="overview" />} />
       </Route>
     </Routes>

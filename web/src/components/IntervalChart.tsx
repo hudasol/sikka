@@ -26,8 +26,9 @@ export function IntervalChart({ items, title, ariaLabel, domain = [0, 1], valueL
   const settings = useSettings();
   const id = useId();
   const rowH = 26;
-  const labelW = 210;
-  const width = 640;
+  const longest = Math.max(10, ...items.map((i) => i.label.length));
+  const labelW = Math.min(300, 30 + longest * 7);
+  const width = 640 + Math.max(0, labelW - 210);
   const plotW = width - labelW - 20;
   const height = items.length * rowH + 30;
   const rtl = settings.lang === "ar";

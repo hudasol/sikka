@@ -30,3 +30,7 @@ export function formatId(value: string): string {
   // Identifiers stay in Latin characters in both languages.
   return value;
 }
+
+export function formatYear(value: number | string, s: FormatSettings): string {
+  return new Intl.NumberFormat(locale(s), { useGrouping: false }).format(Number(value));
+}
