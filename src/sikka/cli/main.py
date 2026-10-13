@@ -198,3 +198,31 @@ def evaluate(
     )
     for path in written:
         typer.echo(f"wrote {path.relative_to(paths.root).as_posix()}")
+
+
+@app.command()
+def serve(
+    host: str = typer.Option("127.0.0.1", help="Interface to bind."),
+    port: int = typer.Option(8000, help="Port of the live API."),
+) -> None:
+    """Start the live API (FastAPI under uvicorn)."""
+    import uvicorn
+
+    from sikka.api import Service, create_app
+
+    paths = Paths()
+    service = Service(paths=paths, store_dir=paths.build / "api-reports")
+    typer.echo("Synthetic data. No real crash, traffic or road records are used.")
+    uvicorn.run(create_app(service), host=host, port=port, log_level="info")
+
+
+@app.command()
+def snapshot() -> None:
+    """Precompute every API response into web/public/snapshot for the static demo."""
+    from sikka.api import Service, snapshot_files
+
+    paths = Paths()
+    files = snapshot_files(Service(paths=paths, mode="static"))
+    written = write_artefacts(paths.root, files)
+    size = sum(len(text.encode("utf-8")) for text in files.values())
+    typer.echo(f"snapshot: {len(files)} files, {size // 1024} KB, {len(written)} updated")
