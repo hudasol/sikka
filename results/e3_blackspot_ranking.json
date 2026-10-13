@@ -1,0 +1,503 @@
+{
+ "experiment": "E3",
+ "generated_by": "sikka eval",
+ "methods": [
+  "raw_count",
+  "rate",
+  "eb",
+  "eb_qp"
+ ],
+ "notice": "Synthetic data. No real crash, traffic or road records are used.",
+ "per_seed": [
+  {
+   "scores": {
+    "eb_coverage": 0.929078,
+    "eb_qp_coverage": 0.93617,
+    "eb_qp_recall_all": 0.166667,
+    "eb_qp_recall_rankable": 0.4,
+    "eb_qp_width": 51.907801,
+    "eb_recall_all": 0.166667,
+    "eb_recall_rankable": 0.4,
+    "eb_width": 52.191489,
+    "planted": 12.0,
+    "planted_rankable": 5.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.6,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.2
+   },
+   "seed": 2001
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.888112,
+    "eb_qp_coverage": 0.874126,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 1.0,
+    "eb_qp_width": 60.468531,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 1.0,
+    "eb_width": 60.909091,
+    "planted": 12.0,
+    "planted_rankable": 4.0,
+    "rate_recall_all": 0.166667,
+    "rate_recall_rankable": 0.5,
+    "raw_count_recall_all": 0.416667,
+    "raw_count_recall_rankable": 0.25
+   },
+   "seed": 2002
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.878788,
+    "eb_qp_coverage": 0.886364,
+    "eb_qp_recall_all": 0.083333,
+    "eb_qp_recall_rankable": 0.25,
+    "eb_qp_width": 53.69697,
+    "eb_recall_all": 0.083333,
+    "eb_recall_rankable": 0.25,
+    "eb_width": 54.515152,
+    "planted": 12.0,
+    "planted_rankable": 4.0,
+    "rate_recall_all": 0.166667,
+    "rate_recall_rankable": 0.5,
+    "raw_count_recall_all": 0.083333,
+    "raw_count_recall_rankable": 0.0
+   },
+   "seed": 2003
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.886364,
+    "eb_qp_coverage": 0.886364,
+    "eb_qp_recall_all": 0.416667,
+    "eb_qp_recall_rankable": 0.714286,
+    "eb_qp_width": 55.80303,
+    "eb_recall_all": 0.416667,
+    "eb_recall_rankable": 0.714286,
+    "eb_width": 55.856061,
+    "planted": 12.0,
+    "planted_rankable": 7.0,
+    "rate_recall_all": 0.416667,
+    "rate_recall_rankable": 0.714286,
+    "raw_count_recall_all": 0.166667,
+    "raw_count_recall_rankable": 0.285714
+   },
+   "seed": 2004
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.842105,
+    "eb_qp_coverage": 0.815789,
+    "eb_qp_recall_all": 0.25,
+    "eb_qp_recall_rankable": 0.375,
+    "eb_qp_width": 62.263158,
+    "eb_recall_all": 0.25,
+    "eb_recall_rankable": 0.375,
+    "eb_width": 62.506579,
+    "planted": 12.0,
+    "planted_rankable": 8.0,
+    "rate_recall_all": 0.333333,
+    "rate_recall_rankable": 0.5,
+    "raw_count_recall_all": 0.083333,
+    "raw_count_recall_rankable": 0.0
+   },
+   "seed": 2005
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.929688,
+    "eb_qp_coverage": 0.9375,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 0.571429,
+    "eb_qp_width": 52.695312,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 0.571429,
+    "eb_width": 53.09375,
+    "planted": 12.0,
+    "planted_rankable": 7.0,
+    "rate_recall_all": 0.416667,
+    "rate_recall_rankable": 0.714286,
+    "raw_count_recall_all": 0.416667,
+    "raw_count_recall_rankable": 0.428571
+   },
+   "seed": 2006
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.830769,
+    "eb_qp_coverage": 0.838462,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 0.666667,
+    "eb_qp_width": 51.376923,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 0.666667,
+    "eb_width": 51.615385,
+    "planted": 12.0,
+    "planted_rankable": 6.0,
+    "rate_recall_all": 0.5,
+    "rate_recall_rankable": 1.0,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.333333
+   },
+   "seed": 2007
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.862745,
+    "eb_qp_coverage": 0.875817,
+    "eb_qp_recall_all": 0.25,
+    "eb_qp_recall_rankable": 0.5,
+    "eb_qp_width": 60.294118,
+    "eb_recall_all": 0.25,
+    "eb_recall_rankable": 0.5,
+    "eb_width": 60.72549,
+    "planted": 12.0,
+    "planted_rankable": 6.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.5,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.333333
+   },
+   "seed": 2008
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.89781,
+    "eb_qp_coverage": 0.912409,
+    "eb_qp_recall_all": 0.416667,
+    "eb_qp_recall_rankable": 0.625,
+    "eb_qp_width": 61.693431,
+    "eb_recall_all": 0.416667,
+    "eb_recall_rankable": 0.625,
+    "eb_width": 61.883212,
+    "planted": 12.0,
+    "planted_rankable": 8.0,
+    "rate_recall_all": 0.166667,
+    "rate_recall_rankable": 0.25,
+    "raw_count_recall_all": 0.416667,
+    "raw_count_recall_rankable": 0.5
+   },
+   "seed": 2009
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.81295,
+    "eb_qp_coverage": 0.81295,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 0.444444,
+    "eb_qp_width": 61.338129,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 0.444444,
+    "eb_width": 61.589928,
+    "planted": 12.0,
+    "planted_rankable": 9.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.333333,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.333333
+   },
+   "seed": 2010
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.93007,
+    "eb_qp_coverage": 0.93007,
+    "eb_qp_recall_all": 0.416667,
+    "eb_qp_recall_rankable": 0.625,
+    "eb_qp_width": 57.097902,
+    "eb_recall_all": 0.416667,
+    "eb_recall_rankable": 0.625,
+    "eb_width": 57.34965,
+    "planted": 12.0,
+    "planted_rankable": 8.0,
+    "rate_recall_all": 0.5,
+    "rate_recall_rankable": 0.75,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.375
+   },
+   "seed": 2011
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.827586,
+    "eb_qp_coverage": 0.855172,
+    "eb_qp_recall_all": 0.25,
+    "eb_qp_recall_rankable": 0.428571,
+    "eb_qp_width": 58.386207,
+    "eb_recall_all": 0.25,
+    "eb_recall_rankable": 0.428571,
+    "eb_width": 59.227586,
+    "planted": 12.0,
+    "planted_rankable": 7.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.428571,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.285714
+   },
+   "seed": 2012
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.875,
+    "eb_qp_coverage": 0.868421,
+    "eb_qp_recall_all": 0.25,
+    "eb_qp_recall_rankable": 0.428571,
+    "eb_qp_width": 66.802632,
+    "eb_recall_all": 0.25,
+    "eb_recall_rankable": 0.428571,
+    "eb_width": 67.059211,
+    "planted": 12.0,
+    "planted_rankable": 7.0,
+    "rate_recall_all": 0.333333,
+    "rate_recall_rankable": 0.571429,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.428571
+   },
+   "seed": 2013
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.85906,
+    "eb_qp_coverage": 0.879195,
+    "eb_qp_recall_all": 0.416667,
+    "eb_qp_recall_rankable": 0.555556,
+    "eb_qp_width": 58.067114,
+    "eb_recall_all": 0.416667,
+    "eb_recall_rankable": 0.555556,
+    "eb_width": 58.469799,
+    "planted": 12.0,
+    "planted_rankable": 9.0,
+    "rate_recall_all": 0.416667,
+    "rate_recall_rankable": 0.555556,
+    "raw_count_recall_all": 0.416667,
+    "raw_count_recall_rankable": 0.333333
+   },
+   "seed": 2014
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.8,
+    "eb_qp_coverage": 0.822222,
+    "eb_qp_recall_all": 0.166667,
+    "eb_qp_recall_rankable": 0.333333,
+    "eb_qp_width": 53.118519,
+    "eb_recall_all": 0.166667,
+    "eb_recall_rankable": 0.333333,
+    "eb_width": 53.333333,
+    "planted": 12.0,
+    "planted_rankable": 6.0,
+    "rate_recall_all": 0.333333,
+    "rate_recall_rankable": 0.666667,
+    "raw_count_recall_all": 0.166667,
+    "raw_count_recall_rankable": 0.166667
+   },
+   "seed": 2015
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.847328,
+    "eb_qp_coverage": 0.854962,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 0.5,
+    "eb_qp_width": 51.015267,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 0.5,
+    "eb_width": 51.564885,
+    "planted": 12.0,
+    "planted_rankable": 8.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.375,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.375
+   },
+   "seed": 2016
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.830986,
+    "eb_qp_coverage": 0.852113,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 0.571429,
+    "eb_qp_width": 60.190141,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 0.571429,
+    "eb_width": 60.246479,
+    "planted": 12.0,
+    "planted_rankable": 7.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.428571,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.571429
+   },
+   "seed": 2017
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.948148,
+    "eb_qp_coverage": 0.948148,
+    "eb_qp_recall_all": 0.083333,
+    "eb_qp_recall_rankable": 0.25,
+    "eb_qp_width": 55.451852,
+    "eb_recall_all": 0.083333,
+    "eb_recall_rankable": 0.25,
+    "eb_width": 55.57037,
+    "planted": 12.0,
+    "planted_rankable": 4.0,
+    "rate_recall_all": 0.083333,
+    "rate_recall_rankable": 0.25,
+    "raw_count_recall_all": 0.166667,
+    "raw_count_recall_rankable": 0.0
+   },
+   "seed": 2018
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.882759,
+    "eb_qp_coverage": 0.896552,
+    "eb_qp_recall_all": 0.333333,
+    "eb_qp_recall_rankable": 0.571429,
+    "eb_qp_width": 54.696552,
+    "eb_recall_all": 0.333333,
+    "eb_recall_rankable": 0.571429,
+    "eb_width": 54.910345,
+    "planted": 12.0,
+    "planted_rankable": 7.0,
+    "rate_recall_all": 0.25,
+    "rate_recall_rankable": 0.428571,
+    "raw_count_recall_all": 0.333333,
+    "raw_count_recall_rankable": 0.285714
+   },
+   "seed": 2019
+  },
+  {
+   "scores": {
+    "eb_coverage": 0.925373,
+    "eb_qp_coverage": 0.925373,
+    "eb_qp_recall_all": 0.083333,
+    "eb_qp_recall_rankable": 0.166667,
+    "eb_qp_width": 55.141791,
+    "eb_recall_all": 0.083333,
+    "eb_recall_rankable": 0.166667,
+    "eb_width": 55.641791,
+    "planted": 12.0,
+    "planted_rankable": 6.0,
+    "rate_recall_all": 0.166667,
+    "rate_recall_rankable": 0.333333,
+    "raw_count_recall_all": 0.25,
+    "raw_count_recall_rankable": 0.166667
+   },
+   "seed": 2020
+  }
+ ],
+ "seeds": [
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020
+ ],
+ "summary": {
+  "eb_coverage": {
+   "estimate": 0.874236,
+   "high": 0.894491,
+   "low": 0.853981,
+   "n": 20
+  },
+  "eb_qp_coverage": {
+   "estimate": 0.880409,
+   "high": 0.899903,
+   "low": 0.860915,
+   "n": 20
+  },
+  "eb_qp_recall_all": {
+   "estimate": 0.279167,
+   "high": 0.331759,
+   "low": 0.226574,
+   "n": 20
+  },
+  "eb_qp_recall_rankable": {
+   "estimate": 0.498869,
+   "high": 0.587155,
+   "low": 0.410583,
+   "n": 20
+  },
+  "eb_qp_width": {
+   "estimate": 57.075269,
+   "high": 59.087177,
+   "low": 55.063361,
+   "n": 20
+  },
+  "eb_recall_all": {
+   "estimate": 0.279167,
+   "high": 0.331759,
+   "low": 0.226574,
+   "n": 20
+  },
+  "eb_recall_rankable": {
+   "estimate": 0.498869,
+   "high": 0.587155,
+   "low": 0.410583,
+   "n": 20
+  },
+  "eb_width": {
+   "estimate": 57.412979,
+   "high": 59.410332,
+   "low": 55.415626,
+   "n": 20
+  },
+  "planted": {
+   "estimate": 12.0,
+   "high": 12.0,
+   "low": 12.0,
+   "n": 20
+  },
+  "planted_rankable": {
+   "estimate": 6.65,
+   "high": 7.366649,
+   "low": 5.933351,
+   "n": 20
+  },
+  "rate_recall_all": {
+   "estimate": 0.2875,
+   "high": 0.341889,
+   "low": 0.233111,
+   "n": 20
+  },
+  "rate_recall_rankable": {
+   "estimate": 0.51998,
+   "high": 0.606798,
+   "low": 0.433163,
+   "n": 20
+  },
+  "raw_count_recall_all": {
+   "estimate": 0.295833,
+   "high": 0.345611,
+   "low": 0.246056,
+   "n": 20
+  },
+  "raw_count_recall_rankable": {
+   "estimate": 0.282619,
+   "high": 0.356623,
+   "low": 0.208615,
+   "n": 20
+  }
+ },
+ "title": "Blackspot ranking against planted blackspots",
+ "top_k": 12
+}

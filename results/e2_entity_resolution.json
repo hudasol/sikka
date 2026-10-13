@@ -1,0 +1,1018 @@
+{
+ "experiment": "E2",
+ "generated_by": "sikka eval",
+ "naive_baseline": {
+  "clean": {
+   "f1": {
+    "estimate": 0.99284,
+    "high": 0.993466,
+    "low": 0.992213,
+    "n": 20
+   },
+   "precision": {
+    "estimate": 0.999958,
+    "high": 1.000046,
+    "low": 0.99987,
+    "n": 20
+   },
+   "recall": {
+    "estimate": 0.985825,
+    "high": 0.987045,
+    "low": 0.984605,
+    "n": 20
+   }
+  },
+  "faults_5pct": {
+   "f1": {
+    "estimate": 0.838421,
+    "high": 0.841305,
+    "low": 0.835538,
+    "n": 20
+   },
+   "precision": {
+    "estimate": 0.999933,
+    "high": 1.000073,
+    "low": 0.999793,
+    "n": 20
+   },
+   "recall": {
+    "estimate": 0.721875,
+    "high": 0.726133,
+    "low": 0.717617,
+    "n": 20
+   }
+  }
+ },
+ "naive_rule": {
+  "metres": 150.0,
+  "minutes": 15.0
+ },
+ "notice": "Synthetic data. No real crash, traffic or road records are used.",
+ "per_seed": [
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.992545,
+     "precision": 1.0,
+     "recall": 0.985201
+    },
+    "faults_5pct": {
+     "f1": 0.842836,
+     "precision": 1.0,
+     "recall": 0.728363
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.030008,
+     "candidate_pairs": 2366.0,
+     "canonical_crashes": 3315.0,
+     "count_error": 0.012214,
+     "f1": 0.989316,
+     "precision": 1.0,
+     "predicted_pairs": 2315.0,
+     "recall": 0.978858,
+     "true_crashes_reported": 3275.0,
+     "truth_pairs": 2365.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.092779,
+     "candidate_pairs": 2285.0,
+     "canonical_crashes": 3567.0,
+     "count_error": 0.089493,
+     "f1": 0.811175,
+     "precision": 1.0,
+     "predicted_pairs": 2105.0,
+     "recall": 0.682334,
+     "true_crashes_reported": 3274.0,
+     "truth_pairs": 3085.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2001
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.992663,
+     "precision": 1.0,
+     "recall": 0.985433
+    },
+    "faults_5pct": {
+     "f1": 0.837291,
+     "precision": 1.0,
+     "recall": 0.720121
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.032271,
+     "candidate_pairs": 2541.0,
+     "canonical_crashes": 3434.0,
+     "count_error": 0.012979,
+     "f1": 0.988048,
+     "precision": 1.0,
+     "predicted_pairs": 2480.0,
+     "recall": 0.976378,
+     "true_crashes_reported": 3390.0,
+     "truth_pairs": 2540.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.089892,
+     "candidate_pairs": 2414.0,
+     "canonical_crashes": 3758.0,
+     "count_error": 0.108882,
+     "f1": 0.805781,
+     "precision": 1.0,
+     "predicted_pairs": 2230.0,
+     "recall": 0.674735,
+     "true_crashes_reported": 3389.0,
+     "truth_pairs": 3305.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2002
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.991026,
+     "precision": 1.0,
+     "recall": 0.982213
+    },
+    "faults_5pct": {
+     "f1": 0.839656,
+     "precision": 1.0,
+     "recall": 0.723627
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.031236,
+     "candidate_pairs": 2305.0,
+     "canonical_crashes": 3240.0,
+     "count_error": 0.013767,
+     "f1": 0.987481,
+     "precision": 1.0,
+     "predicted_pairs": 2248.0,
+     "recall": 0.975271,
+     "true_crashes_reported": 3196.0,
+     "truth_pairs": 2305.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.093892,
+     "candidate_pairs": 2194.0,
+     "canonical_crashes": 3504.0,
+     "count_error": 0.09637,
+     "f1": 0.808673,
+     "precision": 1.0,
+     "predicted_pairs": 2014.0,
+     "recall": 0.6788,
+     "true_crashes_reported": 3196.0,
+     "truth_pairs": 2967.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2003
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.992539,
+     "precision": 1.0,
+     "recall": 0.985188
+    },
+    "faults_5pct": {
+     "f1": 0.841188,
+     "precision": 1.0,
+     "recall": 0.725905
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.031575,
+     "candidate_pairs": 2502.0,
+     "canonical_crashes": 3500.0,
+     "count_error": 0.013025,
+     "f1": 0.988459,
+     "precision": 1.0,
+     "predicted_pairs": 2441.0,
+     "recall": 0.977182,
+     "true_crashes_reported": 3455.0,
+     "truth_pairs": 2498.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.098088,
+     "candidate_pairs": 2406.0,
+     "canonical_crashes": 3805.0,
+     "count_error": 0.10707,
+     "f1": 0.807467,
+     "precision": 1.0,
+     "predicted_pairs": 2206.0,
+     "recall": 0.677103,
+     "true_crashes_reported": 3437.0,
+     "truth_pairs": 3258.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2004
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.993612,
+     "precision": 1.0,
+     "recall": 0.987304
+    },
+    "faults_5pct": {
+     "f1": 0.834494,
+     "precision": 1.0,
+     "recall": 0.715994
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.021151,
+     "candidate_pairs": 2364.0,
+     "canonical_crashes": 3346.0,
+     "count_error": 0.008439,
+     "f1": 0.992109,
+     "precision": 1.0,
+     "predicted_pairs": 2326.0,
+     "recall": 0.984342,
+     "true_crashes_reported": 3318.0,
+     "truth_pairs": 2363.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.077713,
+     "candidate_pairs": 2239.0,
+     "canonical_crashes": 3633.0,
+     "count_error": 0.094937,
+     "f1": 0.806172,
+     "precision": 1.0,
+     "predicted_pairs": 2090.0,
+     "recall": 0.675283,
+     "true_crashes_reported": 3318.0,
+     "truth_pairs": 3095.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2005
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.992173,
+     "precision": 1.0,
+     "recall": 0.984468
+    },
+    "faults_5pct": {
+     "f1": 0.829449,
+     "precision": 1.0,
+     "recall": 0.708597
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.029833,
+     "candidate_pairs": 2514.0,
+     "canonical_crashes": 3419.0,
+     "count_error": 0.010044,
+     "f1": 0.990958,
+     "precision": 1.0,
+     "predicted_pairs": 2466.0,
+     "recall": 0.982079,
+     "true_crashes_reported": 3385.0,
+     "truth_pairs": 2511.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.087566,
+     "candidate_pairs": 2284.0,
+     "canonical_crashes": 3716.0,
+     "count_error": 0.107931,
+     "f1": 0.800834,
+     "precision": 1.0,
+     "predicted_pairs": 2113.0,
+     "recall": 0.667826,
+     "true_crashes_reported": 3354.0,
+     "truth_pairs": 3164.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2006
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.992117,
+     "precision": 1.0,
+     "recall": 0.984357
+    },
+    "faults_5pct": {
+     "f1": 0.838517,
+     "precision": 1.0,
+     "recall": 0.721936
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.025563,
+     "candidate_pairs": 2621.0,
+     "canonical_crashes": 3492.0,
+     "count_error": 0.011002,
+     "f1": 0.991341,
+     "precision": 1.0,
+     "predicted_pairs": 2576.0,
+     "recall": 0.982831,
+     "true_crashes_reported": 3454.0,
+     "truth_pairs": 2621.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.085809,
+     "candidate_pairs": 2424.0,
+     "canonical_crashes": 3781.0,
+     "count_error": 0.09499,
+     "f1": 0.810723,
+     "precision": 1.0,
+     "predicted_pairs": 2253.0,
+     "recall": 0.681694,
+     "true_crashes_reported": 3453.0,
+     "truth_pairs": 3305.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2007
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.989973,
+     "precision": 1.0,
+     "recall": 0.980145
+    },
+    "faults_5pct": {
+     "f1": 0.834774,
+     "precision": 1.0,
+     "recall": 0.716405
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.039238,
+     "candidate_pairs": 2625.0,
+     "canonical_crashes": 3473.0,
+     "count_error": 0.016686,
+     "f1": 0.985474,
+     "precision": 1.0,
+     "predicted_pairs": 2544.0,
+     "recall": 0.971363,
+     "true_crashes_reported": 3416.0,
+     "truth_pairs": 2619.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.104116,
+     "candidate_pairs": 2478.0,
+     "canonical_crashes": 3810.0,
+     "count_error": 0.11534,
+     "f1": 0.800783,
+     "precision": 1.0,
+     "predicted_pairs": 2251.0,
+     "recall": 0.667754,
+     "true_crashes_reported": 3416.0,
+     "truth_pairs": 3371.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2008
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.991083,
+     "precision": 1.0,
+     "recall": 0.982324
+    },
+    "faults_5pct": {
+     "f1": 0.847882,
+     "precision": 1.0,
+     "recall": 0.735934
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.033584,
+     "candidate_pairs": 2263.0,
+     "canonical_crashes": 3130.0,
+     "count_error": 0.01229,
+     "f1": 0.989055,
+     "precision": 1.0,
+     "predicted_pairs": 2214.0,
+     "recall": 0.978347,
+     "true_crashes_reported": 3092.0,
+     "truth_pairs": 2263.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.101248,
+     "candidate_pairs": 2163.0,
+     "canonical_crashes": 3352.0,
+     "count_error": 0.099377,
+     "f1": 0.812462,
+     "precision": 1.0,
+     "predicted_pairs": 1982.0,
+     "recall": 0.684156,
+     "true_crashes_reported": 3049.0,
+     "truth_pairs": 2897.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2009
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.993567,
+     "precision": 1.0,
+     "recall": 0.987217
+    },
+    "faults_5pct": {
+     "f1": 0.837255,
+     "precision": 1.0,
+     "recall": 0.720067
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.025201,
+     "candidate_pairs": 2738.0,
+     "canonical_crashes": 3654.0,
+     "count_error": 0.010509,
+     "f1": 0.990785,
+     "precision": 1.0,
+     "predicted_pairs": 2688.0,
+     "recall": 0.981738,
+     "true_crashes_reported": 3616.0,
+     "truth_pairs": 2738.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.087874,
+     "candidate_pairs": 2606.0,
+     "canonical_crashes": 4004.0,
+     "count_error": 0.10822,
+     "f1": 0.80487,
+     "precision": 1.0,
+     "predicted_pairs": 2413.0,
+     "recall": 0.673458,
+     "true_crashes_reported": 3613.0,
+     "truth_pairs": 3583.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2010
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.994427,
+     "precision": 1.0,
+     "recall": 0.988916
+    },
+    "faults_5pct": {
+     "f1": 0.846434,
+     "precision": 1.0,
+     "recall": 0.733754
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.020509,
+     "candidate_pairs": 2438.0,
+     "canonical_crashes": 3360.0,
+     "count_error": 0.009009,
+     "f1": 0.992139,
+     "precision": 1.0,
+     "predicted_pairs": 2398.0,
+     "recall": 0.984401,
+     "true_crashes_reported": 3330.0,
+     "truth_pairs": 2436.0,
+     "unresolved_true_share": 0.98
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.08383,
+     "candidate_pairs": 2350.0,
+     "canonical_crashes": 3662.0,
+     "count_error": 0.100361,
+     "f1": 0.812956,
+     "precision": 1.0,
+     "predicted_pairs": 2171.0,
+     "recall": 0.684858,
+     "true_crashes_reported": 3328.0,
+     "truth_pairs": 3170.0,
+     "unresolved_true_share": 0.994924
+    }
+   },
+   "seed": 2011
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.992611,
+     "precision": 1.0,
+     "recall": 0.98533
+    },
+    "faults_5pct": {
+     "f1": 0.845985,
+     "precision": 1.0,
+     "recall": 0.73308
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.027687,
+     "candidate_pairs": 2456.0,
+     "canonical_crashes": 3368.0,
+     "count_error": 0.008987,
+     "f1": 0.991576,
+     "precision": 1.0,
+     "predicted_pairs": 2413.0,
+     "recall": 0.983293,
+     "true_crashes_reported": 3338.0,
+     "truth_pairs": 2454.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.087824,
+     "candidate_pairs": 2357.0,
+     "canonical_crashes": 3624.0,
+     "count_error": 0.086657,
+     "f1": 0.817944,
+     "precision": 1.0,
+     "predicted_pairs": 2188.0,
+     "recall": 0.691967,
+     "true_crashes_reported": 3335.0,
+     "truth_pairs": 3162.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2012
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.994058,
+     "precision": 1.0,
+     "recall": 0.988186
+    },
+    "faults_5pct": {
+     "f1": 0.827613,
+     "precision": 1.0,
+     "recall": 0.705921
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.034599,
+     "candidate_pairs": 2370.0,
+     "canonical_crashes": 3192.0,
+     "count_error": 0.01559,
+     "f1": 0.986746,
+     "precision": 1.0,
+     "predicted_pairs": 2308.0,
+     "recall": 0.97384,
+     "true_crashes_reported": 3143.0,
+     "truth_pairs": 2370.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.090662,
+     "candidate_pairs": 2206.0,
+     "canonical_crashes": 3475.0,
+     "count_error": 0.10704,
+     "f1": 0.796869,
+     "precision": 1.0,
+     "predicted_pairs": 2036.0,
+     "recall": 0.662329,
+     "true_crashes_reported": 3139.0,
+     "truth_pairs": 3074.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2013
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.991703,
+     "precision": 1.0,
+     "recall": 0.983543
+    },
+    "faults_5pct": {
+     "f1": 0.842777,
+     "precision": 1.0,
+     "recall": 0.728275
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.024232,
+     "candidate_pairs": 2311.0,
+     "canonical_crashes": 3287.0,
+     "count_error": 0.008282,
+     "f1": 0.991923,
+     "precision": 1.0,
+     "predicted_pairs": 2272.0,
+     "recall": 0.983976,
+     "true_crashes_reported": 3260.0,
+     "truth_pairs": 2309.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.093076,
+     "candidate_pairs": 2224.0,
+     "canonical_crashes": 3547.0,
+     "count_error": 0.088371,
+     "f1": 0.815987,
+     "precision": 1.0,
+     "predicted_pairs": 2062.0,
+     "recall": 0.689171,
+     "true_crashes_reported": 3259.0,
+     "truth_pairs": 2992.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2014
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.99385,
+     "precision": 1.0,
+     "recall": 0.987776
+    },
+    "faults_5pct": {
+     "f1": 0.849567,
+     "precision": 1.0,
+     "recall": 0.738475
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.022844,
+     "candidate_pairs": 2539.0,
+     "canonical_crashes": 3484.0,
+     "count_error": 0.010441,
+     "f1": 0.99145,
+     "precision": 1.0,
+     "predicted_pairs": 2493.0,
+     "recall": 0.983044,
+     "true_crashes_reported": 3448.0,
+     "truth_pairs": 2536.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.094644,
+     "candidate_pairs": 2483.0,
+     "canonical_crashes": 3798.0,
+     "count_error": 0.101828,
+     "f1": 0.815066,
+     "precision": 1.0,
+     "predicted_pairs": 2283.0,
+     "recall": 0.687858,
+     "true_crashes_reported": 3447.0,
+     "truth_pairs": 3319.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2015
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.991635,
+     "precision": 0.999157,
+     "recall": 0.984226
+    },
+    "faults_5pct": {
+     "f1": 0.830952,
+     "precision": 0.998662,
+     "recall": 0.711471
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.032352,
+     "candidate_pairs": 2411.0,
+     "canonical_crashes": 3304.0,
+     "count_error": 0.011325,
+     "f1": 0.989301,
+     "precision": 1.0,
+     "predicted_pairs": 2358.0,
+     "recall": 0.978829,
+     "true_crashes_reported": 3267.0,
+     "truth_pairs": 2409.0,
+     "unresolved_true_share": 0.974359
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.103161,
+     "candidate_pairs": 2278.0,
+     "canonical_crashes": 3608.0,
+     "count_error": 0.105392,
+     "f1": 0.798396,
+     "precision": 1.0,
+     "predicted_pairs": 2091.0,
+     "recall": 0.664442,
+     "true_crashes_reported": 3264.0,
+     "truth_pairs": 3147.0,
+     "unresolved_true_share": 0.987234
+    }
+   },
+   "seed": 2016
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.994721,
+     "precision": 1.0,
+     "recall": 0.989498
+    },
+    "faults_5pct": {
+     "f1": 0.835207,
+     "precision": 1.0,
+     "recall": 0.717044
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.023283,
+     "candidate_pairs": 2577.0,
+     "canonical_crashes": 3598.0,
+     "count_error": 0.008691,
+     "f1": 0.991567,
+     "precision": 1.0,
+     "predicted_pairs": 2528.0,
+     "recall": 0.983275,
+     "true_crashes_reported": 3567.0,
+     "truth_pairs": 2571.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.09106,
+     "candidate_pairs": 2405.0,
+     "canonical_crashes": 3916.0,
+     "count_error": 0.098457,
+     "f1": 0.801952,
+     "precision": 1.0,
+     "predicted_pairs": 2219.0,
+     "recall": 0.669382,
+     "true_crashes_reported": 3565.0,
+     "truth_pairs": 3315.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2017
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.993711,
+     "precision": 1.0,
+     "recall": 0.9875
+    },
+    "faults_5pct": {
+     "f1": 0.838634,
+     "precision": 1.0,
+     "recall": 0.72211
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.031466,
+     "candidate_pairs": 2320.0,
+     "canonical_crashes": 3215.0,
+     "count_error": 0.012598,
+     "f1": 0.988446,
+     "precision": 1.0,
+     "predicted_pairs": 2267.0,
+     "recall": 0.977155,
+     "true_crashes_reported": 3175.0,
+     "truth_pairs": 2320.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.09812,
+     "candidate_pairs": 2181.0,
+     "canonical_crashes": 3467.0,
+     "count_error": 0.097499,
+     "f1": 0.805539,
+     "precision": 1.0,
+     "predicted_pairs": 2007.0,
+     "recall": 0.674395,
+     "true_crashes_reported": 3159.0,
+     "truth_pairs": 2976.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2018
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.994019,
+     "precision": 1.0,
+     "recall": 0.988109
+    },
+    "faults_5pct": {
+     "f1": 0.835329,
+     "precision": 1.0,
+     "recall": 0.717224
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.027871,
+     "candidate_pairs": 2691.0,
+     "canonical_crashes": 3649.0,
+     "count_error": 0.011083,
+     "f1": 0.989865,
+     "precision": 1.0,
+     "predicted_pairs": 2637.0,
+     "recall": 0.979933,
+     "true_crashes_reported": 3609.0,
+     "truth_pairs": 2691.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.096889,
+     "candidate_pairs": 2539.0,
+     "canonical_crashes": 3991.0,
+     "count_error": 0.106153,
+     "f1": 0.798971,
+     "precision": 1.0,
+     "predicted_pairs": 2329.0,
+     "recall": 0.665239,
+     "true_crashes_reported": 3608.0,
+     "truth_pairs": 3501.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2019
+  },
+  {
+   "naive": {
+    "clean": {
+     "f1": 0.994756,
+     "precision": 1.0,
+     "recall": 0.989567
+    },
+    "faults_5pct": {
+     "f1": 0.83259,
+     "precision": 1.0,
+     "recall": 0.713195
+    }
+   },
+   "runs": {
+    "clean": {
+     "abstention_rate": 0.025281,
+     "candidate_pairs": 2492.0,
+     "canonical_crashes": 3452.0,
+     "count_error": 0.009652,
+     "f1": 0.992113,
+     "precision": 1.0,
+     "predicted_pairs": 2453.0,
+     "recall": 0.98435,
+     "true_crashes_reported": 3419.0,
+     "truth_pairs": 2492.0,
+     "unresolved_true_share": 1.0
+    },
+    "faults_5pct": {
+     "abstention_rate": 0.096024,
+     "candidate_pairs": 2364.0,
+     "canonical_crashes": 3752.0,
+     "count_error": 0.102881,
+     "f1": 0.798753,
+     "precision": 1.0,
+     "predicted_pairs": 2177.0,
+     "recall": 0.664936,
+     "true_crashes_reported": 3402.0,
+     "truth_pairs": 3274.0,
+     "unresolved_true_share": 1.0
+    }
+   },
+   "seed": 2020
+  }
+ ],
+ "scenarios": {
+  "clean": 0.0,
+  "faults_5pct": 0.05
+ },
+ "seeds": [
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020
+ ],
+ "summary": {
+  "clean": {
+   "abstention_rate": {
+    "estimate": 0.028489,
+    "high": 0.0308,
+    "low": 0.026178,
+    "n": 20
+   },
+   "count_error": {
+    "estimate": 0.011331,
+    "high": 0.012422,
+    "low": 0.01024,
+    "n": 20
+   },
+   "f1": {
+    "estimate": 0.989908,
+    "high": 0.990839,
+    "low": 0.988976,
+    "n": 20
+   },
+   "precision": {
+    "estimate": 1.0,
+    "high": 1.0,
+    "low": 1.0,
+    "n": 20
+   },
+   "recall": {
+    "estimate": 0.980024,
+    "high": 0.981848,
+    "low": 0.9782,
+    "n": 20
+   },
+   "unresolved_true_share": {
+    "estimate": 0.997718,
+    "high": 1.001033,
+    "low": 0.994403,
+    "n": 20
+   }
+  },
+  "faults_5pct": {
+   "abstention_rate": {
+    "estimate": 0.092713,
+    "high": 0.095833,
+    "low": 0.089594,
+    "n": 20
+   },
+   "count_error": {
+    "estimate": 0.100862,
+    "high": 0.104431,
+    "low": 0.097294,
+    "n": 20
+   },
+   "f1": {
+    "estimate": 0.806569,
+    "high": 0.80957,
+    "low": 0.803567,
+    "n": 20
+   },
+   "precision": {
+    "estimate": 1.0,
+    "high": 1.0,
+    "low": 1.0,
+    "n": 20
+   },
+   "recall": {
+    "estimate": 0.675886,
+    "high": 0.680105,
+    "low": 0.671667,
+    "n": 20
+   },
+   "unresolved_true_share": {
+    "estimate": 0.999108,
+    "high": 1.000519,
+    "low": 0.997696,
+    "n": 20
+   }
+  }
+ },
+ "title": "Entity resolution of crashes across producers"
+}

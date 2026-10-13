@@ -1,0 +1,1881 @@
+{
+ "draws": 1000,
+ "experiment": "E4",
+ "generated_by": "sikka eval",
+ "notice": "Synthetic data. No real crash, traffic or road records are used.",
+ "per_seed": [
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 141,
+      "k": 12,
+      "kendall_tau": 0.963931,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.987054,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 141,
+      "k": 12,
+      "kendall_tau": 0.8077,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.87117,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 141,
+      "k": 12,
+      "kendall_tau": 0.956231,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.987534,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 141,
+      "k": 12,
+      "kendall_tau": 0.982979,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.990395,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 119,
+      "k": 12,
+      "kendall_tau": 0.835921,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.901373,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.931012,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.962411,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2001
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.960406,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.986388,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.756328,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.887131,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.967103,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.986552,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.983256,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.995636,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 125,
+      "k": 12,
+      "kendall_tau": 0.821677,
+      "top_k_overlap": 0.666667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.915231,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 133,
+      "k": 12,
+      "kendall_tau": 0.887446,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.962095,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2002
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.958825,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.987603,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.817257,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.860335,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.966458,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.986577,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.975249,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.99393,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 114,
+      "k": 12,
+      "kendall_tau": 0.830772,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.906872,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 124,
+      "k": 12,
+      "kendall_tau": 0.879098,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.966653,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2003
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.966458,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.988917,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.806153,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.879468,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.96669,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.984599,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.979875,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.994089,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 114,
+      "k": 12,
+      "kendall_tau": 0.830461,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.891259,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 126,
+      "k": 12,
+      "kendall_tau": 0.901206,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.966327,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2004
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.958522,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.985584,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.823283,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.886558,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.96375,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.988043,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.984664,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.994969,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 127,
+      "k": 12,
+      "kendall_tau": 0.801275,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.90243,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 144,
+      "k": 12,
+      "kendall_tau": 0.902681,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.959063,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2005
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 128,
+      "k": 12,
+      "kendall_tau": 0.944144,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.978565,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 128,
+      "k": 12,
+      "kendall_tau": 0.805118,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.859672,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 128,
+      "k": 12,
+      "kendall_tau": 0.941683,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.980489,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 128,
+      "k": 12,
+      "kendall_tau": 0.981299,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.995722,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 108,
+      "k": 12,
+      "kendall_tau": 0.820699,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.899368,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 122,
+      "k": 12,
+      "kendall_tau": 0.901639,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.955124,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2006
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 130,
+      "k": 12,
+      "kendall_tau": 0.963506,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.98999,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 130,
+      "k": 12,
+      "kendall_tau": 0.835897,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.878676,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 130,
+      "k": 12,
+      "kendall_tau": 0.965414,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.98591,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 130,
+      "k": 12,
+      "kendall_tau": 0.982349,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.99699,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 118,
+      "k": 12,
+      "kendall_tau": 0.803853,
+      "top_k_overlap": 0.583333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.915515,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 126,
+      "k": 12,
+      "kendall_tau": 0.936762,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.974418,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2007
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 153,
+      "k": 12,
+      "kendall_tau": 0.967492,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.987711,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 153,
+      "k": 12,
+      "kendall_tau": 0.828345,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.866013,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 153,
+      "k": 12,
+      "kendall_tau": 0.969384,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.989268,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 153,
+      "k": 12,
+      "kendall_tau": 0.976608,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.993149,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 132,
+      "k": 12,
+      "kendall_tau": 0.813324,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.908748,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 150,
+      "k": 12,
+      "kendall_tau": 0.912125,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.965801,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2008
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 137,
+      "k": 12,
+      "kendall_tau": 0.94869,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.982035,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 137,
+      "k": 12,
+      "kendall_tau": 0.807643,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.887796,
+      "top_k_overlap": 0.666667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 137,
+      "k": 12,
+      "kendall_tau": 0.965865,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.990903,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 137,
+      "k": 12,
+      "kendall_tau": 0.98304,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.994555,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 117,
+      "k": 12,
+      "kendall_tau": 0.785735,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.893614,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 129,
+      "k": 12,
+      "kendall_tau": 0.92781,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.960323,
+      "top_k_overlap": 0.833333
+     }
+    }
+   },
+   "seed": 2009
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 139,
+      "k": 12,
+      "kendall_tau": 0.956417,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.984855,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 139,
+      "k": 12,
+      "kendall_tau": 0.817954,
+      "top_k_overlap": 0.666667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.867161,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 139,
+      "k": 12,
+      "kendall_tau": 0.972266,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.988299,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 139,
+      "k": 12,
+      "kendall_tau": 0.981232,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.996294,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 113,
+      "k": 12,
+      "kendall_tau": 0.812895,
+      "top_k_overlap": 0.583333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.891808,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 136,
+      "k": 12,
+      "kendall_tau": 0.90915,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.959177,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2010
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.966118,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.982783,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.809711,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.87751,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.949375,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.983206,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 143,
+      "k": 12,
+      "kendall_tau": 0.97715,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.994573,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 120,
+      "k": 12,
+      "kendall_tau": 0.817647,
+      "top_k_overlap": 0.666667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.892014,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 136,
+      "k": 12,
+      "kendall_tau": 0.923529,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.958287,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2011
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.945785,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.982807,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.804789,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.868561,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.961111,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.989296,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.969349,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.992067,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 130,
+      "k": 12,
+      "kendall_tau": 0.808706,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.896588,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 138,
+      "k": 12,
+      "kendall_tau": 0.922776,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.963465,
+      "top_k_overlap": 0.916667
+     }
+    }
+   },
+   "seed": 2012
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.954862,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.981459,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.822238,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.870572,
+      "top_k_overlap": 0.75
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.952597,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.985088,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 152,
+      "k": 12,
+      "kendall_tau": 0.971593,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.991764,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 124,
+      "k": 12,
+      "kendall_tau": 0.780488,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.889354,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 148,
+      "k": 12,
+      "kendall_tau": 0.914874,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.9646,
+      "top_k_overlap": 0.833333
+     }
+    }
+   },
+   "seed": 2013
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 149,
+      "k": 12,
+      "kendall_tau": 0.966624,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.990274,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 149,
+      "k": 12,
+      "kendall_tau": 0.823689,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.89263,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 149,
+      "k": 12,
+      "kendall_tau": 0.972973,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.989794,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 149,
+      "k": 12,
+      "kendall_tau": 0.974787,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.994189,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 124,
+      "k": 12,
+      "kendall_tau": 0.832678,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.915066,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 140,
+      "k": 12,
+      "kendall_tau": 0.929085,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.96868,
+      "top_k_overlap": 0.916667
+     }
+    }
+   },
+   "seed": 2014
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.961747,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.988934,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.844113,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.89865,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.975677,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.992074,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.985185,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.996712,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 108,
+      "k": 12,
+      "kendall_tau": 0.861544,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.91911,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 129,
+      "k": 12,
+      "kendall_tau": 0.935804,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.968987,
+      "top_k_overlap": 0.916667
+     }
+    }
+   },
+   "seed": 2015
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 131,
+      "k": 12,
+      "kendall_tau": 0.964768,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.978569,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 131,
+      "k": 12,
+      "kendall_tau": 0.813975,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.872012,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 131,
+      "k": 12,
+      "kendall_tau": 0.958191,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.987423,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 131,
+      "k": 12,
+      "kendall_tau": 0.981914,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.993315,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 111,
+      "k": 12,
+      "kendall_tau": 0.843407,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.876805,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 119,
+      "k": 12,
+      "kendall_tau": 0.910554,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.959929,
+      "top_k_overlap": 1.0
+     }
+    }
+   },
+   "seed": 2016
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 142,
+      "k": 12,
+      "kendall_tau": 0.963041,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.98583,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 142,
+      "k": 12,
+      "kendall_tau": 0.833783,
+      "top_k_overlap": 0.75
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.854646,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 142,
+      "k": 12,
+      "kendall_tau": 0.968834,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.988914,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 142,
+      "k": 12,
+      "kendall_tau": 0.974228,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.992443,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 124,
+      "k": 12,
+      "kendall_tau": 0.854183,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.898229,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 138,
+      "k": 12,
+      "kendall_tau": 0.906696,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.962339,
+      "top_k_overlap": 0.916667
+     }
+    }
+   },
+   "seed": 2017
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.955556,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.987501,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.823328,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.873223,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.973687,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.991389,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 135,
+      "k": 12,
+      "kendall_tau": 0.982532,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.994476,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 110,
+      "k": 12,
+      "kendall_tau": 0.820517,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.890067,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 131,
+      "k": 12,
+      "kendall_tau": 0.902995,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.956053,
+      "top_k_overlap": 0.833333
+     }
+    }
+   },
+   "seed": 2018
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.959387,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.989451,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.842337,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.898813,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.96954,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.986962,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 145,
+      "k": 12,
+      "kendall_tau": 0.985632,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.995704,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 125,
+      "k": 12,
+      "kendall_tau": 0.871226,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.912575,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 131,
+      "k": 12,
+      "kendall_tau": 0.913564,
+      "top_k_overlap": 0.833333
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.973453,
+      "top_k_overlap": 0.916667
+     }
+    }
+   },
+   "seed": 2019
+  },
+  {
+   "runs": {
+    "drop_A": {
+     "eb": {
+      "common_segments": 134,
+      "k": 12,
+      "kendall_tau": 0.96566,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.98758,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_B": {
+     "eb": {
+      "common_segments": 134,
+      "k": 12,
+      "kendall_tau": 0.816631,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.861427,
+      "top_k_overlap": 0.916667
+     }
+    },
+    "drop_C": {
+     "eb": {
+      "common_segments": 134,
+      "k": 12,
+      "kendall_tau": 0.973516,
+      "top_k_overlap": 1.0
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.980308,
+      "top_k_overlap": 1.0
+     }
+    },
+    "drop_D": {
+     "eb": {
+      "common_segments": 134,
+      "k": 12,
+      "kendall_tau": 0.97778,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.992387,
+      "top_k_overlap": 1.0
+     }
+    },
+    "faults_20pct": {
+     "eb": {
+      "common_segments": 115,
+      "k": 12,
+      "kendall_tau": 0.823341,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.87583,
+      "top_k_overlap": 0.833333
+     }
+    },
+    "faults_5pct": {
+     "eb": {
+      "common_segments": 129,
+      "k": 12,
+      "kendall_tau": 0.924661,
+      "top_k_overlap": 0.916667
+     },
+     "raw_count": {
+      "k": 12,
+      "kendall_tau": 0.959613,
+      "top_k_overlap": 0.916667
+     }
+    }
+   },
+   "seed": 2020
+  }
+ ],
+ "scenarios": [
+  "drop_A",
+  "drop_B",
+  "drop_C",
+  "drop_D",
+  "faults_5pct",
+  "faults_20pct"
+ ],
+ "seeds": [
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020
+ ],
+ "summary": {
+  "drop_A": {
+   "eb": {
+    "kendall_tau": {
+     "estimate": 0.959597,
+     "high": 0.962845,
+     "low": 0.956349,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.979167,
+     "high": 0.996493,
+     "low": 0.96184,
+     "n": 20
+    }
+   },
+   "raw_count": {
+    "kendall_tau": {
+     "estimate": 0.985695,
+     "high": 0.987364,
+     "low": 0.984025,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.958333,
+     "high": 0.978341,
+     "low": 0.938326,
+     "n": 20
+    }
+   }
+  },
+  "drop_B": {
+   "eb": {
+    "kendall_tau": {
+     "estimate": 0.817014,
+     "high": 0.825751,
+     "low": 0.808276,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.825,
+     "high": 0.862749,
+     "low": 0.787251,
+     "n": 20
+    }
+   },
+   "raw_count": {
+    "kendall_tau": {
+     "estimate": 0.875601,
+     "high": 0.881668,
+     "low": 0.869534,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.879167,
+     "high": 0.913762,
+     "low": 0.844571,
+     "n": 20
+    }
+   }
+  },
+  "drop_C": {
+   "eb": {
+    "kendall_tau": {
+     "estimate": 0.964517,
+     "high": 0.968704,
+     "low": 0.960331,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.975,
+     "high": 0.993337,
+     "low": 0.956663,
+     "n": 20
+    }
+   },
+   "raw_count": {
+    "kendall_tau": {
+     "estimate": 0.987131,
+     "high": 0.988641,
+     "low": 0.985622,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.970833,
+     "high": 0.989919,
+     "low": 0.951748,
+     "n": 20
+    }
+   }
+  },
+  "drop_D": {
+   "eb": {
+    "kendall_tau": {
+     "estimate": 0.979535,
+     "high": 0.981723,
+     "low": 0.977347,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.970833,
+     "high": 0.989919,
+     "low": 0.951748,
+     "n": 20
+    }
+   },
+   "raw_count": {
+    "kendall_tau": {
+     "estimate": 0.994168,
+     "high": 0.994995,
+     "low": 0.993341,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.9875,
+     "high": 1.001788,
+     "low": 0.973212,
+     "n": 20
+    }
+   }
+  },
+  "faults_20pct": {
+   "eb": {
+    "kendall_tau": {
+     "estimate": 0.823517,
+     "high": 0.83428,
+     "low": 0.812755,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.7875,
+     "high": 0.835642,
+     "low": 0.739358,
+     "n": 20
+    }
+   },
+   "raw_count": {
+    "kendall_tau": {
+     "estimate": 0.899593,
+     "high": 0.905423,
+     "low": 0.893762,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.933333,
+     "high": 0.963277,
+     "low": 0.903389,
+     "n": 20
+    }
+   }
+  },
+  "faults_5pct": {
+   "eb": {
+    "kendall_tau": {
+     "estimate": 0.913673,
+     "high": 0.920926,
+     "low": 0.906421,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.9125,
+     "high": 0.932407,
+     "low": 0.892593,
+     "n": 20
+    }
+   },
+   "raw_count": {
+    "kendall_tau": {
+     "estimate": 0.96334,
+     "high": 0.965818,
+     "low": 0.960862,
+     "n": 20
+    },
+    "top_k_overlap": {
+     "estimate": 0.95,
+     "high": 0.979404,
+     "low": 0.920596,
+     "n": 20
+    }
+   }
+  }
+ },
+ "title": "Rank stability under degraded data"
+}
