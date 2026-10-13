@@ -1,0 +1,226 @@
+{
+  "$id": "https://github.com/hudasol/sikka/blob/main/contract/v1.1.0/crash_records.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Crash record in draft 1.1.0: adds the optional ``work_zone`` flag.",
+  "properties": {
+    "collision_type": {
+      "description": "Manner of collision.",
+      "enum": [
+        "rear_end",
+        "side_impact",
+        "head_on",
+        "rollover",
+        "run_off_road",
+        "pedestrian",
+        "fixed_object",
+        "other"
+      ],
+      "examples": [
+        "rear_end"
+      ],
+      "type": "string",
+      "x-description-ar": "نوع التصادم."
+    },
+    "contributing_factors": {
+      "description": "Coded contributing factors. Empty list when none were coded.",
+      "examples": [
+        [
+          "tailgating"
+        ]
+      ],
+      "items": {
+        "enum": [
+          "speeding",
+          "tailgating",
+          "sudden_swerving",
+          "fatigue",
+          "distraction",
+          "mechanical_failure",
+          "weather",
+          "other"
+        ],
+        "type": "string"
+      },
+      "maxItems": 8,
+      "type": "array",
+      "x-description-ar": "العوامل المساهمة المرمّزة. قائمة فارغة إذا لم يُرمّز أي عامل."
+    },
+    "crash_id": {
+      "description": "Identifier of the crash within the producer's feed.",
+      "examples": [
+        "B-2023-000123"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "معرّف الحادث ضمن ملف الجهة المنتجة."
+    },
+    "direction": {
+      "description": "Travel direction of the first vehicle relative to the segment, if known.",
+      "enum": [
+        "forward",
+        "reverse"
+      ],
+      "examples": [
+        "forward"
+      ],
+      "type": "string",
+      "x-description-ar": "اتجاه سير المركبة الأولى بالنسبة إلى المقطع، إن كان معروفا."
+    },
+    "lat": {
+      "description": "Latitude of the crash location, WGS84.",
+      "examples": [
+        24.4521
+      ],
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number",
+      "x-description-ar": "خط عرض موقع الحادث وفق WGS84.",
+      "x-unit": "degrees"
+    },
+    "light_condition": {
+      "description": "Light condition at the time of the crash.",
+      "enum": [
+        "daylight",
+        "dark_lit",
+        "dark_unlit",
+        "dawn_dusk"
+      ],
+      "examples": [
+        "daylight"
+      ],
+      "type": "string",
+      "x-description-ar": "حالة الإضاءة وقت وقوع الحادث."
+    },
+    "lon": {
+      "description": "Longitude of the crash location, WGS84.",
+      "examples": [
+        54.4033
+      ],
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number",
+      "x-description-ar": "خط طول موقع الحادث وفق WGS84.",
+      "x-unit": "degrees"
+    },
+    "occurred_at": {
+      "description": "When the crash occurred, in UTC.",
+      "examples": [
+        "2023-05-14T17:42:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "وقت وقوع الحادث بالتوقيت العالمي المنسق."
+    },
+    "producer_id": {
+      "description": "Producer that reported the crash.",
+      "examples": [
+        "PRODUCER_B"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "الجهة المنتجة التي أبلغت عن الحادث."
+    },
+    "reported_at": {
+      "description": "When the record entered the producer's system, in UTC.",
+      "examples": [
+        "2023-05-14T19:05:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "وقت إدخال السجل في نظام الجهة المنتجة بالتوقيت العالمي المنسق."
+    },
+    "road_surface": {
+      "description": "Road surface condition at the time of the crash.",
+      "enum": [
+        "dry",
+        "wet",
+        "sand_covered",
+        "damaged",
+        "other"
+      ],
+      "examples": [
+        "dry"
+      ],
+      "type": "string",
+      "x-description-ar": "حالة سطح الطريق وقت وقوع الحادث."
+    },
+    "segment_ref": {
+      "description": "Segment the producer assigned the crash to, if any.",
+      "examples": [
+        "SEG-C1-001"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "المقطع الذي نسبت إليه الجهة المنتجة الحادث، إن وجد."
+    },
+    "severity": {
+      "description": "Most severe injury outcome of the crash.",
+      "enum": [
+        "fatal",
+        "serious_injury",
+        "minor_injury",
+        "property_damage_only"
+      ],
+      "examples": [
+        "minor_injury"
+      ],
+      "type": "string",
+      "x-description-ar": "أشد نتيجة إصابة نتجت عن الحادث."
+    },
+    "vehicles_involved": {
+      "description": "Number of vehicles involved.",
+      "examples": [
+        2
+      ],
+      "maximum": 20,
+      "minimum": 1,
+      "type": "integer",
+      "x-description-ar": "عدد المركبات المشاركة في الحادث.",
+      "x-unit": "vehicles"
+    },
+    "weather": {
+      "description": "Weather at the time of the crash.",
+      "enum": [
+        "clear",
+        "rain",
+        "fog",
+        "dust_sand",
+        "strong_wind",
+        "other"
+      ],
+      "examples": [
+        "clear"
+      ],
+      "type": "string",
+      "x-description-ar": "حالة الطقس وقت وقوع الحادث."
+    },
+    "work_zone": {
+      "description": "True when the crash occurred inside a marked road works zone. Absent when unknown.",
+      "examples": [
+        false
+      ],
+      "type": "boolean",
+      "x-description-ar": "تكون القيمة صحيحة إذا وقع الحادث داخل منطقة أعمال طرق محددة. يُحذف الحقل عند عدم المعرفة."
+    }
+  },
+  "required": [
+    "crash_id",
+    "producer_id",
+    "occurred_at",
+    "reported_at",
+    "lat",
+    "lon",
+    "severity",
+    "vehicles_involved",
+    "collision_type",
+    "contributing_factors",
+    "weather",
+    "light_condition",
+    "road_surface"
+  ],
+  "title": "Crash records",
+  "type": "object",
+  "x-contract-version": "1.1.0",
+  "x-title-ar": "سجلات الحوادث"
+}

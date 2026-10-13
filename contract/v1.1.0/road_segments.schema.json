@@ -1,0 +1,206 @@
+{
+  "$id": "https://github.com/hudasol/sikka/blob/main/contract/v1.1.0/road_segments.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Feed 1: one row of the road segment registry.",
+  "properties": {
+    "direction": {
+      "description": "Traffic direction the segment row describes.",
+      "enum": [
+        "both",
+        "forward",
+        "reverse"
+      ],
+      "examples": [
+        "both"
+      ],
+      "type": "string",
+      "x-description-ar": "اتجاه حركة المرور الذي يصفه سجل المقطع."
+    },
+    "geometry": {
+      "additionalProperties": false,
+      "description": "Centre line geometry as a GeoJSON LineString.",
+      "examples": [
+        {
+          "coordinates": [
+            [
+              54.4,
+              24.45
+            ],
+            [
+              54.41,
+              24.46
+            ]
+          ],
+          "type": "LineString"
+        }
+      ],
+      "properties": {
+        "coordinates": {
+          "description": "Ordered positions as [lon, lat] pairs in decimal degrees.",
+          "examples": [
+            [
+              [
+                54.4,
+                24.45
+              ],
+              [
+                54.41,
+                24.46
+              ]
+            ]
+          ],
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "minItems": 2,
+          "type": "array",
+          "x-description-ar": "مواقع مرتبة على شكل أزواج [خط الطول، خط العرض] بالدرجات العشرية.",
+          "x-unit": "degrees"
+        },
+        "type": {
+          "const": "LineString",
+          "description": "GeoJSON geometry type. Always LineString.",
+          "examples": [
+            "LineString"
+          ],
+          "type": "string",
+          "x-description-ar": "نوع الشكل الهندسي وفق GeoJSON، وهو دائما LineString."
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "type": "object",
+      "x-description-ar": "الشكل الهندسي لخط المنتصف بصيغة GeoJSON LineString."
+    },
+    "lane_count": {
+      "description": "Number of through lanes in the direction(s) covered.",
+      "examples": [
+        4
+      ],
+      "maximum": 12,
+      "minimum": 1,
+      "type": "integer",
+      "x-description-ar": "عدد المسارات المستمرة في الاتجاه أو الاتجاهات المشمولة.",
+      "x-unit": "lanes"
+    },
+    "length_m": {
+      "description": "Segment length along the centre line.",
+      "examples": [
+        4200.0
+      ],
+      "exclusiveMinimum": 0,
+      "type": "number",
+      "x-description-ar": "طول المقطع على امتداد خط المنتصف.",
+      "x-unit": "m"
+    },
+    "owner_producer_id": {
+      "description": "Producer responsible for maintaining this segment record.",
+      "examples": [
+        "PRODUCER_A"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "الجهة المنتجة المسؤولة عن تحديث سجل هذا المقطع."
+    },
+    "road_class": {
+      "description": "Functional class of the road.",
+      "enum": [
+        "motorway",
+        "trunk",
+        "primary",
+        "secondary"
+      ],
+      "examples": [
+        "motorway"
+      ],
+      "type": "string",
+      "x-description-ar": "التصنيف الوظيفي للطريق."
+    },
+    "road_name_ar": {
+      "description": "Road name in Arabic.",
+      "examples": [
+        "الممر الأول"
+      ],
+      "minLength": 1,
+      "type": "string",
+      "x-description-ar": "اسم الطريق باللغة العربية."
+    },
+    "road_name_en": {
+      "description": "Road name in English.",
+      "examples": [
+        "Corridor One"
+      ],
+      "minLength": 1,
+      "type": "string",
+      "x-description-ar": "اسم الطريق باللغة الإنجليزية."
+    },
+    "segment_id": {
+      "description": "Stable identifier of the road segment.",
+      "examples": [
+        "SEG-C1-001"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "معرّف ثابت لمقطع الطريق."
+    },
+    "speed_limit_kmh": {
+      "description": "Posted speed limit.",
+      "examples": [
+        120
+      ],
+      "maximum": 160,
+      "minimum": 20,
+      "type": "integer",
+      "x-description-ar": "الحد الأقصى المعلن للسرعة.",
+      "x-unit": "km/h"
+    },
+    "valid_from": {
+      "description": "Start of validity of this segment definition, in UTC.",
+      "examples": [
+        "2020-01-01T00:00:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "بداية سريان تعريف هذا المقطع بالتوقيت العالمي المنسق."
+    },
+    "valid_to": {
+      "description": "End of validity, in UTC. Absent while the definition is current.",
+      "examples": [
+        "2027-01-01T00:00:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "نهاية سريان التعريف بالتوقيت العالمي المنسق. يُحذف الحقل ما دام التعريف ساريا."
+    }
+  },
+  "required": [
+    "segment_id",
+    "road_name_en",
+    "road_name_ar",
+    "road_class",
+    "length_m",
+    "lane_count",
+    "speed_limit_kmh",
+    "direction",
+    "owner_producer_id",
+    "geometry",
+    "valid_from"
+  ],
+  "title": "Road segment registry",
+  "type": "object",
+  "x-contract-version": "1.1.0",
+  "x-title-ar": "سجل مقاطع الطرق"
+}

@@ -1,0 +1,172 @@
+{
+  "$id": "https://github.com/hudasol/sikka/blob/main/contract/v1.0.0/traffic_counts.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Feed 3: one interval from one traffic counting station.",
+  "properties": {
+    "class_counts": {
+      "additionalProperties": false,
+      "description": "Counts by vehicle class, when the station classifies vehicles.",
+      "examples": [
+        {
+          "bus": 8,
+          "car": 410,
+          "heavy_goods": 35,
+          "light_goods": 60,
+          "motorcycle": 3
+        }
+      ],
+      "properties": {
+        "bus": {
+          "description": "Buses and coaches.",
+          "examples": [
+            8
+          ],
+          "minimum": 0,
+          "type": "integer",
+          "x-description-ar": "الحافلات.",
+          "x-unit": "vehicles"
+        },
+        "car": {
+          "description": "Passenger cars.",
+          "examples": [
+            410
+          ],
+          "minimum": 0,
+          "type": "integer",
+          "x-description-ar": "السيارات الخاصة.",
+          "x-unit": "vehicles"
+        },
+        "heavy_goods": {
+          "description": "Heavy goods vehicles.",
+          "examples": [
+            35
+          ],
+          "minimum": 0,
+          "type": "integer",
+          "x-description-ar": "مركبات نقل البضائع الثقيلة.",
+          "x-unit": "vehicles"
+        },
+        "light_goods": {
+          "description": "Light goods vehicles.",
+          "examples": [
+            60
+          ],
+          "minimum": 0,
+          "type": "integer",
+          "x-description-ar": "مركبات نقل البضائع الخفيفة.",
+          "x-unit": "vehicles"
+        },
+        "motorcycle": {
+          "description": "Motorcycles.",
+          "examples": [
+            3
+          ],
+          "minimum": 0,
+          "type": "integer",
+          "x-description-ar": "الدراجات النارية.",
+          "x-unit": "vehicles"
+        }
+      },
+      "type": "object",
+      "x-description-ar": "أعداد المركبات حسب الفئة، عندما تصنّف المحطة المركبات."
+    },
+    "interval_minutes": {
+      "description": "Length of the counting interval.",
+      "examples": [
+        15
+      ],
+      "maximum": 60,
+      "minimum": 1,
+      "type": "integer",
+      "x-description-ar": "طول فترة العد.",
+      "x-unit": "min"
+    },
+    "interval_start": {
+      "description": "Start of the counting interval, in UTC.",
+      "examples": [
+        "2024-02-01T06:00:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "بداية فترة العد بالتوقيت العالمي المنسق."
+    },
+    "mean_speed_kmh": {
+      "description": "Mean spot speed of counted vehicles.",
+      "examples": [
+        104.5
+      ],
+      "maximum": 250,
+      "minimum": 0,
+      "type": "number",
+      "x-description-ar": "متوسط السرعة اللحظية للمركبات المحسوبة.",
+      "x-unit": "km/h"
+    },
+    "occupancy_pct": {
+      "description": "Share of the interval the detector was occupied.",
+      "examples": [
+        7.5
+      ],
+      "maximum": 100,
+      "minimum": 0,
+      "type": "number",
+      "x-description-ar": "نسبة زمن الفترة التي كان فيها الكاشف مشغولا.",
+      "x-unit": "%"
+    },
+    "quality_flag": {
+      "description": "Producer's own quality flag for the interval.",
+      "enum": [
+        "ok",
+        "estimated",
+        "suspect"
+      ],
+      "examples": [
+        "ok"
+      ],
+      "type": "string",
+      "x-description-ar": "مؤشر الجودة الذي تضعه الجهة المنتجة للفترة."
+    },
+    "segment_ref": {
+      "description": "Segment the station measures.",
+      "examples": [
+        "SEG-C1-004"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "المقطع الذي تقيسه المحطة."
+    },
+    "station_id": {
+      "description": "Identifier of the counting station.",
+      "examples": [
+        "STN-C1-004"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "معرّف محطة العد المروري."
+    },
+    "vehicle_count": {
+      "description": "Vehicles counted in the interval, all classes and lanes.",
+      "examples": [
+        516
+      ],
+      "minimum": 0,
+      "type": "integer",
+      "x-description-ar": "عدد المركبات المحسوبة في الفترة لجميع الفئات والمسارات.",
+      "x-unit": "vehicles"
+    }
+  },
+  "required": [
+    "station_id",
+    "segment_ref",
+    "interval_start",
+    "interval_minutes",
+    "vehicle_count",
+    "mean_speed_kmh",
+    "occupancy_pct",
+    "quality_flag"
+  ],
+  "title": "Traffic station counts",
+  "type": "object",
+  "x-contract-version": "1.0.0",
+  "x-title-ar": "أعداد محطات العد المروري"
+}

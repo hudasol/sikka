@@ -1,0 +1,108 @@
+{
+  "$id": "https://github.com/hudasol/sikka/blob/main/contract/v1.0.0/provenance_header.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Header that starts every feed file.",
+  "properties": {
+    "contract_version": {
+      "description": "Contract version the file claims to follow, as MAJOR.MINOR.PATCH.",
+      "examples": [
+        "1.0.0"
+      ],
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "type": "string",
+      "x-description-ar": "إصدار العقد الذي يلتزم به الملف بصيغة رئيسي.فرعي.تصحيح."
+    },
+    "feed_type": {
+      "description": "Which of the three contract feeds this file contains.",
+      "enum": [
+        "road_segments",
+        "crash_records",
+        "traffic_counts"
+      ],
+      "examples": [
+        "crash_records"
+      ],
+      "type": "string",
+      "x-description-ar": "نوع ملف البيانات من بين الأنواع الثلاثة المحددة في العقد."
+    },
+    "generated_at": {
+      "description": "When the producer generated the file, in UTC.",
+      "examples": [
+        "2026-01-05T08:00:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "وقت إعداد الملف لدى الجهة المنتجة بالتوقيت العالمي المنسق."
+    },
+    "licence": {
+      "description": "Licence under which the records may be used.",
+      "examples": [
+        "Apache-2.0"
+      ],
+      "minLength": 1,
+      "type": "string",
+      "x-description-ar": "الترخيص الذي يحكم استخدام السجلات."
+    },
+    "period_end": {
+      "description": "End of the period the records cover, in UTC, exclusive.",
+      "examples": [
+        "2026-01-01T00:00:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "نهاية الفترة التي تغطيها السجلات بالتوقيت العالمي المنسق، غير شاملة."
+    },
+    "period_start": {
+      "description": "Start of the period the records cover, in UTC, inclusive.",
+      "examples": [
+        "2021-01-01T00:00:00Z"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "type": "string",
+      "x-description-ar": "بداية الفترة التي تغطيها السجلات بالتوقيت العالمي المنسق، شاملة."
+    },
+    "producer_id": {
+      "description": "Identifier of the producer that generated the feed.",
+      "examples": [
+        "PRODUCER_A"
+      ],
+      "pattern": "^[A-Z0-9_\\-]{3,40}$",
+      "type": "string",
+      "x-description-ar": "معرّف الجهة المنتجة التي أعدّت ملف البيانات."
+    },
+    "record_count": {
+      "description": "Number of records that follow the header.",
+      "examples": [
+        1250
+      ],
+      "minimum": 0,
+      "type": "integer",
+      "x-description-ar": "عدد السجلات التي تلي الترويسة.",
+      "x-unit": "records"
+    },
+    "synthetic": {
+      "description": "True when every record in the file is synthetic. Must be true in this repository.",
+      "examples": [
+        true
+      ],
+      "type": "boolean",
+      "x-description-ar": "تكون القيمة صحيحة عندما تكون جميع السجلات مصطنعة. يجب أن تكون صحيحة في هذا المستودع."
+    }
+  },
+  "required": [
+    "producer_id",
+    "feed_type",
+    "contract_version",
+    "generated_at",
+    "licence",
+    "synthetic",
+    "record_count",
+    "period_start",
+    "period_end"
+  ],
+  "title": "Provenance header",
+  "type": "object",
+  "x-contract-version": "1.0.0",
+  "x-title-ar": "ترويسة المصدر"
+}
