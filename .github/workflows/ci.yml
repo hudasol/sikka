@@ -27,3 +27,8 @@ jobs:
           python -m pip install -e . --no-deps
       - name: Fast check
         run: sikka check
+      - name: Generated artefacts are fresh
+        run: sikka docs build --check
+      - name: Evaluation smoke test (one seed)
+        if: matrix.os == 'ubuntu-latest'
+        run: sikka eval --smoke --workers 2
