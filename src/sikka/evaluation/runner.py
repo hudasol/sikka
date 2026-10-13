@@ -10,12 +10,16 @@ from sikka.core import round_floats, stable_json_dumps
 from sikka.evaluation.e1 import run_e1
 from sikka.evaluation.e2 import run_e2
 
-EXPERIMENT_SEED_BASE = 1000
+EXPERIMENT_SEED_BASE = 2000
+SMOKE_SEED = 1001
 E1_RATES = [0.01, 0.05, 0.2]
 
 
 def seed_list(n: int) -> list[int]:
-    """The preregistered seeds: 1001, 1002, ... (n of them)."""
+    """The preregistered evaluation seeds: 2001, 2002, ... (n of them).
+
+    Seed 1001 is the development and smoke seed. It is never part of the evaluation.
+    """
     return [EXPERIMENT_SEED_BASE + i for i in range(1, n + 1)]
 
 
@@ -31,7 +35,7 @@ def run_experiments(
     experiments: list[str], *, seeds: int, smoke: bool, workers: int, out_dir: Path
 ) -> list[Path]:
     written: list[Path] = []
-    chosen = seed_list(seeds)
+    chosen = [SMOKE_SEED] if smoke else seed_list(seeds)
     for name in experiments:
         if name == "e1":
             rates = [0.05] if smoke else E1_RATES

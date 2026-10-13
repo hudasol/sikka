@@ -13,7 +13,7 @@ from sikka.evaluation import run_experiments, seed_list
 
 
 def test_seed_list_is_preregistered() -> None:
-    assert seed_list(3) == [1001, 1002, 1003]
+    assert seed_list(3) == [2001, 2002, 2003]
 
 
 def test_unknown_experiment(tmp_path: Path) -> None:
@@ -31,7 +31,7 @@ def test_results_are_written_with_the_notice(
     (path,) = run_experiments(["e1"], seeds=2, smoke=False, workers=1, out_dir=tmp_path)
     doc = json.loads(path.read_text("utf-8"))
     assert doc["notice"].startswith("Synthetic data.")
-    assert doc["seeds"] == [1001, 1002]
+    assert doc["seeds"] == [2001, 2002]
     assert doc["rates"] == [0.01, 0.05, 0.2]
     assert doc["value"] == 0.333333
 
