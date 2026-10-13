@@ -14,7 +14,7 @@ Status of the build phases. Each phase is tagged when its gate holds.
 | P7 | Evaluation E1 to E4 | done | v0.8.0 | `sikka eval` on seeds 2001 to 2020 wrote `results/e1` to `e4`; `docs/EVALUATION.md` is generated from them and a test fails if it is stale; 23 predictions hit and 2 missed (P3.2, P3.6), all reported |
 | P8 | Full web app | done | v0.9.0 | Nine screens in English and Arabic, light and dark; 83 Vitest tests; 12 Playwright tests with axe (WCAG 2.2 AA tags) pass on the static build with no foreign requests and no console errors; screenshots reviewed in all four combinations |
 | P9 | L6 tasking and E5 | done | v0.10.0 | Every planned mission's `.plan` passes the structural validator (API test); the validator rejects every single structural defect (property test); E5 ran on seeds 2001 to 2020 and its three predictions missed, as reported in EVALUATION |
-| P10 | Hardening, review, documentation | next | | |
+| P10 | Hardening, review, documentation | done | v1.0.0 | Independent review run; every finding fixed and recorded (D32, D33), none rejected; all five experiments rerun with the final code and the result files were identical byte for byte (PREREGISTRATION, Amendment 2); performance budgets measured in `results/performance.json` and all met; a clean clone on Windows ran the README commands and `sikka all --no-evaluation` with exit code 0; 86 Vitest tests and 40 Playwright tests pass, with axe on every screen in English and Arabic, light and dark |
 
 ## In progress
 
@@ -22,7 +22,7 @@ Nothing in progress.
 
 ## Next
 
-P10: performance measurements, independent review, fixes, final documentation and the private build report.
+All phases are done. Possible next steps are listed in `docs/PILOT.md`.
 
 ## Blockers
 
