@@ -8,7 +8,7 @@ from typing import Any
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from starlette.datastructures import UploadFile
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -103,6 +103,22 @@ def create_app(service: Service | None = None) -> FastAPI:
     def contract() -> dict[str, Any]:
         return svc.contract()
 
+    @app.get("/v1/contract/diff/{old}/{new}")
+    def contract_diff(old: str, new: str) -> dict[str, Any]:
+        return svc.contract_diff(old, new)
+
+    @app.get("/v1/rules")
+    def rules() -> list[dict[str, Any]]:
+        return svc.rules()
+
+    @app.get("/v1/faults")
+    def faults() -> dict[str, Any]:
+        return svc.faults()
+
+    @app.get("/v1/method")
+    def method() -> dict[str, Any]:
+        return svc.method()
+
     @app.get("/v1/contract/{version}")
     def contract_version(version: str) -> dict[str, Any]:
         return svc.contract(version)
@@ -170,6 +186,31 @@ def create_app(service: Service | None = None) -> FastAPI:
     @app.get("/v1/segments/{segment_id}")
     def segment(segment_id: str, dataset: str = "broken") -> dict[str, Any]:
         return svc.segment(segment_id, dataset)
+
+    @app.get("/v1/tasking/missions")
+    def tasking_missions() -> dict[str, Any]:
+        return svc.tasking_missions()
+
+    @app.get("/v1/tasking/export/{fmt}")
+    def tasking_export(fmt: str) -> Response:
+        content, media = svc.tasking_export(fmt)
+        name = f"sikka-missions.{fmt}"
+        return Response(
+            content,
+            media_type=media,
+            headers={"Content-Disposition": f'attachment; filename="{name}"'},
+        )
+
+    @app.get("/v1/tasking/plan/{mission_id}")
+    def tasking_plan(mission_id: str) -> Response:
+        import json as _json
+
+        plan = svc.tasking_plan(mission_id)
+        return Response(
+            _json.dumps(plan, indent=1),
+            media_type="application/json",
+            headers={"Content-Disposition": f'attachment; filename="{mission_id}.plan"'},
+        )
 
     @app.get("/v1/producers/conformance")
     def producers_conformance() -> dict[str, Any]:

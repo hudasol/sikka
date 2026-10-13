@@ -226,6 +226,56 @@ def test_segment_detail(client: TestClient) -> None:
     assert_problem(client.get("/v1/segments/SEG-NOPE-001"), 404)
 
 
+def test_rules_faults_and_contract_diff(client: TestClient) -> None:
+    rules = client.get("/v1/rules").json()
+    assert len(rules) == 39
+    assert rules[0]["id"] == "SK-P001"
+    faults = client.get("/v1/faults").json()
+    assert [f["id"] for f in faults["faults"]][:2] == ["F01", "F02"]
+    diff = client.get("/v1/contract/diff/1.0.0/1.1.0").json()
+    assert diff["compatible"] is True
+    assert diff["changes"][0]["field"] == "work_zone"
+    assert_problem(client.get("/v1/contract/diff/1.0.0/9.9.9"), 404)
+
+
+def test_conformance_trend(client: TestClient) -> None:
+    trend = client.get("/v1/producers/conformance").json()["trend"]
+    assert {t["period"] for t in trend} >= {"2021", "2025"}
+    for point in trend:
+        assert point["low"] <= point["estimate"] <= point["high"]
+
+
+def test_method_reads_results(client: TestClient) -> None:
+    body = client.get("/v1/method").json()
+    assert body["notice"].startswith("Synthetic data.")
+    assert body["ranking"]["published"]["method"] == "eb_qp"
+    for doc in body["results"].values():
+        assert "per_seed" not in doc
+
+
+def test_tasking_missions_and_exports(client: TestClient) -> None:
+    body = client.get("/v1/tasking/missions").json()
+    assert "simulation and review only" in body["disclaimer"]
+    assert 0 < len(body["missions"]) <= body["budget_missions"]
+    usable = body["profile"]["usable_s"]
+    for m in body["missions"]:
+        assert m["flight_s"] <= usable
+        assert m["plan_valid"] is True
+        assert m["metadata"]["disclaimer"] == body["disclaimer"]
+    assert set(body["comparison"]) == {"value_of_information", "random", "greedy_crash_count"}
+    geo = client.get("/v1/tasking/export/geojson")
+    assert geo.headers["content-type"].startswith("application/geo+json")
+    assert "simulation and review only" in geo.text
+    kml = client.get("/v1/tasking/export/kml")
+    assert "<kml" in kml.text
+    assert_problem(client.get("/v1/tasking/export/shp"), 400)
+    mid = body["missions"][0]["mission_id"]
+    plan = client.get(f"/v1/tasking/plan/{mid}")
+    assert plan.json()["fileType"] == "Plan"
+    assert f"{mid}.plan" in plan.headers["content-disposition"]
+    assert_problem(client.get("/v1/tasking/plan/M99"), 404)
+
+
 def test_safe_filename() -> None:
     assert safe_filename("C:\\Users\\x\\my feed.csv") == "my_feed.csv"
     assert safe_filename("../../etc/a.ndjson") == "a.ndjson"

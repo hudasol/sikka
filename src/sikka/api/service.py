@@ -21,6 +21,7 @@ from sikka.core import (
     NotFoundError,
     Paths,
     stable_json_dumps,
+    wilson_interval,
 )
 
 SAMPLE_SETS = ("clean", "broken")
@@ -29,6 +30,42 @@ SAFE_NAME = re.compile(r"[^A-Za-z0-9_.\-]")
 ALLOWED_SUFFIXES = (".ndjson", ".jsonl", ".csv", ".geojson", ".json")
 CONFORMING_THRESHOLD = 0.9
 RANKING_SEED = 20260422
+
+
+def conformance_trend(result: Any) -> list[dict[str, Any]]:
+    """Share of crash records passing every error and warning rule, per producer and local year."""
+    out = []
+    for feed in result.validated():
+        if feed.feed_type != "crash_records":
+            continue
+        failing: set[int] = set()
+        for o in result.outcomes:
+            if (
+                o.file == feed.file
+                and o.status == "evaluated"
+                and o.rule.severity != "info"
+                and o.rule.scope != "file"
+                and not o.findings.empty
+            ):
+                failing.update(int(r) for r in o.findings["_row"].dropna())
+        frame = result.con.execute(
+            f"SELECT _row, year(occurred_at__ts + INTERVAL 4 HOUR) AS y FROM {feed.table} "
+            "WHERE occurred_at__ts IS NOT NULL"
+        ).df()
+        for year, group in frame.groupby("y"):
+            total = len(group)
+            passing = total - int(group["_row"].isin(failing).sum())
+            iv = wilson_interval(passing, total)
+            out.append(
+                {
+                    "producer_id": feed.producer_id,
+                    "period": str(int(year)),
+                    "passing": passing,
+                    "total": total,
+                    **iv.as_dict(),
+                }
+            )
+    return sorted(out, key=lambda r: (str(r["producer_id"]), r["period"]))
 
 
 def explain(row: dict[str, Any]) -> dict[str, Any]:
@@ -102,6 +139,54 @@ class Service:
             return contract_bundle(resolve_version(version))
         except KeyError as exc:
             raise NotFoundError(f"unknown contract version {version!r}") from exc
+
+    def contract_diff(self, old: str, new: str) -> dict[str, Any]:
+        from sikka.contract import diff_versions
+
+        try:
+            diff = diff_versions(resolve_version(old), resolve_version(new))
+        except KeyError as exc:
+            raise NotFoundError(str(exc.args[0])) from exc
+        return diff.as_dict()
+
+    def rules(self) -> list[dict[str, Any]]:
+        from sikka.conformance import REGISTRY
+
+        return [REGISTRY[k].as_dict() for k in sorted(REGISTRY)]
+
+    def faults(self) -> dict[str, Any]:
+        """The public fault catalogue shipped with the samples (no ground truth)."""
+        import json
+
+        path = self.paths.samples / "fault_catalogue.json"
+        catalogue: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+        return catalogue
+
+    def method(self) -> dict[str, Any]:
+        """Method summary and preregistered evaluation results, read from results/*.json."""
+        import json
+
+        results: dict[str, Any] = {}
+        for name in (
+            "predictions",
+            "e1_fault_detection",
+            "e2_entity_resolution",
+            "e3_blackspot_ranking",
+            "e4_robustness",
+            "e5_tasking",
+            "performance",
+        ):
+            path = self.paths.results / f"{name}.json"
+            if path.is_file():
+                doc = json.loads(path.read_text(encoding="utf-8"))
+                doc.pop("per_seed", None)
+                results[name] = doc
+        ranking = self.segments_ranking()["summary"]
+        return {
+            "notice": SYNTHETIC_NOTICE,
+            "ranking": ranking,
+            "results": results,
+        }
 
     # Samples ----------------------------------------------------------------
 
@@ -301,6 +386,82 @@ class Service:
                 return geometry
         return None
 
+    # Tasking -----------------------------------------------------------------
+
+    def _tasking(self) -> dict[str, Any]:
+        from sikka.tasking import TaskingConfig, compare_strategies
+
+        if "plans" not in self._rankings:
+            rows = self.ranking_bundle().segment_rows()
+            geometry = {sid: seg.coordinates for sid, seg in self.dataset().segments.items()}
+            self._rankings["plans"] = compare_strategies(
+                rows, geometry, TaskingConfig(), seed=RANKING_SEED
+            )
+        plans: dict[str, Any] = self._rankings["plans"]
+        return plans
+
+    def tasking_missions(self) -> dict[str, Any]:
+        from sikka.tasking import DISCLAIMER, DroneProfile, TaskingConfig, to_plan, validate_plan
+
+        plans = self._tasking()
+        rows = {r["segment_id"]: r for r in self.ranking_bundle().segment_rows()}
+        chosen = plans["value_of_information"]
+        missions = []
+        for m in chosen["missions"]:
+            plan_errors = validate_plan(to_plan(m))
+            missions.append(
+                m.as_dict() | {"plan_valid": not plan_errors, "plan_errors": plan_errors}
+            )
+        voi = {
+            sid: (r["p_top_k"] or 0.0) * (1 - (r["p_top_k"] or 0.0))
+            for sid, r in rows.items()
+            if r["p_top_k"] is not None
+        }
+        return {
+            "dataset": DEMO_SET,
+            "notice": SYNTHETIC_NOTICE,
+            "disclaimer": DISCLAIMER,
+            "profile": DroneProfile().as_dict(),
+            "budget_missions": TaskingConfig().max_missions,
+            "missions": missions,
+            "refused": [m.as_dict() for m in chosen["refused"]],
+            "value_of_information": [
+                {"segment_id": sid, "voi": v, "length_km": rows[sid]["length_km"]}
+                for sid, v in sorted(voi.items(), key=lambda kv: (-kv[1], kv[0]))
+            ],
+            "comparison": {
+                name: {
+                    "segments": p["segments"],
+                    "value": p["value"],
+                    "flight_s": p["flight_s"],
+                    "missions": len(p["missions"]),
+                }
+                for name, p in plans.items()
+            },
+        }
+
+    def tasking_export(self, fmt: str) -> tuple[str, str]:
+        """Return (content, media type) for a GeoJSON or KML export of the planned missions."""
+        import json
+
+        from sikka.tasking import to_geojson, to_kml
+
+        missions = self._tasking()["value_of_information"]["missions"]
+        if fmt == "geojson":
+            return json.dumps(to_geojson(missions), indent=1), "application/geo+json"
+        if fmt == "kml":
+            return to_kml(missions), "application/vnd.google-earth.kml+xml"
+        raise InputError("format must be geojson or kml")
+
+    def tasking_plan(self, mission_id: str) -> dict[str, Any]:
+        from sikka.tasking import to_plan
+
+        for m in self._tasking()["value_of_information"]["missions"]:
+            if m.mission_id == mission_id:
+                plan: dict[str, Any] = to_plan(m)
+                return plan
+        raise NotFoundError(f"no mission with id {mission_id!r}")
+
     # Producer conformance across the demo feeds -----------------------------
 
     def producer_conformance(self) -> dict[str, Any]:
@@ -311,6 +472,7 @@ class Service:
         result = run_validation(sources)
         try:
             report = build_report(result)
+            trend = conformance_trend(result)
         finally:
             result.close()
         self._store(report)
@@ -329,6 +491,7 @@ class Service:
             "file_checks": report["file_checks"],
             "families": report["families"],
             "score_definition": report["score_definition"],
+            "trend": trend,
             "headline": {
                 "producers": len(overall),
                 "conforming_threshold": CONFORMING_THRESHOLD,

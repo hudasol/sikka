@@ -7,6 +7,7 @@ validations are precomputed and indexed in ``v1/samples.json``.
 
 from __future__ import annotations
 
+import json
 from typing import Any
 
 from sikka.api.service import Service
@@ -29,6 +30,12 @@ def snapshot_files(service: Service) -> dict[str, str]:
     docs["v1/contract"] = service.contract()
     for version in VERSIONS:
         docs[f"v1/contract/{version}"] = service.contract(version)
+    for old in VERSIONS:
+        for new in VERSIONS:
+            if old != new:
+                docs[f"v1/contract/diff/{old}/{new}"] = service.contract_diff(old, new)
+    docs["v1/rules"] = service.rules()
+    docs["v1/faults"] = service.faults()
     conformance = service.producer_conformance()
     docs["v1/producers/conformance"] = conformance
     docs[f"v1/reports/{conformance['report_id']}"] = service.report(conformance["report_id"])
@@ -40,6 +47,8 @@ def snapshot_files(service: Service) -> dict[str, str]:
     docs["v1/samples"] = samples
     docs["v1/network"] = service.network()
     docs["v1/lineage"] = service.lineage_index()
+    docs["v1/method"] = service.method()
+    docs["v1/tasking/missions"] = service.tasking_missions()
     for label in ("broken", "clean"):
         suffix = "" if label == "broken" else "-clean"
         ranking = service.segments_ranking(label)
@@ -59,4 +68,11 @@ def snapshot_files(service: Service) -> dict[str, str]:
     for path, doc in docs.items():
         if path.startswith("v1/reports/"):
             files[f"{SNAPSHOT_ROOT}/{path}.html"] = render_html(doc)
+    for fmt in ("geojson", "kml"):
+        content, _ = service.tasking_export(fmt)
+        files[f"{SNAPSHOT_ROOT}/downloads/sikka-missions.{fmt}"] = content
+    for mission in docs["v1/tasking/missions"]["missions"]:
+        mid = mission["mission_id"]
+        plan = json.dumps(service.tasking_plan(mid), indent=1)
+        files[f"{SNAPSHOT_ROOT}/downloads/{mid}.plan"] = plan
     return files
