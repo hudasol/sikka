@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sikka conformance report RPT-8073445B8EAA7544662A</title>
+<style>
+:root { --pearl:#fdf8f5; --sakura:#fbe3ea; --pink:#f7b6c8; --ink:#5b3a4a; --text:#3d2632;
+  --link:#8e3553; --muted:#6e4f5d; }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px; background:var(--pearl); color:var(--text);
+  font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.5; }
+h1, h2, h3 { font-family:"Space Grotesk", "IBM Plex Sans", sans-serif; color:var(--ink); }
+.banner { border:2px solid var(--ink); background:var(--sakura); padding:10px 14px;
+  box-shadow:4px 4px 0 var(--ink); font-weight:600; margin-bottom:24px; }
+.card { border:2px solid var(--ink); background:#fff; padding:16px; margin:16px 0;
+  box-shadow:4px 4px 0 var(--ink); }
+table { border-collapse:collapse; width:100%; font-size:14px; }
+th, td { border:1px solid var(--ink); padding:4px 8px; text-align:start; vertical-align:top; }
+th { background:var(--sakura); }
+.mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
+.sev-error::before { content:"\25A0  "; } .sev-warning::before { content:"\25B2  "; }
+.sev-info::before { content:"\25CB  "; }
+.muted { color:var(--muted); }
+@media print { body { background:#fff; padding:0; } .card, .banner { box-shadow:none; }
+  .card { break-inside:avoid; } a { color:inherit; } }
+</style></head><body>
+<div class="banner" role="note">Synthetic data. No real crash, traffic or road records are used.</div>
+<h1>Conformance report</h1>
+<p class="mono">RPT-8073445B8EAA7544662A &middot; contract v1.0.0 &middot;
+engine 0.1.0</p>
+<p>This report was produced by Sikka, a proposal seed that checks synthetic feeds against an
+open data contract. It is not an official assessment of any entity.</p>
+<div class="card"><h2>Files</h2><table><thead><tr><th>File</th><th>Feed</th><th>Producer</th>
+<th>Rows</th><th>Quarantined rows</th><th>Header</th></tr></thead><tbody>
+<tr><td class="mono">crash_records_producer_d.ndjson</td><td>crash_records</td>
+<td class="mono">PRODUCER_D</td><td class="mono">373</td>
+<td class="mono">0</td><td>present</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Conformance by producer and family</h2>
+<p class="muted">A record passes a family when no error or warning rule of that family flagged it directly or through its station series. Informational and file level findings do not count against records. Intervals are Wilson 95 percent intervals. The overall index is the share of records that pass every family.</p>
+<table><thead><tr><th>Producer</th><th>Family</th><th>Passing records</th>
+<th>Share passing</th><th>95 percent interval</th></tr></thead><tbody>
+<tr><td class="mono">PRODUCER_D</td><td>Privacy</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Referential</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Structural</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Timeliness and completeness</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Semantic</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Cross feed</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>All families (overall index)</td>
+<td class="mono">373 of 373</td>
+<td class="mono">100.0 %</td>
+<td class="mono">99.0 to 100.0 %</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Structural (S)</h2>
+<p>11 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Semantic (V)</h2>
+<p>6 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Referential (R)</h2>
+<p>3 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Cross feed (X)</h2>
+<p>4 rules evaluated, 1 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-X001</span> Possible duplicate across producers</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-info">info</td>
+<td class="mono">362</td>
+<td class="mono">97.05 %</td>
+<td><div>
+<span class="mono">HD-000001</span>:
+possible duplicate of crash_records_producer_a.ndjson row 5 (2 candidate(s))</div><div>
+<span class="mono">HD-000002</span>:
+possible duplicate of crash_records_producer_b.ndjson row 16 (2 candidate(s))</div><div>
+<span class="mono">HD-000003</span>:
+possible duplicate of crash_records_producer_b.ndjson row 19 (2 candidate(s))</div><div>
+<span class="mono">HD-000004</span>:
+possible duplicate of crash_records_producer_a.ndjson row 15 (2 candidate(s))</div><div>
+<span class="mono">HD-000005</span>:
+possible duplicate of crash_records_producer_c.csv row 13 (2 candidate(s))</div></td><td>No action is needed from the producer; shared identifiers would make matching exact.</td></tr>
+</tbody></table></div><div class="card"><h2>Timeliness and completeness (T)</h2>
+<p>3 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Privacy (P)</h2>
+<p>2 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div>
+<p class="muted">Synthetic data. No real crash, traffic or road records are used.</p>
+</body></html>

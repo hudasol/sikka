@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sikka conformance report RPT-A42D7A56EAE9449CB2DB</title>
+<style>
+:root { --pearl:#fdf8f5; --sakura:#fbe3ea; --pink:#f7b6c8; --ink:#5b3a4a; --text:#3d2632;
+  --link:#8e3553; --muted:#6e4f5d; }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px; background:var(--pearl); color:var(--text);
+  font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.5; }
+h1, h2, h3 { font-family:"Space Grotesk", "IBM Plex Sans", sans-serif; color:var(--ink); }
+.banner { border:2px solid var(--ink); background:var(--sakura); padding:10px 14px;
+  box-shadow:4px 4px 0 var(--ink); font-weight:600; margin-bottom:24px; }
+.card { border:2px solid var(--ink); background:#fff; padding:16px; margin:16px 0;
+  box-shadow:4px 4px 0 var(--ink); }
+table { border-collapse:collapse; width:100%; font-size:14px; }
+th, td { border:1px solid var(--ink); padding:4px 8px; text-align:start; vertical-align:top; }
+th { background:var(--sakura); }
+.mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
+.sev-error::before { content:"\25A0  "; } .sev-warning::before { content:"\25B2  "; }
+.sev-info::before { content:"\25CB  "; }
+.muted { color:var(--muted); }
+@media print { body { background:#fff; padding:0; } .card, .banner { box-shadow:none; }
+  .card { break-inside:avoid; } a { color:inherit; } }
+</style></head><body>
+<div class="banner" role="note">Synthetic data. No real crash, traffic or road records are used.</div>
+<h1>Conformance report</h1>
+<p class="mono">RPT-A42D7A56EAE9449CB2DB &middot; contract v1.0.0 &middot;
+engine 0.1.0</p>
+<p>This report was produced by Sikka, a proposal seed that checks synthetic feeds against an
+open data contract. It is not an official assessment of any entity.</p>
+<div class="card"><h2>Files</h2><table><thead><tr><th>File</th><th>Feed</th><th>Producer</th>
+<th>Rows</th><th>Quarantined rows</th><th>Header</th></tr></thead><tbody>
+<tr><td class="mono">road_segments_producer_c.geojson</td><td>road_segments</td>
+<td class="mono">PRODUCER_C</td><td class="mono">80</td>
+<td class="mono">0</td><td>present</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Conformance by producer and family</h2>
+<p class="muted">A record passes a family when no error or warning rule of that family flagged it directly or through its station series. Informational and file level findings do not count against records. Intervals are Wilson 95 percent intervals. The overall index is the share of records that pass every family.</p>
+<table><thead><tr><th>Producer</th><th>Family</th><th>Passing records</th>
+<th>Share passing</th><th>95 percent interval</th></tr></thead><tbody>
+<tr><td class="mono">PRODUCER_C</td><td>Privacy</td>
+<td class="mono">80 of 80</td>
+<td class="mono">100.0 %</td>
+<td class="mono">95.4 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Referential</td>
+<td class="mono">80 of 80</td>
+<td class="mono">100.0 %</td>
+<td class="mono">95.4 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Structural</td>
+<td class="mono">78 of 80</td>
+<td class="mono">97.5 %</td>
+<td class="mono">91.3 to 99.3 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Timeliness and completeness</td>
+<td class="mono">80 of 80</td>
+<td class="mono">100.0 %</td>
+<td class="mono">95.4 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Semantic</td>
+<td class="mono">76 of 80</td>
+<td class="mono">95.0 %</td>
+<td class="mono">87.8 to 98.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Cross feed</td>
+<td class="mono">76 of 80</td>
+<td class="mono">95.0 %</td>
+<td class="mono">87.8 to 98.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>All families (overall index)</td>
+<td class="mono">74 of 80</td>
+<td class="mono">92.5 %</td>
+<td class="mono">84.6 to 96.5 %</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Structural (S)</h2>
+<p>11 rules evaluated, 2 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-S002</span> Declared record count matches</td>
+<td class="mono">road_segments_producer_c.geojson</td><td class="sev-error">error</td>
+<td class="mono">1</td>
+<td class="mono">0.00 %</td>
+<td><div>
+<span class="mono">row None</span>:
+header declares 126 records, file has 80</div></td><td>Recompute record_count when the file is written, after all filtering.</td></tr>
+
+<tr><td><span class="mono">SK-S006</span> No unknown fields</td>
+<td class="mono">road_segments_producer_c.geojson</td><td class="sev-warning">warning</td>
+<td class="mono">2</td>
+<td class="mono">2.50 %</td>
+<td><div>
+<span class="mono">SEG-PRL-016</span>:
+field is not defined in the contract</div><div>
+<span class="mono">SEG-PRL-021</span>:
+field is not defined in the contract</div></td><td>Drop fields that are not in the contract, or propose a contract change.</td></tr>
+</tbody></table></div><div class="card"><h2>Semantic (V)</h2>
+<p>5 rules evaluated, 1 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-V012</span> Road name script matches the field</td>
+<td class="mono">road_segments_producer_c.geojson</td><td class="sev-warning">warning</td>
+<td class="mono">4</td>
+<td class="mono">5.00 %</td>
+<td><div>
+<span class="mono">SEG-PRL-027</span>:
+Arabic name field holds no Arabic text</div><div>
+<span class="mono">SEG-FAL-019</span>:
+English name field holds Arabic text</div><div>
+<span class="mono">SEG-FAL-024</span>:
+Arabic name field holds no Arabic text</div><div>
+<span class="mono">SEG-FAL-029</span>:
+Arabic name field holds no Arabic text</div></td><td>Fill each name field in its own language.</td></tr>
+</tbody></table></div><div class="card"><h2>Referential (R)</h2>
+<p>0 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Cross feed (X)</h2>
+<p>1 rules evaluated, 1 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-X004</span> Consistent road names</td>
+<td class="mono">road_segments_producer_c.geojson</td><td class="sev-warning">warning</td>
+<td class="mono">4</td>
+<td class="mono">5.00 %</td>
+<td><div>
+<span class="mono">SEG-PRL-027</span>:
+road_name_ar differs from the usual name ممر اللؤلؤ for the same road_name_en</div><div>
+<span class="mono">SEG-FAL-019</span>:
+road_name_en differs from the usual name Falcon Corridor for the same road_name_ar</div><div>
+<span class="mono">SEG-FAL-024</span>:
+road_name_ar differs from the usual name ممر الصقر for the same road_name_en</div><div>
+<span class="mono">SEG-FAL-029</span>:
+road_name_ar differs from the usual name ممر الصقر for the same road_name_en</div></td><td>Agree a bilingual road name list between producers and use it in every feed.</td></tr>
+</tbody></table></div><div class="card"><h2>Timeliness and completeness (T)</h2>
+<p>0 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Privacy (P)</h2>
+<p>2 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div>
+<p class="muted">Synthetic data. No real crash, traffic or road records are used.</p>
+</body></html>

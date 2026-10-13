@@ -62,6 +62,13 @@ def test_contract_endpoints(client: TestClient) -> None:
     assert_problem(client.get("/v1/contract/9.9.9"), 404)
 
 
+def test_network(client: TestClient) -> None:
+    body = client.get("/v1/network").json()
+    assert body["synthetic"] is True
+    assert len(body["features"]) == 240
+    assert body["features"][0]["geometry"]["type"] == "LineString"
+
+
 def test_samples(client: TestClient) -> None:
     samples = client.get("/v1/samples").json()
     names = {s["name"] for s in samples}

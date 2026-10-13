@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sikka conformance report RPT-14A8C55EDC562AFDA374</title>
+<style>
+:root { --pearl:#fdf8f5; --sakura:#fbe3ea; --pink:#f7b6c8; --ink:#5b3a4a; --text:#3d2632;
+  --link:#8e3553; --muted:#6e4f5d; }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px; background:var(--pearl); color:var(--text);
+  font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.5; }
+h1, h2, h3 { font-family:"Space Grotesk", "IBM Plex Sans", sans-serif; color:var(--ink); }
+.banner { border:2px solid var(--ink); background:var(--sakura); padding:10px 14px;
+  box-shadow:4px 4px 0 var(--ink); font-weight:600; margin-bottom:24px; }
+.card { border:2px solid var(--ink); background:#fff; padding:16px; margin:16px 0;
+  box-shadow:4px 4px 0 var(--ink); }
+table { border-collapse:collapse; width:100%; font-size:14px; }
+th, td { border:1px solid var(--ink); padding:4px 8px; text-align:start; vertical-align:top; }
+th { background:var(--sakura); }
+.mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
+.sev-error::before { content:"\25A0  "; } .sev-warning::before { content:"\25B2  "; }
+.sev-info::before { content:"\25CB  "; }
+.muted { color:var(--muted); }
+@media print { body { background:#fff; padding:0; } .card, .banner { box-shadow:none; }
+  .card { break-inside:avoid; } a { color:inherit; } }
+</style></head><body>
+<div class="banner" role="note">Synthetic data. No real crash, traffic or road records are used.</div>
+<h1>Conformance report</h1>
+<p class="mono">RPT-14A8C55EDC562AFDA374 &middot; contract v1.0.0 &middot;
+engine 0.1.0</p>
+<p>This report was produced by Sikka, a proposal seed that checks synthetic feeds against an
+open data contract. It is not an official assessment of any entity.</p>
+<div class="card"><h2>Files</h2><table><thead><tr><th>File</th><th>Feed</th><th>Producer</th>
+<th>Rows</th><th>Quarantined rows</th><th>Header</th></tr></thead><tbody>
+<tr><td class="mono">traffic_counts_producer_c.csv</td><td>traffic_counts</td>
+<td class="mono">PRODUCER_C</td><td class="mono">7728</td>
+<td class="mono">0</td><td>present</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Conformance by producer and family</h2>
+<p class="muted">A record passes a family when no error or warning rule of that family flagged it directly or through its station series. Informational and file level findings do not count against records. Intervals are Wilson 95 percent intervals. The overall index is the share of records that pass every family.</p>
+<table><thead><tr><th>Producer</th><th>Family</th><th>Passing records</th>
+<th>Share passing</th><th>95 percent interval</th></tr></thead><tbody>
+<tr><td class="mono">PRODUCER_C</td><td>Privacy</td>
+<td class="mono">7728 of 7728</td>
+<td class="mono">100.0 %</td>
+<td class="mono">100.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Referential</td>
+<td class="mono">7469 of 7728</td>
+<td class="mono">96.6 %</td>
+<td class="mono">96.2 to 97.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Structural</td>
+<td class="mono">7178 of 7728</td>
+<td class="mono">92.9 %</td>
+<td class="mono">92.3 to 93.4 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Timeliness and completeness</td>
+<td class="mono">7560 of 7728</td>
+<td class="mono">97.8 %</td>
+<td class="mono">97.5 to 98.1 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Semantic</td>
+<td class="mono">6538 of 7728</td>
+<td class="mono">84.6 %</td>
+<td class="mono">83.8 to 85.4 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>Cross feed</td>
+<td class="mono">7728 of 7728</td>
+<td class="mono">100.0 %</td>
+<td class="mono">100.0 to 100.0 %</td></tr>
+<tr><td class="mono">PRODUCER_C</td><td>All families (overall index)</td>
+<td class="mono">6131 of 7728</td>
+<td class="mono">79.3 %</td>
+<td class="mono">78.4 to 80.2 %</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Structural (S)</h2>
+<p>11 rules evaluated, 4 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-S003</span> Synthetic flag set in a synthetic repository</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">1</td>
+<td class="mono">0.00 %</td>
+<td><div>
+<span class="mono">row None</span>:
+synthetic is False; every feed in this repository must be synthetic</div></td><td>Set synthetic to true, or remove the file if it holds real records.</td></tr>
+
+<tr><td><span class="mono">SK-S006</span> No unknown fields</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">227</td>
+<td class="mono">2.94 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T02:00:00Z</span>:
+field is not defined in the contract</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-06T17:00:00Z</span>:
+field is not defined in the contract</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-07T09:00:00Z</span>:
+field is not defined in the contract</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-07T10:00:00Z</span>:
+field is not defined in the contract</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-07T22:00:00Z</span>:
+field is not defined in the contract</div></td><td>Drop fields that are not in the contract, or propose a contract change.</td></tr>
+
+<tr><td><span class="mono">SK-S007</span> Field types match the contract</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">252</td>
+<td class="mono">3.26 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T09:00:00Z</span>:
+expected integer, found varchar</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T14:00:00Z</span>:
+expected integer, found varchar</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-06T20:00:00Z</span>:
+expected integer, found varchar</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-02T21:00:00Z</span>:
+expected integer, found varchar</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-06T00:00:00Z</span>:
+expected integer, found varchar</div></td><td>Emit numbers as JSON numbers with ASCII digits, timestamps as ISO 8601 strings, and omit missing fields.</td></tr>
+
+<tr><td><span class="mono">SK-S009</span> Identifiers match the pattern</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">89</td>
+<td class="mono">1.15 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-08T03:00:00Z</span>:
+identifier does not match ^[A-Z0-9_\-]{3,40}$</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-05T22:00:00Z</span>:
+identifier does not match ^[A-Z0-9_\-]{3,40}$</div><div>
+<span class="mono">CS-FAL-0007 @ 2025-03-03T16:00:00Z</span>:
+identifier does not match ^[A-Z0-9_\-]{3,40}$</div><div>
+<span class="mono">CS-FAL-0007 @ 2025-03-03T20:00:00Z</span>:
+identifier does not match ^[A-Z0-9_\-]{3,40}$</div><div>
+<span class="mono">CS-FAL-0007 @ 2025-03-04T21:00:00Z</span>:
+identifier does not match ^[A-Z0-9_\-]{3,40}$</div></td><td>Normalise identifiers to upper case and strip spaces before export.</td></tr>
+</tbody></table></div><div class="card"><h2>Semantic (V)</h2>
+<p>9 rules evaluated, 7 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-V001</span> Numeric values inside contract ranges</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">447</td>
+<td class="mono">5.78 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T14:00:00Z</span>:
+value 395.4 outside 0 to 250</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T22:00:00Z</span>:
+value 414.7 outside 0 to 250</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T00:00:00Z</span>:
+value -120.0 outside at least 0</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T04:00:00Z</span>:
+value -1279.0 outside at least 0</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T23:00:00Z</span>:
+value 311.7 outside 0 to 250</div></td><td>Check the sign convention and the unit of the source system.</td></tr>
+
+<tr><td><span class="mono">SK-V002</span> Speeds plausible</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">241</td>
+<td class="mono">3.12 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T14:00:00Z</span>:
+mean speed 395.4 km/h is not plausible</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T22:00:00Z</span>:
+mean speed 414.7 km/h is not plausible</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T23:00:00Z</span>:
+mean speed 311.7 km/h is not plausible</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-06T13:00:00Z</span>:
+mean speed 290.9 km/h is not plausible</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-06T16:00:00Z</span>:
+mean speed 377.0 km/h is not plausible</div></td><td>Check the speed unit and the detector calibration.</td></tr>
+
+<tr><td><span class="mono">SK-V005</span> Digits are ASCII</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">252</td>
+<td class="mono">3.26 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T09:00:00Z</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-05T14:00:00Z</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-06T20:00:00Z</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-02T21:00:00Z</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-06T00:00:00Z</span>:
+value contains Arabic Indic digits</div></td><td>Convert digits to ASCII on export; keep Arabic Indic digits for display only.</td></tr>
+
+<tr><td><span class="mono">SK-V008</span> Speed unit plausible</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">168</td>
+<td class="mono">2.17 %</td>
+<td><div>
+<span class="mono">CS-FAL-0040 @ 2025-03-02T20:00:00Z</span>:
+free flowing station reports speeds below half the limit; likely metres per second</div><div>
+<span class="mono">CS-FAL-0040 @ 2025-03-02T21:00:00Z</span>:
+free flowing station reports speeds below half the limit; likely metres per second</div><div>
+<span class="mono">CS-FAL-0040 @ 2025-03-02T22:00:00Z</span>:
+free flowing station reports speeds below half the limit; likely metres per second</div><div>
+<span class="mono">CS-FAL-0040 @ 2025-03-02T23:00:00Z</span>:
+free flowing station reports speeds below half the limit; likely metres per second</div><div>
+<span class="mono">CS-FAL-0040 @ 2025-03-03T00:00:00Z</span>:
+free flowing station reports speeds below half the limit; likely metres per second</div></td><td>Multiply by 3.6 if the source reports m/s, and fix the export unit.</td></tr>
+
+<tr><td><span class="mono">SK-V009</span> Occupancy unit plausible</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">168</td>
+<td class="mono">2.17 %</td>
+<td><div>
+<span class="mono">CS-PRL-0024 @ 2025-03-02T20:00:00Z</span>:
+occupancy is about a hundredth of what the flow implies; likely a fraction, not percent</div><div>
+<span class="mono">CS-PRL-0024 @ 2025-03-02T21:00:00Z</span>:
+occupancy is about a hundredth of what the flow implies; likely a fraction, not percent</div><div>
+<span class="mono">CS-PRL-0024 @ 2025-03-02T22:00:00Z</span>:
+occupancy is about a hundredth of what the flow implies; likely a fraction, not percent</div><div>
+<span class="mono">CS-PRL-0024 @ 2025-03-02T23:00:00Z</span>:
+occupancy is about a hundredth of what the flow implies; likely a fraction, not percent</div><div>
+<span class="mono">CS-PRL-0024 @ 2025-03-03T00:00:00Z</span>:
+occupancy is about a hundredth of what the flow implies; likely a fraction, not percent</div></td><td>Multiply by 100 if the source reports a fraction.</td></tr>
+
+<tr><td><span class="mono">SK-V010</span> No stuck sensor</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">39</td>
+<td class="mono">0.50 %</td>
+<td><div>
+<span class="mono">CS-FAL-0027 @ 2025-03-04T03:00:00Z</span>:
+identical values for 8 consecutive intervals</div><div>
+<span class="mono">CS-FAL-0027 @ 2025-03-04T04:00:00Z</span>:
+identical values for 8 consecutive intervals</div><div>
+<span class="mono">CS-FAL-0027 @ 2025-03-04T05:00:00Z</span>:
+identical values for 8 consecutive intervals</div><div>
+<span class="mono">CS-FAL-0027 @ 2025-03-04T06:00:00Z</span>:
+identical values for 8 consecutive intervals</div><div>
+<span class="mono">CS-FAL-0027 @ 2025-03-04T07:00:00Z</span>:
+identical values for 8 consecutive intervals</div></td><td>Mark stuck intervals as suspect at the source and repair the detector.</td></tr>
+
+<tr><td><span class="mono">SK-V013</span> Daily profile aligned with the network</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">168</td>
+<td class="mono">2.17 %</td>
+<td><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-03T00:00:00Z</span>:
+daily profile is shifted by +4 h against the network; consistent with local time labelled as UTC</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-03T01:00:00Z</span>:
+daily profile is shifted by +4 h against the network; consistent with local time labelled as UTC</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-03T02:00:00Z</span>:
+daily profile is shifted by +4 h against the network; consistent with local time labelled as UTC</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-03T03:00:00Z</span>:
+daily profile is shifted by +4 h against the network; consistent with local time labelled as UTC</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-03T04:00:00Z</span>:
+daily profile is shifted by +4 h against the network; consistent with local time labelled as UTC</div></td><td>Convert station timestamps from Asia/Dubai to UTC before export.</td></tr>
+</tbody></table></div><div class="card"><h2>Referential (R)</h2>
+<p>2 rules evaluated, 2 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-R001</span> Segment reference exists</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-error">error</td>
+<td class="mono">259</td>
+<td class="mono">3.35 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T08:00:00Z</span>:
+segment S-FAL-003 is not in the registry</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-08T03:00:00Z</span>:
+segment seg-fal-003 is not in the registry</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-08T07:00:00Z</span>:
+segment S-FAL-003 is not in the registry</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-09T14:00:00Z</span>:
+segment SEG-FAL-3 is not in the registry</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-03T14:00:00Z</span>:
+segment S-FAL-005 is not in the registry</div></td><td>Use the registry identifier exactly, with its prefix and leading zeros.</td></tr>
+
+<tr><td><span class="mono">SK-R004</span> Station maps to one segment</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">259</td>
+<td class="mono">3.35 %</td>
+<td><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-04T08:00:00Z</span>:
+station usually reports SEG-FAL-003, this row says S-FAL-003</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-08T03:00:00Z</span>:
+station usually reports SEG-FAL-003, this row says seg-fal-003</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-08T07:00:00Z</span>:
+station usually reports SEG-FAL-003, this row says S-FAL-003</div><div>
+<span class="mono">CS-FAL-0003 @ 2025-03-09T14:00:00Z</span>:
+station usually reports SEG-FAL-003, this row says SEG-FAL-3</div><div>
+<span class="mono">CS-FAL-0005 @ 2025-03-03T14:00:00Z</span>:
+station usually reports SEG-FAL-005, this row says S-FAL-005</div></td><td>Keep a station to segment table at the source and use it on export.</td></tr>
+</tbody></table></div><div class="card"><h2>Cross feed (X)</h2>
+<p>0 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div><div class="card"><h2>Timeliness and completeness (T)</h2>
+<p>2 rules evaluated, 2 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-T001</span> No gaps in station time series</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">1</td>
+<td class="mono">0.00 %</td>
+<td><div>
+<span class="mono">CS-FAL-0016</span>:
+4 of 168 intervals missing</div></td><td>Backfill from the station buffer, or flag the interval as estimated.</td></tr>
+
+<tr><td><span class="mono">SK-T004</span> Records inside the declared period</td>
+<td class="mono">traffic_counts_producer_c.csv</td><td class="sev-warning">warning</td>
+<td class="mono">4</td>
+<td class="mono">0.05 %</td>
+<td><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-09T20:00:00Z</span>:
+outside the declared period</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-09T21:00:00Z</span>:
+outside the declared period</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-09T22:00:00Z</span>:
+outside the declared period</div><div>
+<span class="mono">CS-FAL-0016 @ 2025-03-09T23:00:00Z</span>:
+outside the declared period</div></td><td>Filter records to the declared period on export, or widen the period.</td></tr>
+</tbody></table></div><div class="card"><h2>Privacy (P)</h2>
+<p>2 rules evaluated, 0 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+</tbody></table></div>
+<p class="muted">Synthetic data. No real crash, traffic or road records are used.</p>
+</body></html>

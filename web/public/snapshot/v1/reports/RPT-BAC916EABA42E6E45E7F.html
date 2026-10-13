@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sikka conformance report RPT-BAC916EABA42E6E45E7F</title>
+<style>
+:root { --pearl:#fdf8f5; --sakura:#fbe3ea; --pink:#f7b6c8; --ink:#5b3a4a; --text:#3d2632;
+  --link:#8e3553; --muted:#6e4f5d; }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px; background:var(--pearl); color:var(--text);
+  font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.5; }
+h1, h2, h3 { font-family:"Space Grotesk", "IBM Plex Sans", sans-serif; color:var(--ink); }
+.banner { border:2px solid var(--ink); background:var(--sakura); padding:10px 14px;
+  box-shadow:4px 4px 0 var(--ink); font-weight:600; margin-bottom:24px; }
+.card { border:2px solid var(--ink); background:#fff; padding:16px; margin:16px 0;
+  box-shadow:4px 4px 0 var(--ink); }
+table { border-collapse:collapse; width:100%; font-size:14px; }
+th, td { border:1px solid var(--ink); padding:4px 8px; text-align:start; vertical-align:top; }
+th { background:var(--sakura); }
+.mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
+.sev-error::before { content:"\25A0  "; } .sev-warning::before { content:"\25B2  "; }
+.sev-info::before { content:"\25CB  "; }
+.muted { color:var(--muted); }
+@media print { body { background:#fff; padding:0; } .card, .banner { box-shadow:none; }
+  .card { break-inside:avoid; } a { color:inherit; } }
+</style></head><body>
+<div class="banner" role="note">Synthetic data. No real crash, traffic or road records are used.</div>
+<h1>Conformance report</h1>
+<p class="mono">RPT-BAC916EABA42E6E45E7F &middot; contract v1.0.0 &middot;
+engine 0.1.0</p>
+<p>This report was produced by Sikka, a proposal seed that checks synthetic feeds against an
+open data contract. It is not an official assessment of any entity.</p>
+<div class="card"><h2>Files</h2><table><thead><tr><th>File</th><th>Feed</th><th>Producer</th>
+<th>Rows</th><th>Quarantined rows</th><th>Header</th></tr></thead><tbody>
+<tr><td class="mono">crash_records_producer_d.ndjson</td><td>crash_records</td>
+<td class="mono">PRODUCER_D</td><td class="mono">445</td>
+<td class="mono">8</td><td>present</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Conformance by producer and family</h2>
+<p class="muted">A record passes a family when no error or warning rule of that family flagged it directly or through its station series. Informational and file level findings do not count against records. Intervals are Wilson 95 percent intervals. The overall index is the share of records that pass every family.</p>
+<table><thead><tr><th>Producer</th><th>Family</th><th>Passing records</th>
+<th>Share passing</th><th>95 percent interval</th></tr></thead><tbody>
+<tr><td class="mono">PRODUCER_D</td><td>Privacy</td>
+<td class="mono">437 of 445</td>
+<td class="mono">98.2 %</td>
+<td class="mono">96.5 to 99.1 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Referential</td>
+<td class="mono">432 of 445</td>
+<td class="mono">97.1 %</td>
+<td class="mono">95.1 to 98.3 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Structural</td>
+<td class="mono">374 of 445</td>
+<td class="mono">84.0 %</td>
+<td class="mono">80.4 to 87.2 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Timeliness and completeness</td>
+<td class="mono">428 of 445</td>
+<td class="mono">96.2 %</td>
+<td class="mono">94.0 to 97.6 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Semantic</td>
+<td class="mono">407 of 445</td>
+<td class="mono">91.5 %</td>
+<td class="mono">88.5 to 93.7 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>Cross feed</td>
+<td class="mono">419 of 445</td>
+<td class="mono">94.2 %</td>
+<td class="mono">91.6 to 96.0 %</td></tr>
+<tr><td class="mono">PRODUCER_D</td><td>All families (overall index)</td>
+<td class="mono">303 of 445</td>
+<td class="mono">68.1 %</td>
+<td class="mono">63.6 to 72.3 %</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Structural (S)</h2>
+<p>11 rules evaluated, 6 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-S005</span> Required fields present</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">13</td>
+<td class="mono">2.92 %</td>
+<td><div>
+<span class="mono">HD-000362</span>:
+required field is missing</div><div>
+<span class="mono">HD-000363</span>:
+required field is missing</div><div>
+<span class="mono">HD-000364</span>:
+required field is missing</div><div>
+<span class="mono">HD-000365</span>:
+required field is missing</div><div>
+<span class="mono">HD-000366</span>:
+required field is missing</div></td><td>Check the export mapping against the field dictionary, especially after system changes.</td></tr>
+
+<tr><td><span class="mono">SK-S006</span> No unknown fields</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-warning">warning</td>
+<td class="mono">38</td>
+<td class="mono">8.54 %</td>
+<td><div>
+<span class="mono">HD-000004</span>:
+field is not defined in the contract</div><div>
+<span class="mono">HD-000009</span>:
+field is not defined in the contract</div><div>
+<span class="mono">HD-000013</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000036</span>:
+field is not defined in the contract</div><div>
+<span class="mono">HD-000053</span>:
+field is not defined in the contract</div></td><td>Drop fields that are not in the contract, or propose a contract change.</td></tr>
+
+<tr><td><span class="mono">SK-S007</span> Field types match the contract</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">31</td>
+<td class="mono">6.97 %</td>
+<td><div>
+<span class="mono">HD-000018</span>:
+expected integer, found varchar</div><div>
+<span class="mono">HD-000026</span>:
+expected timestamp, found ubigint</div><div>
+<span class="mono">HD-000036</span>:
+expected enum, found ubigint</div><div>
+<span class="mono">HD-000042</span>:
+expected enum, found ubigint</div><div>
+<span class="mono">HD-000054</span>:
+expected enum, found ubigint</div></td><td>Emit numbers as JSON numbers with ASCII digits, timestamps as ISO 8601 strings, and omit missing fields.</td></tr>
+
+<tr><td><span class="mono">SK-S008</span> Enumerated values allowed</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">12</td>
+<td class="mono">2.70 %</td>
+<td><div>
+<span class="mono">HD-000036</span>:
+value 2 is not one of the allowed values</div><div>
+<span class="mono">HD-000042</span>:
+value 2 is not one of the allowed values</div><div>
+<span class="mono">HD-000054</span>:
+value 2 is not one of the allowed values</div><div>
+<span class="mono">HD-000066</span>:
+value 2 is not one of the allowed values</div><div>
+<span class="mono">HD-000070</span>:
+value 2 is not one of the allowed values</div></td><td>Map local codes to the contract enumeration before export.</td></tr>
+
+<tr><td><span class="mono">SK-S010</span> Identifiers unique within the feed</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">5</td>
+<td class="mono">1.12 %</td>
+<td><div>
+<span class="mono">HD-000031</span>:
+identifier already used at row 34</div><div>
+<span class="mono">HD-000123</span>:
+identifier already used at row 144</div><div>
+<span class="mono">HD-000206</span>:
+identifier already used at row 248</div><div>
+<span class="mono">HD-000241</span>:
+identifier already used at row 294</div><div>
+<span class="mono">HD-000332</span>:
+identifier already used at row 398</div></td><td>Deduplicate on the identifier before export, keeping the latest version.</td></tr>
+
+<tr><td><span class="mono">SK-S011</span> Timestamps are ISO 8601 UTC with Z</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">9</td>
+<td class="mono">2.02 %</td>
+<td><div>
+<span class="mono">HD-000026</span>:
+not an ISO 8601 UTC timestamp ending in Z</div><div>
+<span class="mono">HD-000058</span>:
+not an ISO 8601 UTC timestamp ending in Z</div><div>
+<span class="mono">HD-000175</span>:
+not an ISO 8601 UTC timestamp ending in Z</div><div>
+<span class="mono">X-D-000392</span>:
+not an ISO 8601 UTC timestamp ending in Z</div><div>
+<span class="mono">HD-000228</span>:
+not an ISO 8601 UTC timestamp ending in Z</div></td><td>Convert to UTC and format as YYYY-MM-DDTHH:MM:SSZ.</td></tr>
+</tbody></table></div><div class="card"><h2>Semantic (V)</h2>
+<p>6 rules evaluated, 3 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-V003</span> Coordinates inside the UAE bounding box</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">27</td>
+<td class="mono">6.07 %</td>
+<td><div>
+<span class="mono">HD-000015</span>:
+position 53.740569, 23.512018 is outside the UAE bounding box</div><div>
+<span class="mono">HD-000040</span>:
+position 53.242415, 24.880054 is outside the UAE bounding box</div><div>
+<span class="mono">HD-000045</span>:
+position 53.912885, 23.542895 is outside the UAE bounding box</div><div>
+<span class="mono">X-D-000386</span>:
+position 53.620779, 24.346382 is outside the UAE bounding box</div><div>
+<span class="mono">HD-000049</span>:
+position 53.358147, 23.80334 is outside the UAE bounding box</div></td><td>Check the coordinate reference system and the order of latitude and longitude.</td></tr>
+
+<tr><td><span class="mono">SK-V004</span> Latitude and longitude not swapped</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">13</td>
+<td class="mono">2.92 %</td>
+<td><div>
+<span class="mono">HD-000015</span>:
+latitude and longitude appear swapped</div><div>
+<span class="mono">HD-000040</span>:
+latitude and longitude appear swapped</div><div>
+<span class="mono">HD-000045</span>:
+latitude and longitude appear swapped</div><div>
+<span class="mono">X-D-000386</span>:
+latitude and longitude appear swapped</div><div>
+<span class="mono">HD-000049</span>:
+latitude and longitude appear swapped</div></td><td>Write lat as the north south coordinate (about 22 to 27 in the UAE) and lon as the east west one (about 51 to 57).</td></tr>
+
+<tr><td><span class="mono">SK-V005</span> Digits are ASCII</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">11</td>
+<td class="mono">2.47 %</td>
+<td><div>
+<span class="mono">HD-000018</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">HD-000075</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">HD-000129</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">HD-000144</span>:
+value contains Arabic Indic digits</div><div>
+<span class="mono">HD-000171</span>:
+value contains Arabic Indic digits</div></td><td>Convert digits to ASCII on export; keep Arabic Indic digits for display only.</td></tr>
+</tbody></table></div><div class="card"><h2>Referential (R)</h2>
+<p>3 rules evaluated, 2 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-R002</span> Crash within a segment buffer</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">13</td>
+<td class="mono">2.92 %</td>
+<td><div>
+<span class="mono">HD-000009</span>:
+no segment within 250 m</div><div>
+<span class="mono">X-D-000388</span>:
+nearest segment is 1099 m away</div><div>
+<span class="mono">X-D-000389</span>:
+no segment within 250 m</div><div>
+<span class="mono">HD-000080</span>:
+no segment within 250 m</div><div>
+<span class="mono">X-D-000403</span>:
+no segment within 250 m</div></td><td>Check the coordinates, or add the missing segment to the registry.</td></tr>
+
+<tr><td><span class="mono">SK-R003</span> Location agrees with the segment reference</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-warning">warning</td>
+<td class="mono">3</td>
+<td class="mono">0.67 %</td>
+<td><div>
+<span class="mono">X-D-000388</span>:
+location is 1062 m from the referenced segment</div><div>
+<span class="mono">X-D-000389</span>:
+location is 5798 m from the referenced segment</div><div>
+<span class="mono">X-D-000403</span>:
+location is 5278 m from the referenced segment</div></td><td>Derive segment_ref from the coordinates, or correct the coordinates.</td></tr>
+</tbody></table></div><div class="card"><h2>Cross feed (X)</h2>
+<p>4 rules evaluated, 3 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-X001</span> Possible duplicate across producers</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-info">info</td>
+<td class="mono">355</td>
+<td class="mono">79.78 %</td>
+<td><div>
+<span class="mono">HD-000001</span>:
+possible duplicate of crash_records_producer_a.ndjson row 5 (2 candidate(s))</div><div>
+<span class="mono">HD-000002</span>:
+possible duplicate of crash_records_producer_b.ndjson row 16 (2 candidate(s))</div><div>
+<span class="mono">HD-000003</span>:
+possible duplicate of crash_records_producer_b.ndjson row 19 (2 candidate(s))</div><div>
+<span class="mono">HD-000004</span>:
+possible duplicate of crash_records_producer_a.ndjson row 15 (2 candidate(s))</div><div>
+<span class="mono">HD-000005</span>:
+possible duplicate of crash_records_producer_c.csv row 13 (2 candidate(s))</div></td><td>No action is needed from the producer; shared identifiers would make matching exact.</td></tr>
+
+<tr><td><span class="mono">SK-X002</span> No systematic time offset between producers</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-warning">warning</td>
+<td class="mono">17</td>
+<td class="mono">3.82 %</td>
+<td><div>
+<span class="mono">X-D-000398</span>:
+matches another producer record exactly 4 hours earlier; local time may be labelled as UTC</div><div>
+<span class="mono">HD-000068</span>:
+matches another producer record exactly 4 hours earlier; local time may be labelled as UTC</div><div>
+<span class="mono">HD-000094</span>:
+matches another producer record exactly 4 hours earlier; local time may be labelled as UTC</div><div>
+<span class="mono">HD-000094-D</span>:
+matches another producer record exactly 4 hours earlier; local time may be labelled as UTC</div><div>
+<span class="mono">X-D-000441</span>:
+matches another producer record exactly 4 hours earlier; local time may be labelled as UTC</div></td><td>Convert local timestamps to UTC before adding the Z suffix.</td></tr>
+
+<tr><td><span class="mono">SK-X003</span> No near duplicate within the feed</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-warning">warning</td>
+<td class="mono">10</td>
+<td class="mono">2.25 %</td>
+<td><div>
+<span class="mono">HD-000031</span>:
+near duplicate of row 34</div><div>
+<span class="mono">HD-000047-D</span>:
+near duplicate of row 52</div><div>
+<span class="mono">HD-000083-D</span>:
+near duplicate of row 94</div><div>
+<span class="mono">HD-000094-D</span>:
+near duplicate of row 109</div><div>
+<span class="mono">HD-000123</span>:
+near duplicate of row 144</div></td><td>Deduplicate at the source; keep one record per crash and update it in place.</td></tr>
+</tbody></table></div><div class="card"><h2>Timeliness and completeness (T)</h2>
+<p>3 rules evaluated, 2 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-T002</span> Records arrive on time</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-warning">warning</td>
+<td class="mono">17</td>
+<td class="mono">3.82 %</td>
+<td><div>
+<span class="mono">HD-000005</span>:
+reported 250 days after the crash</div><div>
+<span class="mono">HD-000030</span>:
+reported 338 days after the crash</div><div>
+<span class="mono">HD-000042</span>:
+reported 615 days after the crash</div><div>
+<span class="mono">HD-000079</span>:
+reported 687 days after the crash</div><div>
+<span class="mono">HD-000095</span>:
+reported 691 days after the crash</div></td><td>Send records as they are created, and send corrections as updates.</td></tr>
+
+<tr><td><span class="mono">SK-T003</span> Every month of the period covered</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-warning">warning</td>
+<td class="mono">1</td>
+<td class="mono">0.00 %</td>
+<td><div>
+<span class="mono">row None</span>:
+no records in 1 month(s) of the declared period: 2025-12; a typical month has 7</div></td><td>Resend the missing months or shorten the declared period.</td></tr>
+</tbody></table></div><div class="card"><h2>Privacy (P)</h2>
+<p>2 rules evaluated, 2 with findings.</p>
+<table><thead><tr><th>Rule</th><th>File</th><th>Severity</th><th>Records</th><th>Share</th>
+<th>Examples</th><th>Fix</th></tr></thead><tbody>
+
+<tr><td><span class="mono">SK-P001</span> No prohibited personal fields</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">3</td>
+<td class="mono">0.67 %</td>
+<td><div>
+<span class="mono">HD-000182</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000240</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000312</span>:
+value withheld: record quarantined</div></td><td>Remove the field at the source before sharing. The record is quarantined until then.</td></tr>
+
+<tr><td><span class="mono">SK-P002</span> No personal data patterns in values</td>
+<td class="mono">crash_records_producer_d.ndjson</td><td class="sev-error">error</td>
+<td class="mono">5</td>
+<td class="mono">1.12 %</td>
+<td><div>
+<span class="mono">HD-000013</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000097</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000216</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000296</span>:
+value withheld: record quarantined</div><div>
+<span class="mono">HD-000369</span>:
+value withheld: record quarantined</div></td><td>Remove the value at the source. The record is quarantined until then.</td></tr>
+</tbody></table></div>
+<p class="muted">Synthetic data. No real crash, traffic or road records are used.</p>
+</body></html>

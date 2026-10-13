@@ -111,6 +111,31 @@ class Service:
             if p.is_file() and p.name not in exclude
         ]
 
+    def network(self) -> dict[str, Any]:
+        """The synthetic road network (clean registry samples) as one FeatureCollection."""
+        import json
+
+        features: list[dict[str, Any]] = []
+        clean = self.paths.samples / "clean"
+        for path in sorted(clean.glob("road_segments_*.geojson")):
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            for feature in doc.get("features", []):
+                props = feature.get("properties", {})
+                features.append(
+                    {
+                        "type": "Feature",
+                        "geometry": feature.get("geometry"),
+                        "properties": {
+                            "segment_id": props.get("segment_id"),
+                            "road_name_en": props.get("road_name_en"),
+                            "road_name_ar": props.get("road_name_ar"),
+                            "road_class": props.get("road_class"),
+                            "length_m": props.get("length_m"),
+                        },
+                    }
+                )
+        return {"type": "FeatureCollection", "synthetic": True, "features": features}
+
     # Validation -------------------------------------------------------------
 
     def _store(self, report: dict[str, Any]) -> dict[str, Any]:

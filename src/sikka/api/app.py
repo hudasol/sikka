@@ -111,6 +111,10 @@ def create_app(service: Service | None = None) -> FastAPI:
     def samples() -> list[dict[str, Any]]:
         return svc.samples()
 
+    @app.get("/v1/network")
+    def network() -> dict[str, Any]:
+        return svc.network()
+
     @app.post("/v1/validate", status_code=201)
     async def validate(request: Request) -> dict[str, Any]:
         ctype = request.headers.get("content-type", "")

@@ -10,6 +10,7 @@ from __future__ import annotations
 from typing import Any
 
 from sikka.api.service import Service
+from sikka.conformance import render_html
 from sikka.contract import VERSIONS
 from sikka.core import round_floats, stable_json_dumps
 
@@ -32,7 +33,12 @@ def snapshot_files(service: Service) -> dict[str, str]:
         samples.append(sample | {"report_id": report["report_id"]})
         docs[f"v1/reports/{report['report_id']}"] = report
     docs["v1/samples"] = samples
-    return {
+    docs["v1/network"] = service.network()
+    files = {
         f"{SNAPSHOT_ROOT}/{path}.json": stable_json_dumps(round_floats(doc)) + "\n"
         for path, doc in sorted(docs.items())
     }
+    for path, doc in docs.items():
+        if path.startswith("v1/reports/"):
+            files[f"{SNAPSHOT_ROOT}/{path}.html"] = render_html(doc)
+    return files
