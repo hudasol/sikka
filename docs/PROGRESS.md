@@ -12,8 +12,8 @@ Status of the build phases. Each phase is tagged when its gate holds.
 | P5 | L4 harmonisation and lineage | done | v0.6.0 | Harmonisation tests pass; `GET /v1/lineage/{id}` serves every canonical crash, exposure estimate and segment; an E2 smoke run on seed 1001 scores cluster level precision, recall and abstention against the ground truth (numbers are reported in P7, not here) |
 | P6 | Preregistration, then L5 analytics | done | v0.7.0 | `docs/PREREGISTRATION.md` committed before any analytics code; EB matches two hand worked examples; abstention reasons tested case by case; ranking of 240 segments with 4,000 draws passes the 10 second performance test |
 | P7 | Evaluation E1 to E4 | done | v0.8.0 | `sikka eval` on seeds 2001 to 2020 wrote `results/e1` to `e4`; `docs/EVALUATION.md` is generated from them and a test fails if it is stale; 23 predictions hit and 2 missed (P3.2, P3.6), all reported |
-| P8 | Full web app | next | | |
-| P9 | L6 tasking and E5 | planned | | |
+| P8 | Full web app | done | v0.9.0 | Nine screens in English and Arabic, light and dark; 83 Vitest tests; 12 Playwright tests with axe (WCAG 2.2 AA tags) pass on the static build with no foreign requests and no console errors; screenshots reviewed in all four combinations |
+| P9 | L6 tasking and E5 | next | | |
 | P10 | Hardening, review, documentation | planned | | |
 
 ## In progress
@@ -22,7 +22,7 @@ Nothing in progress.
 
 ## Next
 
-P8: Conformance, Blackspots, Lineage, Contract, Method and Pilot screens with English and Arabic, right to left layout, accessibility checks and the dark theme.
+P9: tasking layer, exports with a validated .plan, E5 and the Tasking screen.
 
 ## Blockers
 
