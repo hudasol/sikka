@@ -1,0 +1,714 @@
+{
+ "draws": 1000,
+ "experiment": "E5",
+ "generated_by": "sikka eval",
+ "missions_budget": 4,
+ "notice": "Synthetic data. No real crash, traffic or road records are used.",
+ "per_seed": [
+  {
+   "runs": {
+    "before": 3.400804,
+    "greedy_crash_count": {
+     "after": 3.550136,
+     "flight_s": 3679.4,
+     "missions": 4,
+     "reduction": -0.043911,
+     "refused": 0,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.475362,
+     "flight_s": 3797.1,
+     "missions": 4,
+     "reduction": -0.021924,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.259364,
+     "flight_s": 2851.3,
+     "missions": 4,
+     "reduction": 0.04159,
+     "refused": 2,
+     "segments": 4
+    }
+   },
+   "seed": 2001
+  },
+  {
+   "runs": {
+    "before": 4.681762,
+    "greedy_crash_count": {
+     "after": 4.73455,
+     "flight_s": 3836.5,
+     "missions": 4,
+     "reduction": -0.011275,
+     "refused": 3,
+     "segments": 8
+    },
+    "random": {
+     "after": 4.796702,
+     "flight_s": 3037.9,
+     "missions": 4,
+     "reduction": -0.024551,
+     "refused": 0,
+     "segments": 7
+    },
+    "value_of_information": {
+     "after": 4.695054,
+     "flight_s": 2764.7,
+     "missions": 4,
+     "reduction": -0.002839,
+     "refused": 3,
+     "segments": 6
+    }
+   },
+   "seed": 2002
+  },
+  {
+   "runs": {
+    "before": 3.626364,
+    "greedy_crash_count": {
+     "after": 3.43246,
+     "flight_s": 3481.9,
+     "missions": 4,
+     "reduction": 0.053471,
+     "refused": 2,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.6388,
+     "flight_s": 3206.5,
+     "missions": 4,
+     "reduction": -0.003429,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.555416,
+     "flight_s": 3345.5,
+     "missions": 4,
+     "reduction": 0.019565,
+     "refused": 4,
+     "segments": 6
+    }
+   },
+   "seed": 2003
+  },
+  {
+   "runs": {
+    "before": 4.024816,
+    "greedy_crash_count": {
+     "after": 3.979696,
+     "flight_s": 4034.7,
+     "missions": 4,
+     "reduction": 0.01121,
+     "refused": 2,
+     "segments": 8
+    },
+    "random": {
+     "after": 4.014336,
+     "flight_s": 3774.3,
+     "missions": 4,
+     "reduction": 0.002604,
+     "refused": 0,
+     "segments": 10
+    },
+    "value_of_information": {
+     "after": 4.111546,
+     "flight_s": 3780.9,
+     "missions": 4,
+     "reduction": -0.021549,
+     "refused": 3,
+     "segments": 7
+    }
+   },
+   "seed": 2004
+  },
+  {
+   "runs": {
+    "before": 3.265936,
+    "greedy_crash_count": {
+     "after": 3.138726,
+     "flight_s": 4298.3,
+     "missions": 4,
+     "reduction": 0.038951,
+     "refused": 2,
+     "segments": 6
+    },
+    "random": {
+     "after": 3.107086,
+     "flight_s": 3667.8,
+     "missions": 4,
+     "reduction": 0.048638,
+     "refused": 0,
+     "segments": 9
+    },
+    "value_of_information": {
+     "after": 2.99735,
+     "flight_s": 4107.9,
+     "missions": 4,
+     "reduction": 0.082239,
+     "refused": 4,
+     "segments": 6
+    }
+   },
+   "seed": 2005
+  },
+  {
+   "runs": {
+    "before": 3.403852,
+    "greedy_crash_count": {
+     "after": 3.3845,
+     "flight_s": 4142.4,
+     "missions": 4,
+     "reduction": 0.005685,
+     "refused": 0,
+     "segments": 6
+    },
+    "random": {
+     "after": 3.42364,
+     "flight_s": 4214.1,
+     "missions": 4,
+     "reduction": -0.005813,
+     "refused": 0,
+     "segments": 10
+    },
+    "value_of_information": {
+     "after": 3.134618,
+     "flight_s": 3455.2,
+     "missions": 4,
+     "reduction": 0.079097,
+     "refused": 3,
+     "segments": 6
+    }
+   },
+   "seed": 2006
+  },
+  {
+   "runs": {
+    "before": 3.282134,
+    "greedy_crash_count": {
+     "after": 3.33236,
+     "flight_s": 3980.6,
+     "missions": 4,
+     "reduction": -0.015303,
+     "refused": 0,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.287444,
+     "flight_s": 4139.9,
+     "missions": 4,
+     "reduction": -0.001618,
+     "refused": 0,
+     "segments": 10
+    },
+    "value_of_information": {
+     "after": 3.180298,
+     "flight_s": 2980.3,
+     "missions": 4,
+     "reduction": 0.031027,
+     "refused": 1,
+     "segments": 5
+    }
+   },
+   "seed": 2007
+  },
+  {
+   "runs": {
+    "before": 3.46219,
+    "greedy_crash_count": {
+     "after": 3.57694,
+     "flight_s": 3862.3,
+     "missions": 4,
+     "reduction": -0.033144,
+     "refused": 0,
+     "segments": 8
+    },
+    "random": {
+     "after": 3.459992,
+     "flight_s": 2563.8,
+     "missions": 4,
+     "reduction": 0.000635,
+     "refused": 0,
+     "segments": 7
+    },
+    "value_of_information": {
+     "after": 3.46831,
+     "flight_s": 2874.4,
+     "missions": 4,
+     "reduction": -0.001768,
+     "refused": 3,
+     "segments": 4
+    }
+   },
+   "seed": 2008
+  },
+  {
+   "runs": {
+    "before": 3.464166,
+    "greedy_crash_count": {
+     "after": 3.236656,
+     "flight_s": 3048.6,
+     "missions": 4,
+     "reduction": 0.065675,
+     "refused": 4,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.514996,
+     "flight_s": 4154.9,
+     "missions": 4,
+     "reduction": -0.014673,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.363534,
+     "flight_s": 3332.4,
+     "missions": 4,
+     "reduction": 0.029049,
+     "refused": 5,
+     "segments": 6
+    }
+   },
+   "seed": 2009
+  },
+  {
+   "runs": {
+    "before": 4.04047,
+    "greedy_crash_count": {
+     "after": 4.004062,
+     "flight_s": 4395.3,
+     "missions": 4,
+     "reduction": 0.009011,
+     "refused": 1,
+     "segments": 6
+    },
+    "random": {
+     "after": 4.037474,
+     "flight_s": 3837.6,
+     "missions": 4,
+     "reduction": 0.000741,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 4.034166,
+     "flight_s": 3640.1,
+     "missions": 4,
+     "reduction": 0.00156,
+     "refused": 3,
+     "segments": 7
+    }
+   },
+   "seed": 2010
+  },
+  {
+   "runs": {
+    "before": 3.7317,
+    "greedy_crash_count": {
+     "after": 3.7521,
+     "flight_s": 3690.4,
+     "missions": 4,
+     "reduction": -0.005467,
+     "refused": 0,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.737924,
+     "flight_s": 3875.8,
+     "missions": 4,
+     "reduction": -0.001668,
+     "refused": 0,
+     "segments": 5
+    },
+    "value_of_information": {
+     "after": 3.468634,
+     "flight_s": 3486.5,
+     "missions": 4,
+     "reduction": 0.070495,
+     "refused": 3,
+     "segments": 6
+    }
+   },
+   "seed": 2011
+  },
+  {
+   "runs": {
+    "before": 3.33042,
+    "greedy_crash_count": {
+     "after": 3.408842,
+     "flight_s": 3615.4,
+     "missions": 4,
+     "reduction": -0.023547,
+     "refused": 1,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.306324,
+     "flight_s": 3678.9,
+     "missions": 4,
+     "reduction": 0.007235,
+     "refused": 1,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.440358,
+     "flight_s": 2971.4,
+     "missions": 4,
+     "reduction": -0.03301,
+     "refused": 3,
+     "segments": 6
+    }
+   },
+   "seed": 2012
+  },
+  {
+   "runs": {
+    "before": 4.154168,
+    "greedy_crash_count": {
+     "after": 4.202592,
+     "flight_s": 3667.5,
+     "missions": 4,
+     "reduction": -0.011657,
+     "refused": 4,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.916048,
+     "flight_s": 2863.1,
+     "missions": 4,
+     "reduction": 0.057321,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.90779,
+     "flight_s": 2147.3,
+     "missions": 4,
+     "reduction": 0.059309,
+     "refused": 4,
+     "segments": 5
+    }
+   },
+   "seed": 2013
+  },
+  {
+   "runs": {
+    "before": 3.351466,
+    "greedy_crash_count": {
+     "after": 3.409686,
+     "flight_s": 3060.4,
+     "missions": 4,
+     "reduction": -0.017372,
+     "refused": 0,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.400616,
+     "flight_s": 3423.2,
+     "missions": 4,
+     "reduction": -0.014665,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.193046,
+     "flight_s": 3510.5,
+     "missions": 4,
+     "reduction": 0.047269,
+     "refused": 2,
+     "segments": 4
+    }
+   },
+   "seed": 2014
+  },
+  {
+   "runs": {
+    "before": 3.327278,
+    "greedy_crash_count": {
+     "after": 3.39602,
+     "flight_s": 3965.4,
+     "missions": 4,
+     "reduction": -0.02066,
+     "refused": 0,
+     "segments": 7
+    },
+    "random": {
+     "after": 3.20904,
+     "flight_s": 3584.5,
+     "missions": 4,
+     "reduction": 0.035536,
+     "refused": 0,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.282732,
+     "flight_s": 3849.2,
+     "missions": 4,
+     "reduction": 0.013388,
+     "refused": 2,
+     "segments": 4
+    }
+   },
+   "seed": 2015
+  },
+  {
+   "runs": {
+    "before": 3.543122,
+    "greedy_crash_count": {
+     "after": 3.282742,
+     "flight_s": 4245.3,
+     "missions": 4,
+     "reduction": 0.073489,
+     "refused": 3,
+     "segments": 6
+    },
+    "random": {
+     "after": 3.493188,
+     "flight_s": 2864.4,
+     "missions": 4,
+     "reduction": 0.014093,
+     "refused": 1,
+     "segments": 8
+    },
+    "value_of_information": {
+     "after": 3.077312,
+     "flight_s": 3429.3,
+     "missions": 4,
+     "reduction": 0.131469,
+     "refused": 3,
+     "segments": 5
+    }
+   },
+   "seed": 2016
+  },
+  {
+   "runs": {
+    "before": 3.213872,
+    "greedy_crash_count": {
+     "after": 3.208208,
+     "flight_s": 3668.6,
+     "missions": 4,
+     "reduction": 0.001762,
+     "refused": 2,
+     "segments": 5
+    },
+    "random": {
+     "after": 3.238864,
+     "flight_s": 2665.0,
+     "missions": 4,
+     "reduction": -0.007776,
+     "refused": 0,
+     "segments": 5
+    },
+    "value_of_information": {
+     "after": 3.204702,
+     "flight_s": 2864.5,
+     "missions": 4,
+     "reduction": 0.002853,
+     "refused": 2,
+     "segments": 4
+    }
+   },
+   "seed": 2017
+  },
+  {
+   "runs": {
+    "before": 4.293912,
+    "greedy_crash_count": {
+     "after": 4.162516,
+     "flight_s": 3766.7,
+     "missions": 4,
+     "reduction": 0.030601,
+     "refused": 0,
+     "segments": 5
+    },
+    "random": {
+     "after": 4.318074,
+     "flight_s": 2985.1,
+     "missions": 4,
+     "reduction": -0.005627,
+     "refused": 0,
+     "segments": 6
+    },
+    "value_of_information": {
+     "after": 4.2341,
+     "flight_s": 3065.8,
+     "missions": 4,
+     "reduction": 0.013929,
+     "refused": 2,
+     "segments": 5
+    }
+   },
+   "seed": 2018
+  },
+  {
+   "runs": {
+    "before": 2.998848,
+    "greedy_crash_count": {
+     "after": 2.947352,
+     "flight_s": 3418.5,
+     "missions": 4,
+     "reduction": 0.017172,
+     "refused": 2,
+     "segments": 7
+    },
+    "random": {
+     "after": 2.966366,
+     "flight_s": 2779.2,
+     "missions": 4,
+     "reduction": 0.010831,
+     "refused": 0,
+     "segments": 7
+    },
+    "value_of_information": {
+     "after": 2.85275,
+     "flight_s": 3104.7,
+     "missions": 4,
+     "reduction": 0.048718,
+     "refused": 5,
+     "segments": 5
+    }
+   },
+   "seed": 2019
+  },
+  {
+   "runs": {
+    "before": 4.080626,
+    "greedy_crash_count": {
+     "after": 3.986928,
+     "flight_s": 4324.6,
+     "missions": 4,
+     "reduction": 0.022962,
+     "refused": 3,
+     "segments": 7
+    },
+    "random": {
+     "after": 4.037342,
+     "flight_s": 4419.1,
+     "missions": 4,
+     "reduction": 0.010607,
+     "refused": 0,
+     "segments": 9
+    },
+    "value_of_information": {
+     "after": 3.96524,
+     "flight_s": 3301.4,
+     "missions": 4,
+     "reduction": 0.028277,
+     "refused": 4,
+     "segments": 7
+    }
+   },
+   "seed": 2020
+  }
+ ],
+ "seeds": [
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020
+ ],
+ "strategies": [
+  "value_of_information",
+  "random",
+  "greedy_crash_count"
+ ],
+ "summary": {
+  "greedy_crash_count_flight_s": {
+   "estimate": 3809.14,
+   "high": 3987.739864,
+   "low": 3630.540136,
+   "n": 20
+  },
+  "greedy_crash_count_missions": {
+   "estimate": 4.0,
+   "high": 4.0,
+   "low": 4.0,
+   "n": 20
+  },
+  "greedy_crash_count_reduction": {
+   "estimate": 0.007383,
+   "high": 0.022505,
+   "low": -0.00774,
+   "n": 20
+  },
+  "greedy_crash_count_segments": {
+   "estimate": 5.95,
+   "high": 6.486312,
+   "low": 5.413688,
+   "n": 20
+  },
+  "random_flight_s": {
+   "estimate": 3476.61,
+   "high": 3742.698755,
+   "low": 3210.521245,
+   "n": 20
+  },
+  "random_missions": {
+   "estimate": 4.0,
+   "high": 4.0,
+   "low": 4.0,
+   "n": 20
+  },
+  "random_reduction": {
+   "estimate": 0.004325,
+   "high": 0.014331,
+   "low": -0.005682,
+   "n": 20
+  },
+  "random_segments": {
+   "estimate": 7.85,
+   "high": 8.516645,
+   "low": 7.183355,
+   "n": 20
+  },
+  "seeds_voi_beats_greedy": 14,
+  "seeds_voi_beats_random": 16,
+  "value_of_information_flight_s": {
+   "estimate": 3243.165,
+   "high": 3453.846461,
+   "low": 3032.483539,
+   "n": 20
+  },
+  "value_of_information_missions": {
+   "estimate": 4.0,
+   "high": 4.0,
+   "low": 4.0,
+   "n": 20
+  },
+  "value_of_information_reduction": {
+   "estimate": 0.032033,
+   "high": 0.050488,
+   "low": 0.013578,
+   "n": 20
+  },
+  "value_of_information_segments": {
+   "estimate": 5.4,
+   "high": 5.889682,
+   "low": 4.910318,
+   "n": 20
+  }
+ },
+ "survey_years": 2.0,
+ "title": "Value of information tasking against random and greedy tasking"
+}
