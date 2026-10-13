@@ -39,7 +39,7 @@ RECORD = {
 
 
 def _open(name: str, text: str):  # type: ignore[no-untyped-def]
-    return open_text(name, io.StringIO(text))  # type: ignore[arg-type]
+    return open_text(name, io.StringIO(text))
 
 
 def test_detect_format() -> None:

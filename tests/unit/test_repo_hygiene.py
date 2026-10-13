@@ -60,3 +60,9 @@ def test_writing_rules(path: Path) -> None:
     assert not stray, f"emoji not in the allowed set: {stray}"
     if path.name != "test_repo_hygiene.py":
         assert not AFFILIATION.search(text), "no institutional affiliation may be mentioned"
+
+
+@pytest.mark.parametrize("path", FILES, ids=lambda p: p.relative_to(ROOT).as_posix())
+def test_no_stray_control_characters(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+    assert not any(ch in text for ch in (chr(7), chr(8), chr(11), chr(12)))

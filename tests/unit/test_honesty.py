@@ -12,19 +12,21 @@ from sikka.core import Paths
 from sikka.synth import CATALOGUE
 
 ROOT = Paths().root
-# Names of real bodies and sources that may appear in docs/CONTEXT.md only.
-REAL_ENTITIES = [
-    "Gulf News",
-    "Gulf Today",
-    "gulfnews",
-    "gulftoday",
-    "Federal National Council",
-    "Ministry",
-    "RTA",
-    "Abu Dhabi Police",
-    "Dubai Police",
-    "Etihad Rail",
-]
+
+
+def real_entities() -> list[str]:
+    """Names of real sources and bodies, read from docs/CONTEXT.md at test time.
+
+    The names are not written in this file, so the rule that real entities appear only
+    in CONTEXT.md holds for the tests too.
+    """
+    context = (ROOT / "docs" / "CONTEXT.md").read_text(encoding="utf-8")
+    names = set(re.findall(r"Source: \[([^\]]+)\]", context))
+    names |= set(re.findall(r"\bA (Federal [A-Z][a-z]+ [A-Z][a-z]+)\b", context))
+    hosts = set(re.findall(r"https://(?:www\.)?([a-z]+)\.", context))
+    return sorted(names | hosts)
+
+
 SKIP = {".venv", "node_modules", ".git", ".sikka", ".claude", "dist", "build", "test-results"}
 SUFFIXES = {".py", ".md", ".ts", ".tsx", ".json", ".css", ".html", ".toml", ".yml"}
 
@@ -40,13 +42,15 @@ def _files() -> list[Path]:
 
 
 def test_real_entities_only_in_context() -> None:
-    allowed = {ROOT / "docs" / "CONTEXT.md", Path(__file__).resolve()}
+    allowed = {ROOT / "docs" / "CONTEXT.md"}
+    entities = real_entities()
+    assert len(entities) >= 3
     offenders = []
     for path in _files():
         if path.resolve() in allowed:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
-        for name in REAL_ENTITIES:
+        for name in entities:
             if re.search(rf"\b{re.escape(name)}\b", text):
                 offenders.append(f"{path.relative_to(ROOT).as_posix()}: {name}")
     assert not offenders, offenders

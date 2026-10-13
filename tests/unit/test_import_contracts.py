@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import tomllib
+from typing import cast
 
 from sikka.core import Paths
 
@@ -35,8 +36,9 @@ def test_layers_contract_matches_architecture() -> None:
 
 def test_product_layers_cannot_read_synthetic_truth() -> None:
     forbidden = [c for c in _contracts() if c["type"] == "forbidden"]
+    product = {"sikka.conformance", "sikka.analytics", "sikka.api"}
     assert any(
         c["forbidden_modules"] == ["sikka.synth"]
-        and {"sikka.conformance", "sikka.analytics", "sikka.api"} <= set(c["source_modules"])  # type: ignore[arg-type]
+        and product <= set(cast("list[str]", c["source_modules"]))
         for c in forbidden
     )
