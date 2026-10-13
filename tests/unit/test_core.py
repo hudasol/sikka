@@ -128,3 +128,13 @@ def test_repo_root_detection(tmp_path: object, monkeypatch: pytest.MonkeyPatch) 
     assert Paths(root).contract == root / "contract"
     monkeypatch.setenv("SIKKA_ROOT", str(root / "docs"))
     assert find_repo_root() == (root / "docs").resolve()
+
+
+def test_write_text_lf_never_writes_crlf(tmp_path: object) -> None:
+    from pathlib import Path
+
+    from sikka.core import write_text_lf
+
+    target = Path(str(tmp_path)) / "x.json"
+    write_text_lf(target, "a\nb\n")
+    assert target.read_bytes() == b"a\nb\n"

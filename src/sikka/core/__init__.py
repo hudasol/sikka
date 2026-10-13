@@ -1,7 +1,7 @@
 """Cross cutting helpers: configuration, logging, ids, time, errors, metrics, determinism."""
 
 from sikka.core.config import DEFAULT_SEED, MAX_UPLOAD_BYTES, Paths, find_repo_root
-from sikka.core.determinism import rng, round_floats, stable_json_dumps
+from sikka.core.determinism import rng, round_floats, stable_json_dumps, write_text_lf
 from sikka.core.errors import (
     InputError,
     NotFoundError,
@@ -41,4 +41,5 @@ __all__ = [
     "stable_json_dumps",
     "to_local",
     "wilson_interval",
+    "write_text_lf",
 ]

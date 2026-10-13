@@ -22,6 +22,7 @@ from sikka.core import (
     Paths,
     stable_json_dumps,
     wilson_interval,
+    write_text_lf,
 )
 
 SAMPLE_SETS = ("clean", "broken")
@@ -255,9 +256,7 @@ class Service:
         self._reports[rid] = report
         if self.store_dir is not None:
             self.store_dir.mkdir(parents=True, exist_ok=True)
-            (self.store_dir / f"{rid}.json").write_text(
-                stable_json_dumps(report) + "\n", encoding="utf-8"
-            )
+            write_text_lf(self.store_dir / f"{rid}.json", stable_json_dumps(report) + "\n")
         return report
 
     def validate_bytes(self, name: str, data: bytes) -> dict[str, Any]:

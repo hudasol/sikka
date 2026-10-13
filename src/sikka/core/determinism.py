@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -54,3 +55,8 @@ def round_floats(value: Any, digits: int = 6) -> Any:
     if isinstance(value, list | tuple):
         return [round_floats(v, digits) for v in value]
     return value
+
+
+def write_text_lf(path: Path, text: str) -> None:
+    """Write UTF 8 text with LF line endings on every platform."""
+    path.write_bytes(text.encode("utf-8"))

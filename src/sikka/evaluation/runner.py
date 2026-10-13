@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from sikka.conformance import SYNTHETIC_NOTICE
-from sikka.core import round_floats, stable_json_dumps
+from sikka.core import round_floats, stable_json_dumps, write_text_lf
 from sikka.evaluation.e1 import run_e1
 from sikka.evaluation.e2 import run_e2
 from sikka.evaluation.e3 import run_e3
@@ -42,7 +42,7 @@ def _write(out_dir: Path, name: str, payload: dict[str, Any]) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     doc = undefined_to_null({"notice": SYNTHETIC_NOTICE, "generated_by": "sikka eval", **payload})
     path = out_dir / f"{name}.json"
-    path.write_text(stable_json_dumps(round_floats(doc), indent=1) + "\n", encoding="utf-8")
+    write_text_lf(path, stable_json_dumps(round_floats(doc), indent=1) + "\n")
     return path
 
 

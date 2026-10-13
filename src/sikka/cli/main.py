@@ -13,7 +13,7 @@ from sikka.cli.checks import fast_check_steps, run_steps
 from sikka.cli.docs import collect_artefacts, stale_artefacts, write_artefacts
 from sikka.conformance import Source, build_report, render_html, run_validation
 from sikka.contract import diff_versions, render_diff_text, resolve_version
-from sikka.core import DEFAULT_SEED, Paths, stable_json_dumps
+from sikka.core import DEFAULT_SEED, Paths, stable_json_dumps, write_text_lf
 from sikka.synth import FAULTS, WorldConfig, build_world, inject, sample_files, write_world
 
 app = typer.Typer(
@@ -160,8 +160,8 @@ def validate(
         result.close()
     out.mkdir(parents=True, exist_ok=True)
     stem = out / report["report_id"]
-    stem.with_suffix(".json").write_text(stable_json_dumps(report, indent=1) + "\n", "utf-8")
-    stem.with_suffix(".html").write_text(render_html(report), "utf-8")
+    write_text_lf(stem.with_suffix(".json"), stable_json_dumps(report, indent=1) + "\n")
+    write_text_lf(stem.with_suffix(".html"), render_html(report))
     typer.echo(report["notice"])
     for fam in report["families"]:
         typer.echo(
@@ -247,7 +247,7 @@ def harmonise(
         "summary": ds.resolution_summary(),
     }
     for name, doc in docs.items():
-        (out / f"{name}.json").write_text(stable_json_dumps(doc, indent=1) + "\n", "utf-8")
+        write_text_lf(out / f"{name}.json", stable_json_dumps(doc, indent=1) + "\n")
     summary = docs["summary"]
     typer.echo("Synthetic data. No real crash, traffic or road records are used.")
     typer.echo(
@@ -265,9 +265,7 @@ def perf() -> None:
     paths = Paths()
     doc = measure(paths)
     paths.results.mkdir(parents=True, exist_ok=True)
-    (paths.results / "performance.json").write_text(
-        stable_json_dumps(doc, indent=1) + "\n", "utf-8"
-    )
+    write_text_lf(paths.results / "performance.json", stable_json_dumps(doc, indent=1) + "\n")
     for m in doc["measures"]:
         typer.echo(f"{m['name']}: {m['value']} (budget {m['budget']})")
 
