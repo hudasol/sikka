@@ -102,9 +102,12 @@ export function Conformance() {
                 {faults.data.faults.map((f) => (
                   <tr key={f.id}>
                     <th scope="row">
-                      <span className="mono">{f.id}</span> {f.title}
+                      <span className="mono">{f.id}</span>{" "}
+                      {settings.lang === "ar" ? (f.title_ar ?? f.title) : f.title}
                     </th>
-                    <td>{f.description}</td>
+                    <td lang="en" dir="ltr">
+                      {f.description}
+                    </td>
                     <td>{f.unit}</td>
                     <td className="mono">{f.expected_rules.join(", ")}</td>
                   </tr>

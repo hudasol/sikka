@@ -132,7 +132,9 @@ export function Lineage() {
                         <td className="mono">{tr.field}</td>
                         <td className="mono">{show(tr.before)}</td>
                         <td className="mono">{show(tr.after)}</td>
-                        <td>{tr.note}</td>
+                        <td lang="en" dir="ltr">
+                          {tr.note}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -158,7 +160,7 @@ export function Lineage() {
                 </p>
               ) : null}
               {entry.data.lineage.notes.map((n) => (
-                <p key={n} className="muted">
+                <p key={n} className="muted" lang="en" dir="ltr">
                   {n}
                 </p>
               ))}

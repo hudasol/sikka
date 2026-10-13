@@ -335,6 +335,12 @@ details > .details-body {
   background: var(--surface);
 }
 
+.map-unavailable {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
 .whisker-chart {
   inline-size: 100%;
   overflow: visible;

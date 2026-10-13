@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 
 import { MODE } from "../api/client";
 import { useSettings } from "../lib/settings";
+import { ErrorBoundary } from "./ErrorBoundary";
+import { ErrorState } from "./States";
 
 export const SCREENS = [
   { path: "/", key: "overview" },
@@ -82,7 +84,9 @@ export function Layout() {
         <p className="muted" data-testid="mode-note">
           {t(`mode.${MODE}`)}
         </p>
-        <Outlet />
+        <ErrorBoundary fallback={(error) => <ErrorState error={error} />}>
+          <Outlet />
+        </ErrorBoundary>
       </main>
       <footer>{t("footer")}</footer>
     </>

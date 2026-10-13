@@ -37,6 +37,9 @@ export interface RuleResult {
   rule_id: string;
   family: string;
   title: string;
+  title_ar?: string;
+  share_low?: number;
+  share_high?: number;
   severity: "error" | "warning" | "info";
   scope: "record" | "series" | "file";
   status: "evaluated" | "skipped";
@@ -183,6 +186,7 @@ export interface RuleInfo {
   family: string;
   family_name: string;
   title: string;
+  title_ar?: string;
   severity: "error" | "warning" | "info";
   description: string;
   rationale: string;
@@ -195,6 +199,7 @@ export interface RuleInfo {
 export interface FaultInfo {
   id: string;
   title: string;
+  title_ar?: string;
   description: string;
   feed_types: string[];
   unit: string;

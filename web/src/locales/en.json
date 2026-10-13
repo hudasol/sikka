@@ -121,10 +121,6 @@
     "failed": "Validation failed: {{detail}}",
     "file_summary": "{{rows}} records, {{quarantined}} quarantined"
   },
-  "placeholder": {
-    "title": "{{screen}}",
-    "body": "This screen is not part of the current build. It is planned for a later phase of the build plan in docs/PROGRESS.md."
-  },
   "abbr": {
     "EB": "Empirical Bayes",
     "PSI": "Potential for safety improvement",
@@ -401,5 +397,11 @@
     "reduction": "Reduction of rank uncertainty",
     "e5_chart": "Relative reduction of top 12 uncertainty per strategy, mean over seeds with intervals",
     "flight_of": "{{flight}} of {{usable}} s"
-  }
+  },
+  "not_found": {
+    "title": "Page not found",
+    "body": "There is no screen at this address.",
+    "home": "Go to the overview"
+  },
+  "map_unavailable": "The map cannot be shown in this browser (WebGL is not available). The table beside it holds the same data."
 }

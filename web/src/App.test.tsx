@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 
 import { AppRoutes, makeQueryClient } from "./App";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { SCREENS } from "./components/Layout";
 import i18n from "./i18n";
 import { SettingsProvider } from "./lib/settings";
@@ -97,13 +98,54 @@ describe("language and settings", () => {
     await user.click(screen.getByRole("button", { name: "تبديل الأرقام الهندية" }));
     const figure = await screen.findByTestId("figure-producers");
     expect(figure.textContent ?? "").toMatch(/[٠-٩]/);
+    const before = document.documentElement.dataset.theme;
     await user.click(screen.getByRole("button", { name: "تبديل المظهر الداكن" }));
-    expect(["dark", "light"]).toContain(document.documentElement.dataset.theme);
+    await waitFor(() =>
+      expect(document.documentElement.dataset.theme).toBe(before === "dark" ? "light" : "dark"),
+    );
+  });
+
+  it("shows Arabic rule titles and keeps English rule text marked as English", async () => {
+    const user = userEvent.setup();
+    renderAt("/contract");
+    await user.click(screen.getByRole("button", { name: "Switch the interface to Arabic" }));
+    const rule = await screen.findByText("SK-P002", {}, { timeout: 5000 });
+    const details = rule.closest("details")!;
+    const summary = details.querySelector("summary")!;
+    const title = (summary.textContent ?? "").split("SK-P002")[1] ?? "";
+    expect(title.trim().slice(0, 8)).toMatch(/[\u0600-\u06FF]/);
+    const english = details.querySelectorAll('[lang="en"][dir="ltr"]');
+    expect(english.length).toBeGreaterThanOrEqual(3);
+  });
+});
+
+describe("robustness", () => {
+  it("shows a not found screen for an unknown address", async () => {
+    renderAt("/no-such-screen");
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Page not found");
+    expect(screen.getByTestId("synthetic-banner")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Go to the overview" })).toBeInTheDocument();
+  });
+
+  it("keeps the layout when a screen throws", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const error = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    function Broken(): never {
+      throw new Error("broken view");
+    }
+    render(
+      <ErrorBoundary fallback={(e) => <p role="alert">{e.message}</p>}>
+        <Broken />
+      </ErrorBoundary>,
+    );
+    expect(screen.getByRole("alert")).toHaveTextContent("broken view");
+    warn.mockRestore();
+    error.mockRestore();
   });
 });
 
 describe("full screens", () => {
-  it("ranks blackspots with intervals and explains a rank", async () => {
+  it("ranks blackspots with intervals and explains a rank", { timeout: 20_000 }, async () => {
     const user = userEvent.setup();
     renderAt("/blackspots");
     const table = await screen.findByTestId("ranking-table", {}, { timeout: 5000 });

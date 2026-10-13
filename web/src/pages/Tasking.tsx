@@ -246,14 +246,19 @@ export function Tasking() {
                   valueLabel={t("tasking.reduction")}
                   ariaLabel={t("tasking.e5_chart")}
                   domain={[-0.1, 0.1]}
-                  items={e5.strategies.map((s) => {
+                  items={e5.strategies.flatMap((s) => {
                     const v: Summary | undefined = e5.summary[`${s}_reduction`];
-                    return {
-                      label: t(`tasking.s_${s}`),
-                      estimate: v?.estimate ?? 0,
-                      low: v?.low ?? 0,
-                      high: v?.high ?? 0,
-                    };
+                    if (!v || v.estimate === null || v.low === null || v.high === null) {
+                      return [];
+                    }
+                    return [
+                      {
+                        label: t(`tasking.s_${s}`),
+                        estimate: v.estimate,
+                        low: v.low,
+                        high: v.high,
+                      },
+                    ];
                   })}
                 />
               ) : (

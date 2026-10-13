@@ -6,9 +6,11 @@ import { getJson } from "../api/client";
 import type { ContractBundle, ContractDiff, ContractIndex, RuleInfo } from "../api/types";
 import { SeverityBadge } from "../components/SeverityBadge";
 import { ErrorState, Loading } from "../components/States";
+import { useSettings } from "../lib/settings";
 
 export function Contract() {
   const { t } = useTranslation();
+  const settings = useSettings();
   const index = useQuery({
     queryKey: ["contract"],
     queryFn: () => getJson<ContractIndex>("/v1/contract"),
@@ -133,15 +135,25 @@ export function Contract() {
         {(rules.data ?? []).map((r) => (
           <details key={r.id} id={`rule-${r.id}`}>
             <summary>
-              <span className="mono">{r.id}</span> {r.title} <SeverityBadge severity={r.severity} />
+              <span className="mono">{r.id}</span>{" "}
+              {settings.lang === "ar" ? (r.title_ar ?? r.title) : r.title}{" "}
+              <SeverityBadge severity={r.severity} />
             </summary>
             <div className="details-body">
-              <p>{r.description}</p>
-              <p>
-                <strong>{t("contract.why")}</strong> {r.rationale}
+              <p lang="en" dir="ltr">
+                {r.description}
               </p>
               <p>
-                <strong>{t("common.fix")}:</strong> {r.fix_hint}
+                <strong>{t("contract.why")}</strong>{" "}
+                <span lang="en" dir="ltr">
+                  {r.rationale}
+                </span>
+              </p>
+              <p>
+                <strong>{t("common.fix")}:</strong>{" "}
+                <span lang="en" dir="ltr">
+                  {r.fix_hint}
+                </span>
               </p>
             </div>
           </details>

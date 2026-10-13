@@ -97,14 +97,19 @@ export function Method() {
                 title={t("method.method")}
                 valueLabel={t("method.recall_rankable")}
                 ariaLabel={t("method.e3_chart")}
-                items={data.data.results.e3_blackspot_ranking.methods.map((m) => {
+                items={data.data.results.e3_blackspot_ranking.methods.flatMap((m) => {
                   const s = data.data.results.e3_blackspot_ranking!.summary[`${m}_recall_rankable`];
-                  return {
-                    label: t(`method.m_${m}`),
-                    estimate: s?.estimate ?? 0,
-                    low: Math.max(0, s?.low ?? 0),
-                    high: Math.min(1, s?.high ?? 0),
-                  };
+                  if (!s || s.estimate === null || s.low === null || s.high === null) {
+                    return [];
+                  }
+                  return [
+                    {
+                      label: t(`method.m_${m}`),
+                      estimate: s.estimate,
+                      low: Math.max(0, s.low),
+                      high: Math.min(1, s.high),
+                    },
+                  ];
                 })}
               />
               <table>

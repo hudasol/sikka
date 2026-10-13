@@ -11,7 +11,7 @@ import { Method } from "./pages/Method";
 import { Overview } from "./pages/Overview";
 import { Pilot } from "./pages/Pilot";
 import { Tasking } from "./pages/Tasking";
-import { Placeholder } from "./pages/Placeholder";
+import { NotFound } from "./pages/NotFound";
 import { Validate } from "./pages/Validate";
 
 export function makeQueryClient(): QueryClient {
@@ -33,7 +33,7 @@ export function AppRoutes() {
         <Route path="tasking" element={<Tasking />} />
         <Route path="method" element={<Method />} />
         <Route path="pilot" element={<Pilot />} />
-        <Route path="*" element={<Placeholder screen="overview" />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

@@ -81,16 +81,58 @@ test("validate a broken sample in the static demo", async ({ page }) => {
   expect(foreign).toEqual([]);
 });
 
-test("Arabic, right to left, and dark theme stay accessible", async ({ page }) => {
+// Every screen in both languages and both themes. Settings are stored before
+// the page loads, so each run starts directly in the chosen language and theme.
+for (const lang of ["en", "ar"] as const) {
+  for (const theme of ["light", "dark"] as const) {
+    if (lang === "en" && theme === "light") {
+      continue; // covered by the static screen tests above
+    }
+    for (const path of SCREENS) {
+      test(`${lang} ${theme} ${path}: direction, theme and no axe violations`, async ({ page }) => {
+        const foreign = watchRequests(page);
+        await page.addInitScript(
+          ([l, th]) => {
+            window.localStorage.setItem("sikka.lang", l);
+            window.localStorage.setItem("sikka.theme", th);
+          },
+          [lang, theme] as const,
+        );
+        await page.goto(`/#${path}`);
+        await expect(page.locator("html")).toHaveAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+        await expect(page.locator("html")).toHaveAttribute("lang", lang);
+        await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+        if (lang === "ar") {
+          await expect(page.getByTestId("synthetic-banner")).toContainText("بيانات مصطنعة");
+        } else {
+          await expect(page.getByTestId("synthetic-banner")).toHaveText(BANNER);
+        }
+        await settled(page);
+        await axe(page);
+        expect(foreign).toEqual([]);
+      });
+    }
+  }
+}
+
+test("switching language and theme with the buttons", async ({ page }) => {
   await page.goto("/#/");
   await page.getByRole("button", { name: "Switch the interface to Arabic" }).click();
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
-  await expect(page.getByTestId("synthetic-banner")).toContainText("بيانات مصطنعة");
-  await settled(page);
-  await axe(page);
+  const before = await page.locator("html").getAttribute("data-theme");
   await page.getByRole("button", { name: "تبديل المظهر الداكن" }).click();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", /dark|light/);
-  await axe(page);
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-theme",
+    before === "dark" ? "light" : "dark",
+  );
+});
+
+test("an unknown address shows the not found screen", async ({ page }) => {
+  await page.goto("/#/no-such-screen");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Page not found");
+  await expect(page.getByTestId("synthetic-banner")).toHaveText(BANNER);
+  await page.getByRole("link", { name: "Go to the overview" }).click();
+  await expect(page).toHaveURL(/#\/$/);
 });
 
 test("keyboard users reach the main content and see focus", async ({ page }) => {

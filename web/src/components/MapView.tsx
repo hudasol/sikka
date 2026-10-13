@@ -3,7 +3,11 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import * as maplibregl from "maplibre-gl";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import type { FeatureCollection } from "geojson";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { useSettings } from "../lib/settings";
+import { THEMES } from "../styles/tokens";
 
 // MapLibre 6 runs its parsing in a module worker shipped as a separate file.
 // Vite copies it into the build through the ?url import; without this the
@@ -53,69 +57,83 @@ export default function MapView({
   const fitted = useRef(false);
   const latest = useRef<Latest>({ network, points, routes, highlight });
   latest.current = { network, points, routes, highlight, select: onSelectSegment };
+  const { t } = useTranslation();
+  const { theme, lang } = useSettings();
+  const [failed, setFailed] = useState(false);
 
+  // The map is rebuilt when the theme or the language changes, so its colours
+  // follow the theme and its zoom control sits on the reading start side.
   useEffect(() => {
     if (!container.current || map.current) {
       return;
     }
-    const css = getComputedStyle(document.documentElement);
-    const color = (name: string, fallback: string) => css.getPropertyValue(name).trim() || fallback;
-    const instance = new maplibregl.Map({
-      container: container.current,
-      style: {
-        version: 8,
-        sources: {
-          network: { type: "geojson", data: EMPTY },
-          routes: { type: "geojson", data: EMPTY },
-          points: { type: "geojson", data: EMPTY },
+    const tokens = THEMES[theme];
+    let instance: maplibregl.Map;
+    try {
+      instance = new maplibregl.Map({
+        container: container.current,
+        style: {
+          version: 8,
+          sources: {
+            network: { type: "geojson", data: EMPTY },
+            routes: { type: "geojson", data: EMPTY },
+            points: { type: "geojson", data: EMPTY },
+          },
+          layers: [
+            {
+              id: "background",
+              type: "background",
+              paint: { "background-color": tokens.surface },
+            },
+            {
+              id: "network",
+              type: "line",
+              source: "network",
+              paint: { "line-color": tokens.ink, "line-width": 2 },
+            },
+            {
+              id: "network-highlight",
+              type: "line",
+              source: "network",
+              filter: ["==", ["get", "segment_id"], ""],
+              paint: { "line-color": tokens.accentStrong, "line-width": 7 },
+            },
+            {
+              id: "routes",
+              type: "line",
+              source: "routes",
+              paint: {
+                "line-color": tokens.accentStrong,
+                "line-width": 4,
+                "line-dasharray": [2, 1],
+              },
+            },
+            {
+              id: "points",
+              type: "circle",
+              source: "points",
+              paint: {
+                "circle-radius": 4,
+                "circle-color": tokens.accentStrong,
+                "circle-stroke-color": tokens.ink,
+                "circle-stroke-width": 1,
+              },
+            },
+          ],
         },
-        layers: [
-          {
-            id: "background",
-            type: "background",
-            paint: { "background-color": color("--surface", "#fbe3ea") },
-          },
-          {
-            id: "network",
-            type: "line",
-            source: "network",
-            paint: { "line-color": color("--ink", "#5b3a4a"), "line-width": 2 },
-          },
-          {
-            id: "network-highlight",
-            type: "line",
-            source: "network",
-            filter: ["==", ["get", "segment_id"], ""],
-            paint: { "line-color": color("--accent-strong", "#a8456a"), "line-width": 7 },
-          },
-          {
-            id: "routes",
-            type: "line",
-            source: "routes",
-            paint: {
-              "line-color": color("--accent-strong", "#a8456a"),
-              "line-width": 4,
-              "line-dasharray": [2, 1],
-            },
-          },
-          {
-            id: "points",
-            type: "circle",
-            source: "points",
-            paint: {
-              "circle-radius": 4,
-              "circle-color": color("--accent-strong", "#a8456a"),
-              "circle-stroke-color": color("--ink", "#5b3a4a"),
-              "circle-stroke-width": 1,
-            },
-          },
-        ],
-      },
-      center: [54.0, 24.2],
-      zoom: 7,
-      attributionControl: false,
-    });
-    instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+        center: [54.0, 24.2],
+        zoom: 7,
+        attributionControl: false,
+      });
+    } catch (error) {
+      console.warn("Sikka map unavailable", error instanceof Error ? error.message : error);
+      setFailed(true);
+      return;
+    }
+    instance.addControl(
+      new maplibregl.NavigationControl({ showCompass: false }),
+      lang === "ar" ? "top-left" : "top-right",
+    );
     instance.on("load", () => {
       loaded.current = true;
       apply(instance, latest.current, fitted);
@@ -139,7 +157,7 @@ export default function MapView({
       loaded.current = false;
       fitted.current = false;
     };
-  }, []);
+  }, [theme, lang]);
 
   useEffect(() => {
     if (map.current && loaded.current) {
@@ -147,6 +165,13 @@ export default function MapView({
     }
   }, [network, points, routes, highlight]);
 
+  if (failed) {
+    return (
+      <div className="map map-unavailable" role="note">
+        <p>{t("map_unavailable")}</p>
+      </div>
+    );
+  }
   return (
     <div
       ref={container}

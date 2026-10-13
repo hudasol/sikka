@@ -16,7 +16,7 @@ import {
 import type { Report, RuleResult, Sample } from "../api/types";
 import { SeverityBadge } from "../components/SeverityBadge";
 import { Empty, ErrorState, Loading } from "../components/States";
-import { formatNumber, formatPercent } from "../lib/format";
+import { formatInterval, formatNumber, formatPercent } from "../lib/format";
 import { useSettings } from "../lib/settings";
 
 const MapView = lazy(() => import("../components/MapView"));
@@ -249,11 +249,16 @@ function RuleItem({ rule }: { rule: RuleResult }) {
   return (
     <details>
       <summary>
-        <span className="mono">{rule.rule_id}</span> {rule.title}{" "}
+        <span className="mono">{rule.rule_id}</span>{" "}
+        {settings.lang === "ar" ? (rule.title_ar ?? rule.title) : rule.title}{" "}
         <SeverityBadge severity={rule.severity} />{" "}
         <span className="num">
           {formatNumber(rule.records || rule.findings, settings)} (
-          {formatPercent(rule.share, settings, 2)})
+          {formatPercent(rule.share, settings, 2)}
+          {rule.share_low !== undefined && rule.share_high !== undefined
+            ? `; ${t("common.interval")} ${formatInterval(rule.share_low, rule.share_high, settings, 2)}`
+            : ""}
+          )
         </span>
       </summary>
       <div className="details-body">
@@ -273,12 +278,17 @@ function RuleItem({ rule }: { rule: RuleResult }) {
           {rule.examples.map((e, i) => (
             <li key={i}>
               <span className="mono">{e.record_id ?? `${t("common.row")} ${e.row ?? ""}`}</span>:{" "}
-              {e.detail}
+              <span lang="en" dir="ltr">
+                {e.detail}
+              </span>
             </li>
           ))}
         </ul>
         <p>
-          <strong>{t("common.fix")}:</strong> {rule.fix_hint}
+          <strong>{t("common.fix")}:</strong>{" "}
+          <span lang="en" dir="ltr">
+            {rule.fix_hint}
+          </span>
         </p>
       </div>
     </details>
