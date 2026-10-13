@@ -11,6 +11,8 @@ import math
 from concurrent.futures import ProcessPoolExecutor
 from typing import Any
 
+import pandas as pd
+
 from sikka.conformance import Source, run_validation
 from sikka.core import mean_interval
 from sikka.synth import FAULTS, Fault, World, WorldConfig, build_world, finalise_feed, inject
@@ -61,7 +63,7 @@ def score_fault(fault: Fault, world: World) -> dict[str, float]:
     ):
         if rule_id not in fault.expected_rules:
             continue
-        if fault.unit == "record" and row is not None and row == row:
+        if fault.unit == "record" and not pd.isna(row):
             flagged.add((file, str(int(row))))
         elif fault.unit == "series" and isinstance(series, str):
             flagged.add((file, series))

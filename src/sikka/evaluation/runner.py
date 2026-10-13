@@ -8,6 +8,7 @@ from typing import Any
 from sikka.conformance import SYNTHETIC_NOTICE
 from sikka.core import round_floats, stable_json_dumps
 from sikka.evaluation.e1 import run_e1
+from sikka.evaluation.e2 import run_e2
 
 EXPERIMENT_SEED_BASE = 1000
 E1_RATES = [0.01, 0.05, 0.2]
@@ -36,6 +37,11 @@ def run_experiments(
             rates = [0.05] if smoke else E1_RATES
             written.append(
                 _write(out_dir, "e1_fault_detection", run_e1(chosen, rates, workers=workers))
+            )
+        elif name == "e2":
+            scenarios = ["clean"] if smoke else None
+            written.append(
+                _write(out_dir, "e2_entity_resolution", run_e2(chosen, scenarios, workers=workers))
             )
         else:
             raise ValueError(f"unknown experiment {name!r}")
