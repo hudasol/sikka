@@ -1,0 +1,38 @@
+{
+ "bundle_bytes": {
+  "css": 109743,
+  "fonts": 931356,
+  "js": 1484008
+ },
+ "measures": [
+  {
+   "budget": "under 60 s",
+   "name": "Validate 1,000,000 crash rows (NDJSON, every rule, registry as context)",
+   "ok": true,
+   "value": "20.8 s"
+  },
+  {
+   "budget": "under 10 s",
+   "name": "Rank 240 segments with 4,000 posterior draws (EB and EB+QP)",
+   "ok": true,
+   "value": "0.4 s"
+  },
+  {
+   "budget": "reported",
+   "name": "Web bundle: JavaScript, CSS, fonts (uncompressed)",
+   "ok": true,
+   "value": "1449 KB, 107 KB, 910 KB"
+  },
+  {
+   "budget": "under 3 s",
+   "name": "Static web first load (10 Mbit/s down, 5 Mbit/s up, 40 ms latency, cache disabled, until the overview matrix shows)",
+   "ok": true,
+   "value": "0.60 s"
+  }
+ ],
+ "note": "Measured by `sikka perf` on the machine that ran it (Windows 11, AMD64, Python 3.13.0). Timings vary between machines and runs.",
+ "rank_seconds": 0.44004600000334904,
+ "rows": 1000000,
+ "segments": 240,
+ "validate_seconds": 20.799098599993158
+}

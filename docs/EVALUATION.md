@@ -150,6 +150,17 @@ Each strategy plans 4 missions with the default drone profile. A survey adds 2 y
 
 Value of information beat random in 16 of 20 seeds and greedy by crash count in 14 of 20 seeds.
 
+## Performance
+
+Measured by `sikka perf` on the machine that ran it (Windows 11, AMD64, Python 3.13.0). Timings vary between machines and runs.
+
+| Measure | Value | Budget | Within budget |
+| --- | --- | --- | --- |
+| Validate 1,000,000 crash rows (NDJSON, every rule, registry as context) | 20.8 s | under 60 s | yes |
+| Rank 240 segments with 4,000 posterior draws (EB and EB+QP) | 0.4 s | under 10 s | yes |
+| Web bundle: JavaScript, CSS, fonts (uncompressed) | 1449 KB, 107 KB, 910 KB | reported | yes |
+| Static web first load (10 Mbit/s down, 5 Mbit/s up, 40 ms latency, cache disabled, until the overview matrix shows) | 0.60 s | under 3 s | yes |
+
 ## Observations
 
 Comparisons computed from the same result files.
