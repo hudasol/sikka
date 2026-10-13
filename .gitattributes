@@ -1,0 +1,7 @@
+# Keep LF in every working copy so generated artefacts are byte identical
+# on Windows, macOS and Linux and the staleness tests compare like with like.
+* text=auto eol=lf
+*.png binary
+*.woff binary
+*.woff2 binary
+*.duckdb binary
