@@ -1,6 +1,6 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 import type { FeatureCollection } from "geojson";
 import { useEffect, useRef } from "react";
 
@@ -16,13 +16,24 @@ interface Props {
   points: MapPoint[];
   label: string;
   highlight?: string | null;
+  onSelectSegment?: (segmentId: string) => void;
+  routes?: FeatureCollection | null;
 }
 
 // MapLibre with local GeoJSON only. The style has no sources with URLs, no
 // glyphs and no sprites, so the map never requests tiles or fonts.
-export default function MapView({ network, points, label, highlight = null }: Props) {
+export default function MapView({
+  network,
+  points,
+  label,
+  highlight = null,
+  onSelectSegment,
+  routes = null,
+}: Props) {
   const container = useRef<HTMLDivElement | null>(null);
   const map = useRef<maplibregl.Map | null>(null);
+  const select = useRef(onSelectSegment);
+  select.current = onSelectSegment;
 
   useEffect(() => {
     if (!container.current || map.current) {
@@ -66,6 +77,20 @@ export default function MapView({ network, points, label, highlight = null }: Pr
         filter: ["==", ["get", "segment_id"], highlight ?? ""],
         paint: { "line-color": color("--accent-strong", "#a8456a"), "line-width": 6 },
       });
+      instance.addSource("routes", {
+        type: "geojson",
+        data: routes ?? { type: "FeatureCollection", features: [] },
+      });
+      instance.addLayer({
+        id: "routes",
+        type: "line",
+        source: "routes",
+        paint: {
+          "line-color": color("--accent-strong", "#a8456a"),
+          "line-width": 4,
+          "line-dasharray": [2, 1],
+        },
+      });
       instance.addSource("points", { type: "geojson", data: toGeoJson(points) });
       instance.addLayer({
         id: "points",
@@ -79,6 +104,18 @@ export default function MapView({ network, points, label, highlight = null }: Pr
         },
       });
       fit(instance, network, points);
+      instance.on("click", "network", (event: maplibregl.MapLayerMouseEvent) => {
+        const id = event.features?.[0]?.properties?.segment_id;
+        if (typeof id === "string") {
+          select.current?.(id);
+        }
+      });
+      instance.on("mouseenter", "network", () => {
+        instance.getCanvas().style.cursor = "pointer";
+      });
+      instance.on("mouseleave", "network", () => {
+        instance.getCanvas().style.cursor = "";
+      });
     });
     map.current = instance;
     return () => {
@@ -100,10 +137,14 @@ export default function MapView({ network, points, label, highlight = null }: Pr
     if (network) {
       net?.setData(network);
     }
+    const rt = instance.getSource("routes") as maplibregl.GeoJSONSource | undefined;
+    if (routes) {
+      rt?.setData(routes);
+    }
     if (instance.getLayer("network-highlight")) {
       instance.setFilter("network-highlight", ["==", ["get", "segment_id"], highlight ?? ""]);
     }
-  }, [points, network, highlight]);
+  }, [points, network, highlight, routes]);
 
   return <div ref={container} className="map" role="region" aria-label={label} />;
 }
@@ -125,6 +166,10 @@ function fit(instance: maplibregl.Map, network: FeatureCollection | null, points
   for (const p of points) {
     bounds.extend([p.lon, p.lat]);
     any = true;
+  }
+  if (any) {
+    instance.fitBounds(bounds, { padding: 30, animate: false });
+    return;
   }
   for (const f of network?.features ?? []) {
     if (f.geometry.type === "LineString") {
