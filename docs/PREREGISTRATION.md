@@ -112,4 +112,10 @@ These choices are fixed now so that the evaluation cannot shape them.
 
 ## Amendments
 
-None yet.
+### Amendment 1, 2026-10-13 (before any evaluation seed was run for the affected experiments)
+
+The original text above is unchanged. These implementation details were settled after registration; none of them changes a prediction, a metric definition, a seed or a hit rule.
+
+1. **E1 combined scenario, precision against any fault.** A station or a file is counted as carrying an injected fault when any of its rows carries one. The first implementation counted only faults of the same unit, which contradicted the wording above. The bug was found on the development seed 1001 and fixed before the E1 run on seeds 2001 to 2020.
+2. **E5 planner.** On the development seed 1001 the first planner seeded each mission at the segment with the highest value per kilometre, which left most of the flight budget unused, and the baselines extended their missions using the value of information score. The planner now keeps, in each round, the feasible mission with the largest total value of information, and the baselines extend along the corridor without using that score. This was changed before E5 was run on seeds 2001 to 2020. On the development seed the changed planner did not do better than random tasking; no further change was made.
+3. **Posterior draws inside E4 and E5.** E4 and E5 recompute many rankings per seed and use 1,000 posterior draws per ranking; E3 and the published ranking use 4,000 as registered.
