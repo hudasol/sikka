@@ -1,0 +1,201 @@
+{
+ "notice": "Synthetic data only. Verdicts for the preregistered predictions.",
+ "predictions": [
+  {
+   "experiment": "E1",
+   "id": "P1.1",
+   "observed": "24 of 25 faults",
+   "text": "in isolation, at least 22 of the 25 faults have mean recall of at least 0.95 at every rate.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E1",
+   "id": "P1.2",
+   "observed": "lowest mean precision 0.974",
+   "text": "in isolation, every fault has mean precision of at least 0.95 at every rate where at least one unit is flagged.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E1",
+   "id": "P1.3",
+   "observed": "recall 0.943",
+   "text": "F03 (local time labelled as UTC) has mean recall between 0.85 and 0.99 at 5 percent, because crash records that no other producer reported cannot be compared.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E1",
+   "id": "P1.4",
+   "observed": "mean recall 0.959",
+   "text": "in the combined scenario, mean recall over the 25 faults is between 0.85 and 1.00.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E1",
+   "id": "P1.5",
+   "observed": "mean precision against any fault 1.000",
+   "text": "in the combined scenario, mean precision against any fault over the 25 faults is at least 0.95.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E1",
+   "id": "P1.6",
+   "observed": "8 of 25 faults",
+   "text": "the schema only baseline detects fewer than 13 of the 25 faults with recall of at least 0.5, because many faults (swapped axes, wrong units, stuck sensors, duplicates, offsets, gaps, partial periods) produce records that are each individually valid.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.1",
+   "observed": "f1 0.990",
+   "text": "clean F1 between 0.97 and 1.00.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.2",
+   "observed": "precision 1.000",
+   "text": "clean precision of at least 0.99.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.3",
+   "observed": "abstention_rate 0.028",
+   "text": "clean abstention rate between 0.01 and 0.06.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.4",
+   "observed": "recall 0.676",
+   "text": "faults_5pct recall between 0.55 and 0.80.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.5",
+   "observed": "precision 1.000",
+   "text": "faults_5pct precision of at least 0.98.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.6",
+   "observed": "abstention_rate 0.093",
+   "text": "faults_5pct abstention rate between 0.05 and 0.15.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E2",
+   "id": "P2.7",
+   "observed": "naive 0.999958 against matcher 1.000000",
+   "text": "the naive baseline has lower clean precision than the matcher.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.1",
+   "observed": "EB recall_rankable 0.499",
+   "text": "EB `recall_rankable` between 0.45 and 0.80.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.2",
+   "observed": "EB 0.499 against rate 0.520",
+   "text": "EB `recall_rankable` is higher than rate `recall_rankable`.",
+   "verdict": "MISS"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.3",
+   "observed": "EB 0.499 against raw count 0.283",
+   "text": "EB `recall_rankable` is higher than raw count `recall_rankable`.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.4",
+   "observed": "raw count recall_all 0.296",
+   "text": "raw count `recall_all` is between 0.20 and 0.50.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.5",
+   "observed": "EB coverage 0.874",
+   "text": "EB 90 percent rank interval coverage between 0.80 and 0.95.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.6",
+   "observed": "coverage 0.880 against 0.874; width 57.1 against 57.4",
+   "text": "EB+QP coverage is at least EB coverage, and EB+QP mean interval width is larger than EB mean width.",
+   "verdict": "MISS"
+  },
+  {
+   "experiment": "E3",
+   "id": "P3.7",
+   "observed": "EB+QP 0.499 against EB 0.499",
+   "text": "EB+QP `recall_rankable` is within 0.05 of EB `recall_rankable`.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E4",
+   "id": "P4.1",
+   "observed": "Kendall tau 0.980",
+   "text": "dropping D (fatal and serious crashes only, mostly duplicates of B) leaves Kendall tau of at least 0.90.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E4",
+   "id": "P4.2",
+   "observed": "drop_A 0.960, drop_B 0.817, drop_C 0.965, drop_D 0.980",
+   "text": "dropping B gives the lowest Kendall tau of the four producer drops.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E4",
+   "id": "P4.3",
+   "observed": "Kendall tau 0.914",
+   "text": "Kendall tau at 5 percent faults is between 0.75 and 0.95.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E4",
+   "id": "P4.4",
+   "observed": "20 percent 0.824 against 5 percent 0.914",
+   "text": "Kendall tau at 20 percent faults is lower than at 5 percent faults.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E4",
+   "id": "P4.5",
+   "observed": "top 12 overlap 0.787",
+   "text": "top 12 overlap at 20 percent faults is between 0.40 and 0.80.",
+   "verdict": "HIT"
+  },
+  {
+   "experiment": "E5",
+   "id": "P5.1",
+   "observed": "not run yet",
+   "text": "value of information reduces the uncertainty mass by more than random in at least 18 of 20 seeds.",
+   "verdict": "PENDING"
+  },
+  {
+   "experiment": "E5",
+   "id": "P5.2",
+   "observed": "not run yet",
+   "text": "value of information reduces it by more than greedy by crash count in at least 15 of 20 seeds.",
+   "verdict": "PENDING"
+  },
+  {
+   "experiment": "E5",
+   "id": "P5.3",
+   "observed": "not run yet",
+   "text": "the mean relative reduction with value of information is between 0.10 and 0.40.",
+   "verdict": "PENDING"
+  }
+ ]
+}

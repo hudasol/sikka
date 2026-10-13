@@ -125,7 +125,7 @@ def p2_7(r: Results) -> tuple[str, bool]:
     naive = _est(r["e2_entity_resolution"]["naive_baseline"]["clean"]["precision"])
     ours = _e2(r, "clean", "precision")
     ok = naive is not None and ours is not None and naive < ours
-    return f"naive {_fmt(naive)} against matcher {_fmt(ours)}", ok
+    return f"naive {_fmt(naive, 6)} against matcher {_fmt(ours, 6)}", ok
 
 
 # E3 -----------------------------------------------------------------------------

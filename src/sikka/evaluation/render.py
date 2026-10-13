@@ -53,6 +53,50 @@ def _table(header: list[str], rows: list[list[str]]) -> list[str]:
     return [*lines, ""]
 
 
+def _e(node: dict[str, Any] | None) -> float | None:
+    return None if not node or node.get("estimate") is None else float(node["estimate"])
+
+
+def observations(results: Results) -> list[str]:
+    """Plain statements comparing results, each built from numbers in the files."""
+    out: list[str] = []
+    e2 = results.get("e2_entity_resolution")
+    if e2:
+        for scenario, s in e2["summary"].items():
+            naive = e2["naive_baseline"][scenario]
+            pr_m, pr_n = _e(s["precision"]), _e(naive["precision"])
+            re_m, re_n = _e(s["recall"]), _e(naive["recall"])
+            if None in (pr_m, pr_n, re_m, re_n):
+                continue
+            better = "higher" if re_n > re_m else "lower"  # type: ignore[operator]
+            out.append(
+                f"E2 `{scenario}`: the naive baseline has {better} recall than the matcher "
+                f"({re_n:.3f} against {re_m:.3f}) at precision {pr_n:.6f} against {pr_m:.6f}. "
+                "On this synthetic world the matcher's abstention lowers recall without a "
+                "material gain in precision."
+                if re_n > re_m  # type: ignore[operator]
+                else f"E2 `{scenario}`: the matcher has higher recall than the naive baseline "
+                f"({re_m:.3f} against {re_n:.3f}) at precision {pr_m:.6f} against {pr_n:.6f}."
+            )
+    e3 = results.get("e3_blackspot_ranking")
+    if e3:
+        s = e3["summary"]
+        ranked = {m: _e(s.get(f"{m}_recall_rankable")) for m in e3["methods"]}
+        best = max((m for m in ranked if ranked[m] is not None), key=lambda m: ranked[m] or 0.0)
+        text = (
+            f"E3: the highest recall of planted blackspots with exposure comes from `{best}` "
+            f"({ranked[best]:.3f})."
+        )
+        if best not in {"eb", "eb_qp"}:
+            text += (
+                " Empirical Bayes ranks by excess crashes, so a planted blackspot on a quiet "
+                "or short segment, whose excess is small in absolute terms, can rank below "
+                "busy segments with a modest excess."
+            )
+        out.append(text)
+    return out
+
+
 def render_evaluation(results: Results) -> str:
     verdicts = judge(results)
     hits = sum(v["verdict"] == "HIT" for v in verdicts)
@@ -70,7 +114,8 @@ def render_evaluation(results: Results) -> str:
         "",
         "The experiments, metrics, seeds and predictions were fixed in "
         "[PREREGISTRATION.md](PREREGISTRATION.md) before any of these results existed. Means over "
-        "seeds are shown with 95 percent Student t intervals in brackets.",
+        "seeds are shown with 95 percent Student t intervals in brackets. Implementation "
+        "details settled after registration are listed in its dated amendments.",
         "",
         f"Seeds: {seeds[0]} to {seeds[-1]} ({len(seeds)} seeds)." if seeds else "Seeds: none run.",
         "",
@@ -261,5 +306,9 @@ def render_evaluation(results: Results) -> str:
                 for m in perf["measures"]
             ],
         )
+    notes = observations(results)
+    if notes:
+        lines += ["## Observations", "", "Comparisons computed from the same result files.", ""]
+        lines += [f"- {n}" for n in notes] + [""]
     lines += ["## Limitations", ""] + [f"- {item}" for item in LIMITATIONS] + [""]
     return "\n".join(lines)
