@@ -78,6 +78,14 @@ def observations(results: Results) -> list[str]:
                 else f"E2 `{scenario}`: the matcher has higher recall than the naive baseline "
                 f"({re_m:.3f} against {re_n:.3f}) at precision {pr_m:.6f} against {pr_n:.6f}."
             )
+        clean = e2["summary"].get("clean")
+        naive = e2["naive_baseline"].get("clean")
+        if clean and naive:
+            out.append(
+                "P2.7 is a hit by its rule, but the precision difference is not material: the "
+                f"naive baseline's interval reaches {naive['precision']['high']:.6f}. In "
+                "substance the two methods tie on precision."
+            )
     e3 = results.get("e3_blackspot_ranking")
     if e3:
         s = e3["summary"]
@@ -194,6 +202,7 @@ def render_evaluation(results: Results) -> str:
                     _iv(s["count_error"]),
                     _iv(n["precision"]),
                     _iv(n["recall"]),
+                    _iv(n["f1"]),
                 ]
             )
         lines += _table(
@@ -206,6 +215,7 @@ def render_evaluation(results: Results) -> str:
                 "Count error",
                 "Naive precision",
                 "Naive recall",
+                "Naive F1",
             ],
             rows,
         )

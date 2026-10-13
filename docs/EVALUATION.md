@@ -109,10 +109,10 @@ Schema only baseline (contract model validation) at 0.05, and the combined scena
 
 Pairs of records from different producers placed in the same canonical crash, against pairs that share a true crash id. The naive baseline merges any two records within 15 minutes and 150 metres.
 
-| Scenario | Precision | Recall | F1 | Abstention | Count error | Naive precision | Naive recall |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `clean` | 1.000 (1.000 to 1.000) | 0.980 (0.978 to 0.982) | 0.990 (0.989 to 0.991) | 0.028 (0.026 to 0.031) | 0.011 (0.010 to 0.012) | 1.000 (1.000 to 1.000) | 0.986 (0.985 to 0.987) |
-| `faults_5pct` | 1.000 (1.000 to 1.000) | 0.676 (0.672 to 0.680) | 0.807 (0.804 to 0.810) | 0.093 (0.090 to 0.096) | 0.101 (0.097 to 0.104) | 1.000 (1.000 to 1.000) | 0.722 (0.718 to 0.726) |
+| Scenario | Precision | Recall | F1 | Abstention | Count error | Naive precision | Naive recall | Naive F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `clean` | 1.000 (1.000 to 1.000) | 0.980 (0.978 to 0.982) | 0.990 (0.989 to 0.991) | 0.028 (0.026 to 0.031) | 0.011 (0.010 to 0.012) | 1.000 (1.000 to 1.000) | 0.986 (0.985 to 0.987) | 0.993 (0.992 to 0.993) |
+| `faults_5pct` | 1.000 (1.000 to 1.000) | 0.676 (0.672 to 0.680) | 0.807 (0.804 to 0.810) | 0.093 (0.090 to 0.096) | 0.101 (0.097 to 0.104) | 1.000 (1.000 to 1.000) | 0.722 (0.718 to 0.726) | 0.838 (0.836 to 0.841) |
 
 ## E3: blackspot ranking
 
@@ -156,6 +156,7 @@ Comparisons computed from the same result files.
 
 - E2 `clean`: the naive baseline has higher recall than the matcher (0.986 against 0.980) at precision 0.999958 against 1.000000. On this synthetic world the matcher's abstention lowers recall without a material gain in precision.
 - E2 `faults_5pct`: the naive baseline has higher recall than the matcher (0.722 against 0.676) at precision 0.999933 against 1.000000. On this synthetic world the matcher's abstention lowers recall without a material gain in precision.
+- P2.7 is a hit by its rule, but the precision difference is not material: the naive baseline's interval reaches 1.000046. In substance the two methods tie on precision.
 - E3: the highest recall of planted blackspots with exposure comes from `rate` (0.520). Empirical Bayes ranks by excess crashes, so a planted blackspot on a quiet or short segment, whose excess is small in absolute terms, can rank below busy segments with a modest excess.
 
 ## Limitations
