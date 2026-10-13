@@ -179,23 +179,23 @@
   {
    "experiment": "E5",
    "id": "P5.1",
-   "observed": "not run yet",
+   "observed": "16 of 20 seeds",
    "text": "value of information reduces the uncertainty mass by more than random in at least 18 of 20 seeds.",
-   "verdict": "PENDING"
+   "verdict": "MISS"
   },
   {
    "experiment": "E5",
    "id": "P5.2",
-   "observed": "not run yet",
+   "observed": "14 of 20 seeds",
    "text": "value of information reduces it by more than greedy by crash count in at least 15 of 20 seeds.",
-   "verdict": "PENDING"
+   "verdict": "MISS"
   },
   {
    "experiment": "E5",
    "id": "P5.3",
-   "observed": "not run yet",
+   "observed": "mean reduction 0.032",
    "text": "the mean relative reduction with value of information is between 0.10 and 0.40.",
-   "verdict": "PENDING"
+   "verdict": "MISS"
   }
  ]
 }

@@ -10,7 +10,7 @@ Seeds: 2001 to 2020 (20 seeds).
 
 ## Predictions
 
-23 hits, 2 misses, 3 pending.
+23 hits, 5 misses, 0 pending.
 
 | Id | Prediction | Observed | Verdict |
 | --- | --- | --- | --- |
@@ -39,9 +39,9 @@ Seeds: 2001 to 2020 (20 seeds).
 | P4.3 | Kendall tau at 5 percent faults is between 0.75 and 0.95. | Kendall tau 0.914 | **HIT** |
 | P4.4 | Kendall tau at 20 percent faults is lower than at 5 percent faults. | 20 percent 0.824 against 5 percent 0.914 | **HIT** |
 | P4.5 | top 12 overlap at 20 percent faults is between 0.40 and 0.80. | top 12 overlap 0.787 | **HIT** |
-| P5.1 | value of information reduces the uncertainty mass by more than random in at least 18 of 20 seeds. | not run yet | **PENDING** |
-| P5.2 | value of information reduces it by more than greedy by crash count in at least 15 of 20 seeds. | not run yet | **PENDING** |
-| P5.3 | the mean relative reduction with value of information is between 0.10 and 0.40. | not run yet | **PENDING** |
+| P5.1 | value of information reduces the uncertainty mass by more than random in at least 18 of 20 seeds. | 16 of 20 seeds | **MISS** |
+| P5.2 | value of information reduces it by more than greedy by crash count in at least 15 of 20 seeds. | 14 of 20 seeds | **MISS** |
+| P5.3 | the mean relative reduction with value of information is between 0.10 and 0.40. | mean reduction 0.032 | **MISS** |
 
 ## E1: fault detection
 
@@ -137,6 +137,18 @@ Kendall tau and top 12 overlap between the ranking on the clean world and on deg
 | `drop_D` | 0.980 (0.977 to 0.982) | 0.971 (0.952 to 0.990) | 0.994 (0.993 to 0.995) | 0.988 (0.973 to 1.002) |
 | `faults_20pct` | 0.824 (0.813 to 0.834) | 0.787 (0.739 to 0.836) | 0.900 (0.894 to 0.905) | 0.933 (0.903 to 0.963) |
 | `faults_5pct` | 0.914 (0.906 to 0.921) | 0.912 (0.893 to 0.932) | 0.963 (0.961 to 0.966) | 0.950 (0.921 to 0.979) |
+
+## E5: tasking
+
+Each strategy plans 4 missions with the default drone profile. A survey adds 2 years of crash data drawn from the hidden true rate; all strategies use the same draws. The metric is the relative reduction of the top 12 uncertainty mass, the sum of p(1 - p) over ranked segments, recomputed with 1000 posterior draws.
+
+| Strategy | Reduction | Segments surveyed | Flight time (s) |
+| --- | --- | --- | --- |
+| Value of information | 0.032 (0.014 to 0.050) | 5.4 (4.9 to 5.9) | 3243 (3032 to 3454) |
+| Random | 0.004 (-0.006 to 0.014) | 7.8 (7.2 to 8.5) | 3477 (3211 to 3743) |
+| Greedy by crash count | 0.007 (-0.008 to 0.023) | 6.0 (5.4 to 6.5) | 3809 (3631 to 3988) |
+
+Value of information beat random in 16 of 20 seeds and greedy by crash count in 14 of 20 seeds.
 
 ## Observations
 
