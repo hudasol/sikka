@@ -24,14 +24,15 @@ Sikka is a proposal seed prepared by a student. It runs on synthetic data only a
 
 10. **Model form.** The synthetic crash process has the same functional form as the safety performance function, which flatters Empirical Bayes.
 11. **Capture recapture.** Chapman's estimator assumes independent detection with equal catchability. Real reporting is correlated, so completeness would be overstated.
-12. **Abstention reduces coverage.** Segments without a counting station are not ranked; a planted blackspot there cannot be found by Empirical Bayes even when raw counts would list it.
-13. **Screening, not diagnosis.** A high rank says where to look, not what is wrong or what to do.
+12. **Quality propagation does not widen intervals as intended.** In E3 the quality propagated intervals were no wider than plain Empirical Bayes intervals (K05 in [KNOWN_ISSUES.md](KNOWN_ISSUES.md)).
+13. **Abstention reduces coverage.** Segments without a counting station are not ranked; a planted blackspot there cannot be found by Empirical Bayes even when raw counts would list it.
+14. **Screening, not diagnosis.** A high rank says where to look, not what is wrong or what to do.
 
 ## Tasking
 
-14. **Simulated surveys.** E5 models a survey as two extra years of crash data drawn from the hidden truth. A real survey yields other information (road condition, conflicts, signage) that this model does not capture.
-15. **No flight claim.** Mission plans are for simulation and review only. Real flights need the operator's own safety case and the regulator's approval; no plan here has been flown.
+15. **Simulated surveys.** E5 models a survey as two extra years of crash data drawn from the hidden truth. A real survey yields other information (road condition, conflicts, signage) that this model does not capture.
+16. **No flight claim.** Mission plans are for simulation and review only. Real flights need the operator's own safety case and the regulator's approval; no plan here has been flown.
 
 ## Interface
 
-16. **Arabic text.** The Arabic interface and field descriptions are a machine drafted first version that needs review by a native speaker.
+17. **Arabic text.** The Arabic interface and field descriptions are a machine drafted first version that needs review by a native speaker.

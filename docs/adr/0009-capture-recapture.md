@@ -14,5 +14,5 @@ No producer sees every crash. When two producers cover the same corridors, the o
 
 ## Consequences
 
-- Intervals widen where data quality is uncertain, and corridors with lower completeness are corrected upwards.
+- Corridors with lower completeness are corrected upwards. The intention was also to widen intervals where data quality is uncertain; in the evaluation (E3) the quality propagated intervals were not wider on average than plain EB intervals, because the Chapman uncertainty is small when thousands of crashes overlap and scaling counts upwards narrows the gamma posteriors slightly. This is recorded in `docs/KNOWN_ISSUES.md` (K05).
 - Chapman assumes independent detection with equal catchability. Severe crashes are more likely to be reported by everyone, which biases the total downwards; matching errors in harmonisation bias it in either direction. The published completeness is therefore an optimistic bound, and this is stated in METHOD and LIMITATIONS.
