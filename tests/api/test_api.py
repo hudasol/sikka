@@ -166,6 +166,26 @@ def test_producer_conformance(client: TestClient) -> None:
     assert_no_paths(body)
 
 
+def test_lineage(client: TestClient) -> None:
+    index = client.get("/v1/lineage", params={"limit": 500}).json()
+    assert index["dataset"] == "broken"
+    assert index["count"] == len(index["items"]) <= 500
+    crash_id = next(i["canonical_id"] for i in index["items"] if i["kind"] == "crash")
+    entry = client.get(f"/v1/lineage/{crash_id}").json()
+    assert entry["canonical_id"] == crash_id
+    assert entry["lineage"]["sources"]
+    by_record = client.get("/v1/lineage", params={"q": "PB-0000007"}).json()
+    assert any("PB-0000007" in i["record_ids"] for i in by_record["items"])
+    exposure = client.get("/v1/lineage/EX-SEG-DUN-001")
+    assert exposure.status_code in {200, 404}
+    assert client.get("/v1/lineage/SG-SEG-DUN-001").json()["kind"] == "segment"
+    assert_problem(client.get("/v1/lineage/CC-NOPE"), 404)
+    assert_problem(client.get("/v1/lineage", params={"limit": 0}), 400)
+    text = json.dumps(client.get("/v1/lineage", params={"limit": 500}).json())
+    assert "Synthetic Person" not in text
+    assert_no_paths(entry)
+
+
 def test_safe_filename() -> None:
     assert safe_filename("C:\\Users\\x\\my feed.csv") == "my_feed.csv"
     assert safe_filename("../../etc/a.ndjson") == "a.ndjson"

@@ -49,6 +49,8 @@ class Service:
     mode: str = "live"
     _reports: dict[str, dict[str, Any]] = field(default_factory=dict)
     _conformance: dict[str, Any] | None = None
+    _datasets: dict[str, Any] = field(default_factory=dict)
+    _lineage: dict[str, dict[str, dict[str, Any]]] = field(default_factory=dict)
 
     # Basic endpoints --------------------------------------------------------
 
@@ -181,6 +183,59 @@ class Service:
                 self._reports[report_id] = report
                 return report
         raise NotFoundError(f"no report with id {report_id!r}")
+
+    # Harmonised data and lineage ------------------------------------------
+
+    def dataset(self, label: str = DEMO_SET) -> Any:
+        """The harmonised sample set (cached), built by the L4 pipeline."""
+        from sikka.harmonise import harmonise
+
+        if label not in SAMPLE_SETS:
+            raise NotFoundError(f"unknown dataset {label!r}")
+        if label not in self._datasets:
+            folder = self.paths.samples / label
+            sources = [Source.from_path(p) for p in sorted(folder.iterdir()) if p.is_file()]
+            self._datasets[label] = harmonise(sources)
+        return self._datasets[label]
+
+    def _lineage_entries(self) -> dict[str, dict[str, Any]]:
+        if DEMO_SET not in self._lineage:
+            self._lineage[DEMO_SET] = self.dataset().lineage_index()
+        return self._lineage[DEMO_SET]
+
+    def lineage_index(self, query: str = "", limit: int = 0) -> dict[str, Any]:
+        entries = self._lineage_entries()
+        items = []
+        needle = query.strip().upper()
+        for cid, entry in sorted(entries.items()):
+            sources = entry["lineage"]["sources"]
+            record_ids = [s.get("record_id") for s in sources if s.get("record_id")]
+            if needle and needle not in cid and not any(needle in r.upper() for r in record_ids):
+                continue
+            record = entry["record"]
+            items.append(
+                {
+                    "canonical_id": cid,
+                    "kind": entry["kind"],
+                    "segment_id": record.get("segment_id"),
+                    "status": entry["lineage"]["status"],
+                    "sources": len(sources),
+                    "record_ids": record_ids[:4],
+                }
+            )
+            if limit and len(items) >= limit:
+                break
+        return {"dataset": DEMO_SET, "count": len(items), "items": items}
+
+    def lineage(self, canonical_id: str) -> dict[str, Any]:
+        entry: dict[str, Any] | None = self._lineage_entries().get(canonical_id)
+        if entry is None:
+            raise NotFoundError(f"no canonical record with id {canonical_id!r}")
+        return entry
+
+    def resolution_summary(self) -> dict[str, Any]:
+        summary: dict[str, Any] = self.dataset().resolution_summary()
+        return summary
 
     # Producer conformance across the demo feeds -----------------------------
 

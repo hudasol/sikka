@@ -17,6 +17,11 @@ from sikka.core import round_floats, stable_json_dumps
 SNAPSHOT_ROOT = "web/public/snapshot"
 
 
+def lineage_bucket(canonical_id: str) -> str:
+    """Static lineage is split into buckets: CC-XY for crashes, else the prefix."""
+    return canonical_id[:5] if canonical_id.startswith("CC-") else canonical_id[:2]
+
+
 def snapshot_files(service: Service) -> dict[str, str]:
     """Relative path to JSON text for every snapshot file."""
     docs: dict[str, Any] = {}
@@ -34,6 +39,13 @@ def snapshot_files(service: Service) -> dict[str, str]:
         docs[f"v1/reports/{report['report_id']}"] = report
     docs["v1/samples"] = samples
     docs["v1/network"] = service.network()
+    docs["v1/lineage"] = service.lineage_index()
+    buckets: dict[str, dict[str, Any]] = {}
+    for item in docs["v1/lineage"]["items"]:
+        cid = item["canonical_id"]
+        buckets.setdefault(lineage_bucket(cid), {})[cid] = service.lineage(cid)
+    for key, bucket in buckets.items():
+        docs[f"v1/lineage-buckets/{key}"] = bucket
     files = {
         f"{SNAPSHOT_ROOT}/{path}.json": stable_json_dumps(round_floats(doc)) + "\n"
         for path, doc in sorted(docs.items())

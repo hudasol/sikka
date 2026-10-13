@@ -226,3 +226,32 @@ def snapshot() -> None:
     written = write_artefacts(paths.root, files)
     size = sum(len(text.encode("utf-8")) for text in files.values())
     typer.echo(f"snapshot: {len(files)} files, {size // 1024} KB, {len(written)} updated")
+
+
+@app.command()
+def harmonise(
+    dataset: str = typer.Option("broken", help="Sample set to harmonise: clean or broken."),
+    out: Path = typer.Option(Path("build/harmonised"), help="Output folder."),
+) -> None:
+    """Harmonise a sample set into the canonical model and write it with lineage."""
+    from sikka.api import Service
+
+    service = Service(paths=Paths())
+    ds = service.dataset(dataset)
+    out.mkdir(parents=True, exist_ok=True)
+    docs = {
+        "crashes": [c.as_dict() for c in ds.crashes],
+        "exposure": [e.as_dict() for e in ds.exposure.values()],
+        "decisions": [d.as_dict() for d in ds.decisions],
+        "lineage": ds.lineage_index(),
+        "summary": ds.resolution_summary(),
+    }
+    for name, doc in docs.items():
+        (out / f"{name}.json").write_text(stable_json_dumps(doc, indent=1) + "\n", "utf-8")
+    summary = docs["summary"]
+    typer.echo("Synthetic data. No real crash, traffic or road records are used.")
+    typer.echo(
+        f"{summary['producer_records']} producer records -> {summary['canonical_crashes']} "
+        f"canonical crashes; pairs: {summary['match']} match, {summary['non_match']} non match, "
+        f"{summary['unresolved']} unresolved; written to {out}"
+    )

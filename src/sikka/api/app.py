@@ -153,6 +153,16 @@ def create_app(service: Service | None = None) -> FastAPI:
             raise InputError("format must be json or html")
         return data
 
+    @app.get("/v1/lineage")
+    def lineage_index(q: str = "", limit: int = 50) -> dict[str, Any]:
+        if not 0 < limit <= 500:
+            raise InputError("limit must be between 1 and 500")
+        return svc.lineage_index(q, limit)
+
+    @app.get("/v1/lineage/{canonical_id}")
+    def lineage(canonical_id: str) -> dict[str, Any]:
+        return svc.lineage(canonical_id)
+
     @app.get("/v1/producers/conformance")
     def producers_conformance() -> dict[str, Any]:
         return svc.producer_conformance()
