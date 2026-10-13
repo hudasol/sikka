@@ -179,7 +179,7 @@ def validate(
 
 @app.command("eval")
 def evaluate(
-    experiments: str = typer.Option("e1", help="Comma separated experiments to run."),
+    experiments: str = typer.Option("e1,e2,e3,e4,e5", help="Comma separated experiments to run."),
     seeds: int = typer.Option(20, help="Number of seeds (1 to N)."),
     smoke: bool = typer.Option(False, help="One seed and one rate, written to build/."),
     workers: int = typer.Option(4, help="Worker processes."),
@@ -255,3 +255,50 @@ def harmonise(
         f"canonical crashes; pairs: {summary['match']} match, {summary['non_match']} non match, "
         f"{summary['unresolved']} unresolved; written to {out}"
     )
+
+
+@app.command()
+def perf() -> None:
+    """Measure the performance budgets and write results/performance.json."""
+    from sikka.evaluation.performance import measure
+
+    paths = Paths()
+    doc = measure(paths)
+    paths.results.mkdir(parents=True, exist_ok=True)
+    (paths.results / "performance.json").write_text(
+        stable_json_dumps(doc, indent=1) + "\n", "utf-8"
+    )
+    for m in doc["measures"]:
+        typer.echo(f"{m['name']}: {m['value']} (budget {m['budget']})")
+
+
+@app.command("all")
+def run_all(
+    evaluation: bool = typer.Option(
+        True, help="Run the full evaluation (several hours on a laptop)."
+    ),
+    workers: int = typer.Option(3, help="Worker processes for the evaluation."),
+) -> None:
+    """Regenerate every artefact: samples, docs, evaluation, performance, snapshot, check."""
+    import subprocess
+
+    paths = Paths()
+    steps: list[tuple[str, list[str]]] = [
+        ("generate", ["generate"]),
+        ("docs build", ["docs", "build"]),
+    ]
+    if evaluation:
+        steps.append(("eval", ["eval", "--workers", str(workers)]))
+    steps += [
+        ("perf", ["perf"]),
+        ("docs build", ["docs", "build"]),
+        ("snapshot", ["snapshot"]),
+        ("check", ["check"]),
+    ]
+    for name, args in steps:
+        typer.echo(f"==> sikka {name}")
+        code = subprocess.call([sys.executable, "-m", "sikka.cli", *args], cwd=paths.root)
+        if code != 0:
+            typer.echo(f"sikka {name} failed with exit code {code}", err=True)
+            raise typer.Exit(code)
+    typer.echo("sikka all finished; build the web app with: npm --prefix web run build")
