@@ -11,8 +11,8 @@ Status of the build phases. Each phase is tagged when its gate holds.
 | P4 | Walking skeleton: API, web shell, static snapshot | done | v0.5.0 | API tests for every endpoint and the problem+json contract pass; 75 web unit tests and 12 Playwright tests with axe pass on the static build; live mode checked in a browser with `sikka serve` (overview and sample validation) |
 | P5 | L4 harmonisation and lineage | done | v0.6.0 | Harmonisation tests pass; `GET /v1/lineage/{id}` serves every canonical crash, exposure estimate and segment; an E2 smoke run on seed 1001 scores cluster level precision, recall and abstention against the ground truth (numbers are reported in P7, not here) |
 | P6 | Preregistration, then L5 analytics | done | v0.7.0 | `docs/PREREGISTRATION.md` committed before any analytics code; EB matches two hand worked examples; abstention reasons tested case by case; ranking of 240 segments with 4,000 draws passes the 10 second performance test |
-| P7 | Evaluation E1 to E4 | next | | |
-| P8 | Full web app | planned | | |
+| P7 | Evaluation E1 to E4 | done | v0.8.0 | `sikka eval` on seeds 2001 to 2020 wrote `results/e1` to `e4`; `docs/EVALUATION.md` is generated from them and a test fails if it is stale; 23 predictions hit and 2 missed (P3.2, P3.6), all reported |
+| P8 | Full web app | next | | |
 | P9 | L6 tasking and E5 | planned | | |
 | P10 | Hardening, review, documentation | planned | | |
 
@@ -22,7 +22,7 @@ Nothing in progress.
 
 ## Next
 
-P7: run E1 to E4 on seeds 2001 to 2020 exactly as preregistered, render docs/EVALUATION.md from results/*.json with hits and misses, and add the test that ties document numbers to the result files.
+P8: Conformance, Blackspots, Lineage, Contract, Method and Pilot screens with English and Arabic, right to left layout, accessibility checks and the dark theme.
 
 ## Blockers
 
