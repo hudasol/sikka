@@ -40,6 +40,12 @@ def snapshot_files(service: Service) -> dict[str, str]:
     docs["v1/samples"] = samples
     docs["v1/network"] = service.network()
     docs["v1/lineage"] = service.lineage_index()
+    for label in ("broken", "clean"):
+        suffix = "" if label == "broken" else "-clean"
+        ranking = service.segments_ranking(label)
+        docs[f"v1/segments/ranking{suffix}"] = ranking
+    for row in docs["v1/segments/ranking"]["segments"]:
+        docs[f"v1/segments/{row['segment_id']}"] = service.segment(row["segment_id"])
     buckets: dict[str, dict[str, Any]] = {}
     for item in docs["v1/lineage"]["items"]:
         cid = item["canonical_id"]

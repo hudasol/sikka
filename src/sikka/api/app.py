@@ -163,6 +163,14 @@ def create_app(service: Service | None = None) -> FastAPI:
     def lineage(canonical_id: str) -> dict[str, Any]:
         return svc.lineage(canonical_id)
 
+    @app.get("/v1/segments/ranking")
+    def segments_ranking(dataset: str = "broken") -> dict[str, Any]:
+        return svc.segments_ranking(dataset)
+
+    @app.get("/v1/segments/{segment_id}")
+    def segment(segment_id: str, dataset: str = "broken") -> dict[str, Any]:
+        return svc.segment(segment_id, dataset)
+
     @app.get("/v1/producers/conformance")
     def producers_conformance() -> dict[str, Any]:
         return svc.producer_conformance()

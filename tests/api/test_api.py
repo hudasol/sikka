@@ -186,6 +186,46 @@ def test_lineage(client: TestClient) -> None:
     assert_no_paths(entry)
 
 
+def test_segments_ranking(client: TestClient) -> None:
+    body = client.get("/v1/segments/ranking").json()
+    assert body["notice"].startswith("Synthetic data.")
+    summary = body["summary"]
+    assert summary["published"]["method"] == "eb_qp"
+    assert summary["published"]["ranked"] + summary["published"]["abstained"] == 240
+    assert summary["spf"]["coefficients"][0]["name"] == "intercept"
+    ranked = [s for s in body["segments"] if not s["abstained"]]
+    abstained = [s for s in body["segments"] if s["abstained"]]
+    assert ranked
+    assert abstained
+    assert all(
+        s["rank_low"] <= s["rank"] <= s["rank_high"] or s["rank_low"] <= s["rank_high"]
+        for s in ranked
+    )
+    assert {s["abstained"] for s in abstained} <= {
+        "no_exposure",
+        "short_window",
+        "low_coverage",
+        "no_exposure;low_coverage",
+    }
+    clean = client.get("/v1/segments/ranking", params={"dataset": "clean"}).json()
+    assert clean["dataset"] == "clean"
+    assert_problem(client.get("/v1/segments/ranking", params={"dataset": "x"}), 404)
+
+
+def test_segment_detail(client: TestClient) -> None:
+    body = client.get("/v1/segments/ranking").json()
+    top = min((s for s in body["segments"] if s["rank"]), key=lambda s: s["rank"])
+    detail = client.get(f"/v1/segments/{top['segment_id']}").json()
+    assert detail["explanation"]["kind"] == "ranked"
+    assert detail["geometry"]["type"] == "LineString"
+    assert detail["clean_comparison"]["segment_id"] == top["segment_id"]
+    gone = next(s for s in body["segments"] if s["abstained"])
+    assert client.get(f"/v1/segments/{gone['segment_id']}").json()["explanation"]["kind"] == (
+        "abstained"
+    )
+    assert_problem(client.get("/v1/segments/SEG-NOPE-001"), 404)
+
+
 def test_safe_filename() -> None:
     assert safe_filename("C:\\Users\\x\\my feed.csv") == "my_feed.csv"
     assert safe_filename("../../etc/a.ndjson") == "a.ndjson"

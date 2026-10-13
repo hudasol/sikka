@@ -28,6 +28,30 @@ DEMO_SET = "broken"
 SAFE_NAME = re.compile(r"[^A-Za-z0-9_.\-]")
 ALLOWED_SUFFIXES = (".ndjson", ".jsonl", ".csv", ".geojson", ".json")
 CONFORMING_THRESHOLD = 0.9
+RANKING_SEED = 20260422
+
+
+def explain(row: dict[str, Any]) -> dict[str, Any]:
+    """Plain language reasons for a segment's rank, as structured parts for translation."""
+    if row["abstained"]:
+        return {"kind": "abstained", "reasons": row["abstained"].split(";")}
+    observed_per_year = row["observed"] / row["window_years"] if row["window_years"] else 0.0
+    predicted = row["predicted_per_year"] or 0.0
+    return {
+        "kind": "ranked",
+        "observed_per_year": observed_per_year,
+        "predicted_per_year": predicted,
+        "ratio": observed_per_year / predicted if predicted else None,
+        "eb_weight": row["eb_weight"],
+        "eb_per_year": row["eb_per_year"],
+        "psi_per_year": row["psi_per_year"],
+        "rank": row["rank"],
+        "rank_low": row["rank_low"],
+        "rank_high": row["rank_high"],
+        "p_top_k": row["p_top_k"],
+        "unresolved_pairs": row["unresolved_pairs"],
+        "quality_factor": row["quality_factor"],
+    }
 
 
 def safe_filename(name: str) -> str:
@@ -51,6 +75,7 @@ class Service:
     _conformance: dict[str, Any] | None = None
     _datasets: dict[str, Any] = field(default_factory=dict)
     _lineage: dict[str, dict[str, dict[str, Any]]] = field(default_factory=dict)
+    _rankings: dict[str, Any] = field(default_factory=dict)
 
     # Basic endpoints --------------------------------------------------------
 
@@ -236,6 +261,45 @@ class Service:
     def resolution_summary(self) -> dict[str, Any]:
         summary: dict[str, Any] = self.dataset().resolution_summary()
         return summary
+
+    # Ranking -----------------------------------------------------------------
+
+    def ranking_bundle(self, label: str = DEMO_SET) -> Any:
+        from sikka.analytics import rank_dataset
+
+        if label not in self._rankings:
+            self._rankings[label] = rank_dataset(self.dataset(label), seed=RANKING_SEED)
+        return self._rankings[label]
+
+    def segments_ranking(self, label: str = DEMO_SET) -> dict[str, Any]:
+        bundle = self.ranking_bundle(label)
+        rows = bundle.segment_rows()
+        return {
+            "dataset": label,
+            "notice": SYNTHETIC_NOTICE,
+            "summary": bundle.summary(),
+            "segments": rows,
+        }
+
+    def segment(self, segment_id: str, label: str = DEMO_SET) -> dict[str, Any]:
+        rows = {r["segment_id"]: r for r in self.ranking_bundle(label).segment_rows()}
+        if segment_id not in rows:
+            raise NotFoundError(f"no segment with id {segment_id!r}")
+        row: dict[str, Any] = rows[segment_id]
+        clean = {r["segment_id"]: r for r in self.ranking_bundle("clean").segment_rows()}
+        return row | {
+            "dataset": label,
+            "explanation": explain(row),
+            "geometry": self._geometry(segment_id),
+            "clean_comparison": clean.get(segment_id),
+        }
+
+    def _geometry(self, segment_id: str) -> dict[str, Any] | None:
+        for feature in self.network()["features"]:
+            if feature["properties"]["segment_id"] == segment_id:
+                geometry: dict[str, Any] = feature["geometry"]
+                return geometry
+        return None
 
     # Producer conformance across the demo feeds -----------------------------
 
