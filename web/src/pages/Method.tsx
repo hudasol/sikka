@@ -76,8 +76,12 @@ export function Method() {
                         <th scope="row" className="mono">
                           {p.id}
                         </th>
-                        <td lang="en">{p.text}</td>
-                        <td lang="en">{p.observed}</td>
+                        <td lang="en" dir="ltr">
+                          {p.text}
+                        </td>
+                        <td lang="en" dir="ltr">
+                          {p.observed}
+                        </td>
                         <td>
                           <VerdictBadge verdict={p.verdict} />
                         </td>

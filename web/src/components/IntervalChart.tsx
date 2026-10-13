@@ -78,6 +78,9 @@ export function IntervalChart({ items, title, ariaLabel, domain = [0, 1], valueL
                 fontSize="12"
                 fill="var(--text)"
                 textAnchor={rtl ? "end" : "start"}
+                // Anchors follow the text direction; in the Arabic layout "end" would
+                // otherwise mean the left edge and push the label out of the chart.
+                direction="ltr"
               >
                 {item.label}
               </text>

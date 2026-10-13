@@ -100,7 +100,9 @@ export function Contract() {
                     </th>
                     <td>{f.type}</td>
                     <td>{f.unit ?? ""}</td>
-                    <td>{f.allowed ?? ""}</td>
+                    <td lang="en" dir="ltr">
+                      {f.allowed ?? ""}
+                    </td>
                     <td>{f.required ? t("contract.yes") : t("contract.no")}</td>
                     <td lang="en" dir="ltr">
                       {f.description_en}
@@ -108,7 +110,9 @@ export function Contract() {
                     <td lang="ar" dir="rtl">
                       {f.description_ar}
                     </td>
-                    <td className="mono">{JSON.stringify(f.example)}</td>
+                    <td className="mono" dir="ltr">
+                      {JSON.stringify(f.example)}
+                    </td>
                     <td>
                       {(rulesByField.get(`${feed}.${f.name}`) ?? []).map((r) => (
                         <a
