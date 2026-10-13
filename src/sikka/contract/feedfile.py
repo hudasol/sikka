@@ -5,8 +5,8 @@ Three encodings are supported, each starting with the provenance header:
 * NDJSON: the first line is ``{"sikka_header": {...}}``; each further line is one record.
 * CSV: the first line is ``# sikka_header: {...}`` (JSON); the second line holds the
   column names; nested objects are flattened with dotted names
-  (``class_counts.car``); lists are joined with ``;``; nested geometry is a JSON
-  string; an empty cell means the field is absent.
+  (``class_counts.car``); lists and geometry are JSON text (``["speeding"]``,
+  ``[]``); an empty cell means the field is absent.
 * GeoJSON: a ``FeatureCollection`` with a ``sikka_header`` member. Each feature's
   properties are the record; a LineString geometry becomes the ``geometry`` field.
 """
@@ -24,7 +24,6 @@ from sikka.contract.conventions import HEADER_KEY
 FeedFormat = Literal["ndjson", "csv", "geojson"]
 FORMAT_SUFFIX: dict[str, str] = {"ndjson": ".ndjson", "csv": ".csv", "geojson": ".geojson"}
 CSV_HEADER_PREFIX = f"# {HEADER_KEY}: "
-LIST_SEPARATOR = ";"
 
 
 def public_fields(record: Mapping[str, Any]) -> dict[str, Any]:
@@ -51,7 +50,7 @@ def flatten_for_csv(record: Mapping[str, Any]) -> dict[str, str]:
             for sub, sub_value in value.items():
                 out[f"{key}.{sub}"] = "" if sub_value is None else str(sub_value)
         elif isinstance(value, list):
-            out[key] = LIST_SEPARATOR.join(str(v) for v in value)
+            out[key] = _dumps(value)
         elif isinstance(value, bool):
             out[key] = "true" if value else "false"
         elif value is None:
