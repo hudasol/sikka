@@ -46,8 +46,30 @@ export function installSnapshotFetch(): void {
           status: 201,
         });
       }
+      const [route = clean, query = ""] = clean.split("?");
+      const detail = /^\/v1\/lineage\/(.+)$/.exec(route);
+      if (detail) {
+        const id = decodeURIComponent(detail[1]!);
+        const key = id.startsWith("CC-") ? id.slice(0, 5) : id.slice(0, 2);
+        const bucket = JSON.parse(
+          readFileSync(resolve(SNAPSHOT, `v1/lineage-buckets/${key}.json`), "utf-8"),
+        ) as Record<string, unknown>;
+        return new Response(JSON.stringify(bucket[id]), { status: bucket[id] ? 200 : 404 });
+      }
+      if (route === "/v1/lineage" && query) {
+        const q = (new URLSearchParams(query).get("q") ?? "").toUpperCase();
+        const index = JSON.parse(readFileSync(resolve(SNAPSHOT, "v1/lineage.json"), "utf-8")) as {
+          items: { canonical_id: string; record_ids: string[] }[];
+        };
+        const items = index.items
+          .filter(
+            (i) => !q || i.canonical_id.includes(q) || i.record_ids.some((r) => r.includes(q)),
+          )
+          .slice(0, 50);
+        return new Response(JSON.stringify({ items }), { status: 200 });
+      }
       try {
-        const body = readFileSync(resolve(SNAPSHOT, `.${clean.split("?")[0]}.json`), "utf-8");
+        const body = readFileSync(resolve(SNAPSHOT, `.${route}.json`), "utf-8");
         return new Response(body, { status: 200, headers: { "content-type": "application/json" } });
       } catch {
         return new Response(

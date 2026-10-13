@@ -53,7 +53,8 @@ describe("overview", () => {
       expect(within(matrix).getByText(p)).toBeInTheDocument();
     }
     expect(screen.getByTestId("figure-producers")).toHaveTextContent("of 4");
-    expect(screen.getByTestId("figure-ranked")).toHaveTextContent("Partial data");
+    expect(await screen.findByTestId("top10")).toBeInTheDocument();
+    expect(screen.getByTestId("figure-ranked")).toHaveTextContent("of 240");
     expect(screen.getAllByRole("img", { name: /share of records passing/i }).length).toBe(1);
   });
 
@@ -65,7 +66,8 @@ describe("overview", () => {
     const client = makeQueryClient();
     client.setDefaultOptions({ queries: { retry: false } });
     renderAt("/", client);
-    expect(await screen.findByRole("alert")).toHaveTextContent("could not be loaded");
+    const alerts = await screen.findAllByRole("alert");
+    expect(alerts[0]).toHaveTextContent("could not be loaded");
   });
 });
 
@@ -97,5 +99,81 @@ describe("language and settings", () => {
     expect(figure.textContent ?? "").toMatch(/[٠-٩]/);
     await user.click(screen.getByRole("button", { name: "تبديل المظهر الداكن" }));
     expect(["dark", "light"]).toContain(document.documentElement.dataset.theme);
+  });
+});
+
+describe("full screens", () => {
+  it("ranks blackspots with intervals and explains a rank", async () => {
+    const user = userEvent.setup();
+    renderAt("/blackspots");
+    const table = await screen.findByTestId("ranking-table", {}, { timeout: 5000 });
+    const buttons = within(table).getAllByRole("button", { name: /^SEG-/ });
+    expect(buttons.length).toBeGreaterThan(10);
+    expect(within(table).getAllByRole("img", { name: /90 percent interval/ }).length).toBe(
+      buttons.length,
+    );
+    await user.click(buttons[0]!);
+    expect(await screen.findByTestId("why", {}, { timeout: 5000 })).toHaveTextContent(
+      "crashes per year",
+    );
+    expect(screen.getByText(/Segments not ranked/)).toBeInTheDocument();
+  });
+
+  it("shows the bilingual field dictionary and the version diff", async () => {
+    renderAt("/contract");
+    const dict = await screen.findByTestId("field-dictionary");
+    expect(within(dict).getByText("occurred_at")).toBeInTheDocument();
+    expect(await screen.findByTestId("contract-diff")).toHaveTextContent("work_zone");
+  });
+
+  it("shows producer scorecards and the fault catalogue", async () => {
+    renderAt("/conformance");
+    expect(await screen.findByTestId("scorecard-PRODUCER_B")).toBeInTheDocument();
+    expect(await screen.findByTestId("fault-catalogue")).toHaveTextContent("F25");
+  });
+
+  it("searches lineage and shows the chain", { timeout: 20_000 }, async () => {
+    const user = userEvent.setup();
+    renderAt("/lineage");
+    await user.type(screen.getByLabelText("Canonical or source id"), "PB-0000007");
+    await user.click(screen.getByRole("button", { name: "Search" }));
+    const results = await screen.findByTestId("lineage-results");
+    const first = await within(results).findAllByRole("button");
+    await user.click(first[0]!);
+    expect(await screen.findByTestId("lineage-entry", {}, { timeout: 5000 })).toHaveTextContent(
+      "PRODUCER_B",
+    );
+  });
+
+  it("renders preregistered predictions with verdicts and limitations", async () => {
+    renderAt("/method");
+    expect(await screen.findByTestId("limitations")).toHaveTextContent("synthetic world only");
+    expect(await screen.findByTestId("predictions")).toHaveTextContent("P1.1");
+  });
+
+  it("plans missions with the simulation disclaimer", async () => {
+    renderAt("/tasking");
+    expect(screen.getByTestId("tasking-disclaimer")).toHaveTextContent(
+      "simulation and review only",
+    );
+    expect(await screen.findByTestId("missions")).toHaveTextContent("M01");
+    expect(await screen.findByTestId("tasking-comparison")).toHaveTextContent("Random");
+  });
+
+  it("frames the pilot path as a proposal", () => {
+    renderAt("/pilot");
+    expect(screen.getByText(/Proposal only/)).toBeInTheDocument();
+  });
+});
+
+describe("locales", () => {
+  it("have the same keys in English and Arabic", async () => {
+    const en = (await import("./locales/en.json")).default as Record<string, unknown>;
+    const ar = (await import("./locales/ar.json")).default as Record<string, unknown>;
+    const keys = (o: Record<string, unknown>, p = ""): string[] =>
+      Object.entries(o).flatMap(([k, v]) =>
+        v && typeof v === "object" ? keys(v as Record<string, unknown>, `${p}${k}.`) : [`${p}${k}`],
+      );
+    expect(keys(ar).sort()).toEqual(keys(en).sort());
   });
 });

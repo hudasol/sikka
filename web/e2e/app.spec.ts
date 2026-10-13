@@ -16,6 +16,18 @@ const SCREENS = [
 const BANNER = "Synthetic data. No real crash, traffic or road records are used.";
 const WCAG = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
+// Wait until every loading indicator has gone (data rendered), then a short pause.
+async function settled(page: Page) {
+  await page.waitForFunction(
+    () => document.querySelectorAll('[role="status"]').length === 0,
+    null,
+    {
+      timeout: 30_000,
+    },
+  );
+  await page.waitForTimeout(500);
+}
+
 async function axe(page: Page) {
   const result = await new AxeBuilder({ page }).withTags(WCAG).analyze();
   const summary = result.violations.map((v) => `${v.id}: ${v.nodes.length} node(s) ${v.help}`);
@@ -24,6 +36,12 @@ async function axe(page: Page) {
 
 function watchRequests(page: Page): string[] {
   const foreign: string[] = [];
+  // Console errors (for example a map worker that fails to load) count as failures too.
+  page.on("console", (message) => {
+    if (message.type() === "error") {
+      foreign.push(`console error: ${message.text()}`);
+    }
+  });
   page.on("request", (request) => {
     const url = new URL(request.url());
     // blob: and data: URLs are created inside the page (for example the map worker)
@@ -42,7 +60,7 @@ for (const path of SCREENS) {
     await page.goto(`/#${path}`);
     await expect(page.getByTestId("synthetic-banner")).toHaveText(BANNER);
     await expect(page.locator("h1")).toBeVisible();
-    await page.waitForLoadState("networkidle");
+    await settled(page);
     await axe(page);
     expect(foreign).toEqual([]);
   });
@@ -58,7 +76,7 @@ test("validate a broken sample in the static demo", async ({ page }) => {
   await expect(report).toBeVisible();
   await expect(report.getByText("SK-S008").first()).toBeVisible();
   await expect(page.locator(".maplibregl-canvas")).toBeVisible();
-  await page.waitForLoadState("networkidle");
+  await settled(page);
   await axe(page);
   expect(foreign).toEqual([]);
 });
@@ -68,7 +86,7 @@ test("Arabic, right to left, and dark theme stay accessible", async ({ page }) =
   await page.getByRole("button", { name: "Switch the interface to Arabic" }).click();
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
   await expect(page.getByTestId("synthetic-banner")).toContainText("بيانات مصطنعة");
-  await page.waitForLoadState("networkidle");
+  await settled(page);
   await axe(page);
   await page.getByRole("button", { name: "تبديل المظهر الداكن" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", /dark|light/);
