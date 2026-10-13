@@ -9,7 +9,7 @@ Sikka is an open source proposal seed that explores one answer on **synthetic da
 Python 3.13 and Node 22 are needed. On Windows (PowerShell), from a clone of this repository:
 
 ```
-py -3.13 -m venv .venv; .\.venv\Scripts\pip install -r requirements.lock; .\.venv\Scripts\pip install -e . --no-deps
+py -3.13 -m venv .venv; .\.venv\Scripts\python -m pip install -r requirements.lock; .\.venv\Scripts\python -m pip install -e . --no-deps
 .\.venv\Scripts\sikka serve
 npm --prefix web install; npm --prefix web run dev
 ```
