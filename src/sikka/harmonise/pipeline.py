@@ -48,6 +48,7 @@ class Segment:
     owner_producer_id: str | None
     coordinates: list[list[float]]
     lineage: Lineage
+    valid_from: str | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -59,6 +60,7 @@ class Segment:
             "speed_limit_kmh": self.speed_limit_kmh,
             "length_m": self.length_m,
             "owner_producer_id": self.owner_producer_id,
+            "valid_from": self.valid_from,
         }
 
 
@@ -209,6 +211,7 @@ def _segments(
             else None,
             coordinates=coords if isinstance(coords, list) else [],
             lineage=lineage,
+            valid_from=r.get("valid_from") if isinstance(r.get("valid_from"), str) else None,
         )
     return out
 
