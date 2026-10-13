@@ -15,7 +15,7 @@ from typing import Any
 
 from sikka.conformance import Source
 from sikka.core import mean_interval
-from sikka.harmonise import HarmonisedDataset, harmonise
+from sikka.harmonise import HarmonisedDataset, candidate_pairs, harmonise
 from sikka.synth import FAULTS, World, WorldConfig, build_world, finalise_feed, inject
 from sikka.synth.world import truth_documents
 
@@ -87,12 +87,73 @@ def score_resolution(ds: HarmonisedDataset, truth: dict[str, Any]) -> dict[str, 
     }
 
 
+NAIVE_MINUTES = 15.0
+NAIVE_METRES = 150.0
+
+
+def _truth_pairs(truth: dict[str, Any]) -> set[tuple[str, str]]:
+    true_id = {f"{r['file']}#{r['row']}": r["true_id"] for r in truth["record_map"]}
+    by_true: dict[str, list[str]] = {}
+    for key, tid in true_id.items():
+        by_true.setdefault(tid, []).append(key)
+    return {
+        (a, b)
+        for keys in by_true.values()
+        for a, b in combinations(sorted(keys), 2)
+        if a.split("#")[0] != b.split("#")[0]
+    }
+
+
+def naive_pairs(ds: HarmonisedDataset) -> set[tuple[str, str]]:
+    """Baseline: any two records of different producers within 15 minutes and 150 metres,
+    merged transitively, without abstention."""
+    crashes = ds.producer_crashes
+    parent = list(range(len(crashes)))
+
+    def find(k: int) -> int:
+        while parent[k] != k:
+            parent[k] = parent[parent[k]]
+            k = parent[k]
+        return k
+
+    for i, j, gap, dist in candidate_pairs(crashes):
+        if gap <= NAIVE_MINUTES and dist * 1000 <= NAIVE_METRES:
+            parent[find(j)] = find(i)
+    groups: dict[int, list[str]] = {}
+    for k, c in enumerate(crashes):
+        if c.usable:
+            groups.setdefault(find(k), []).append(c.key)
+    out = set()
+    for keys in groups.values():
+        for a, b in combinations(sorted(keys), 2):
+            if a.split("#")[0] != b.split("#")[0]:
+                out.add((a, b))
+    return out
+
+
+def score_naive(ds: HarmonisedDataset, truth: dict[str, Any]) -> dict[str, float]:
+    truth_pairs = _truth_pairs(truth)
+    predicted = naive_pairs(ds)
+    hits = len(truth_pairs & predicted)
+    precision = hits / len(predicted) if predicted else math.nan
+    recall = hits / len(truth_pairs) if truth_pairs else math.nan
+    f1 = (
+        2 * precision * recall / (precision + recall)
+        if predicted and truth_pairs and precision + recall > 0
+        else math.nan
+    )
+    return {"precision": precision, "recall": recall, "f1": f1}
+
+
 def run_seed(seed: int, scenarios: list[str]) -> dict[str, Any]:
     out = {}
+    naive = {}
     for scenario in scenarios:
         sources, truth = render_world(scenario_world(seed, scenario))
-        out[scenario] = score_resolution(harmonise(sources), truth)
-    return {"seed": seed, "runs": out}
+        ds = harmonise(sources)
+        out[scenario] = score_resolution(ds, truth)
+        naive[scenario] = score_naive(ds, truth)
+    return {"seed": seed, "runs": out, "naive": naive}
 
 
 def _summary(values: list[float]) -> dict[str, Any]:
@@ -124,11 +185,20 @@ def run_e2(
         scenario: {m: _summary([s["runs"][scenario][m] for s in per_seed]) for m in metrics}
         for scenario in scenarios
     }
+    naive = {
+        scenario: {
+            m: _summary([s["naive"][scenario][m] for s in per_seed])
+            for m in ("precision", "recall", "f1")
+        }
+        for scenario in scenarios
+    }
     return {
         "experiment": "E2",
         "title": "Entity resolution of crashes across producers",
         "seeds": seeds,
         "scenarios": {k: SCENARIOS[k] for k in scenarios},
         "summary": summary,
+        "naive_baseline": naive,
+        "naive_rule": {"minutes": NAIVE_MINUTES, "metres": NAIVE_METRES},
         "per_seed": per_seed,
     }
