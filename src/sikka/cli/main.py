@@ -175,3 +175,26 @@ def validate(
                 f"family (95 percent interval {100 * s['low']:.1f} to {100 * s['high']:.1f})"
             )
     typer.echo(f"report {report['report_id']} written to {out}")
+
+
+@app.command("eval")
+def evaluate(
+    experiments: str = typer.Option("e1", help="Comma separated experiments to run."),
+    seeds: int = typer.Option(20, help="Number of seeds (1 to N)."),
+    smoke: bool = typer.Option(False, help="One seed and one rate, written to build/."),
+    workers: int = typer.Option(4, help="Worker processes."),
+) -> None:
+    """Run the preregistered evaluation and write results/*.json."""
+    from sikka.evaluation import run_experiments
+
+    paths = Paths()
+    out = paths.build / "eval-smoke" if smoke else paths.results
+    written = run_experiments(
+        [e.strip().lower() for e in experiments.split(",") if e.strip()],
+        seeds=1 if smoke else seeds,
+        smoke=smoke,
+        workers=workers,
+        out_dir=out,
+    )
+    for path in written:
+        typer.echo(f"wrote {path.relative_to(paths.root).as_posix()}")
