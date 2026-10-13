@@ -780,7 +780,7 @@ Passing record:
 
 Severity: **error**. Scope: record. Feeds: `road_segments`, `crash_records`, `traffic_counts`.
 
-Unknown fields and name fields hold no value that looks like a UAE phone number, an identity card number or an email address.
+No value in any field, including identifiers, enumerations and lists, looks like a UAE phone number, an identity card number or an email address.
 
 Why it matters: Personal data can arrive under an innocent field name such as contact or reference.
 

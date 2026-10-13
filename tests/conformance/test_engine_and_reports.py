@@ -151,3 +151,53 @@ def test_e1_runner_aggregates_seeds() -> None:
     out = run_e1([5], [0.05], ["F01"])
     summary = out["faults"]["F01"]["by_rate"]["0.05"]
     assert summary["recall"]["n"] == 1
+
+
+def test_personal_values_inside_contract_fields_are_quarantined_everywhere() -> None:
+    """Regression from the independent review: a phone number in an enum or id field."""
+    import json
+
+    from sikka.harmonise import harmonise
+
+    phone_a, phone_b = "+971501234567", "+971501234568"
+    records = [
+        crash_like(1, weather=phone_a),
+        crash_like(2) | {"crash_id": phone_b},
+        crash_like(3),
+    ]
+    data = feed_bytes("crash_records", records)
+    result = run_validation([Source.from_bytes("pii.ndjson", data)], [registry_source()])
+    try:
+        assert result.quarantined("pii.ndjson") == {1, 2}
+        report = build_report(result)
+    finally:
+        result.close()
+    text = json.dumps(report) + render_html(report)
+    assert phone_a not in text
+    assert phone_b not in text
+    ds = harmonise([Source.from_bytes("pii.ndjson", data)], [registry_source()])
+    lineage = json.dumps(ds.lineage_index())
+    assert phone_a not in lineage
+    assert phone_b not in lineage
+
+
+def test_every_rule_and_fault_has_an_arabic_title() -> None:
+    from sikka.conformance import FAULT_TITLES_AR, TITLES_AR
+
+    assert set(TITLES_AR) == set(REGISTRY)
+    assert set(FAULT_TITLES_AR) == {f.id for f in CATALOGUE}
+    for title in [*TITLES_AR.values(), *FAULT_TITLES_AR.values()]:
+        assert any("ء" <= ch <= "ي" for ch in title)
+
+
+def test_files_not_declared_synthetic_change_the_notice() -> None:
+    data = feed_bytes("crash_records", [crash_like(1)], synthetic=False)
+    result = run_validation([Source.from_bytes("real.ndjson", data)], [registry_source()])
+    try:
+        report = build_report(result)
+    finally:
+        result.close()
+    assert report["files_not_declared_synthetic"] == ["real.ndjson"]
+    assert "must not be used here" in report["notice"]
+    for rule in report["rules"]:
+        assert rule["share_low"] <= rule["share"] <= rule["share_high"]

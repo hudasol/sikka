@@ -30,6 +30,7 @@ DEMO_SET = "broken"
 SAFE_NAME = re.compile(r"[^A-Za-z0-9_.\-]")
 ALLOWED_SUFFIXES = (".ndjson", ".jsonl", ".csv", ".geojson", ".json")
 CONFORMING_THRESHOLD = 0.9
+MAX_CACHED_REPORTS = 200
 RANKING_SEED = 20260422
 
 
@@ -160,7 +161,11 @@ class Service:
         import json
 
         path = self.paths.samples / "fault_catalogue.json"
+        from sikka.conformance import FAULT_TITLES_AR
+
         catalogue: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+        for fault in catalogue.get("faults", []):
+            fault["title_ar"] = FAULT_TITLES_AR.get(fault["id"], fault["title"])
         return catalogue
 
     def method(self) -> dict[str, Any]:
@@ -254,6 +259,8 @@ class Service:
     def _store(self, report: dict[str, Any]) -> dict[str, Any]:
         rid = report["report_id"]
         self._reports[rid] = report
+        while len(self._reports) > MAX_CACHED_REPORTS:
+            self._reports.pop(next(iter(self._reports)))
         if self.store_dir is not None:
             self.store_dir.mkdir(parents=True, exist_ok=True)
             write_text_lf(self.store_dir / f"{rid}.json", stable_json_dumps(report) + "\n")

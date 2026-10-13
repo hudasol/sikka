@@ -8,6 +8,8 @@ from typing import TYPE_CHECKING, Any, Literal
 
 import pandas as pd
 
+from sikka.conformance.titles_ar import TITLES_AR
+
 if TYPE_CHECKING:
     from sikka.conformance.context import RuleContext
 
@@ -65,6 +67,7 @@ class Rule:
             "family": self.family,
             "family_name": FAMILY_NAMES[self.family],
             "title": self.title,
+            "title_ar": TITLES_AR.get(self.id, self.title),
             "severity": self.severity,
             "description": self.description,
             "rationale": self.rationale,

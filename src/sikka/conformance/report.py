@@ -11,9 +11,15 @@ from sikka import __version__
 from sikka.conformance.engine import ValidationResult
 from sikka.conformance.registry import FAMILY_NAMES
 from sikka.conformance.scoring import score_rows
+from sikka.conformance.titles_ar import TITLES_AR
 from sikka.contract import CURRENT_VERSION
+from sikka.core import wilson_interval
 
 SYNTHETIC_NOTICE = "Synthetic data. No real crash, traffic or road records are used."
+NOT_DECLARED_NOTICE = (
+    "This repository handles synthetic data only. At least one file in this report does not "
+    "declare itself synthetic (rule SK-S003); it must not be used here."
+)
 MAX_EXAMPLES = 5
 MAX_LOCATIONS = 500
 HEADER_KEYS = (
@@ -82,7 +88,7 @@ def build_report(result: ValidationResult) -> dict[str, Any]:
                 examples.append(
                     {
                         "row": r,
-                        "record_id": rid if isinstance(rid, str) else None,
+                        "record_id": rid if isinstance(rid, str) and r not in quarantined else None,
                         "detail": detail if detail else "value withheld: record quarantined",
                     }
                 )
@@ -108,6 +114,7 @@ def build_report(result: ValidationResult) -> dict[str, Any]:
                     "rule_id": outcome.rule.id,
                     "family": outcome.rule.family,
                     "title": outcome.rule.title,
+                    "title_ar": TITLES_AR.get(outcome.rule.id, outcome.rule.title),
                     "severity": outcome.rule.severity,
                     "scope": outcome.rule.scope,
                     "status": outcome.status,
@@ -118,6 +125,8 @@ def build_report(result: ValidationResult) -> dict[str, Any]:
                     "records": len(rows),
                     "series": len(series),
                     "share": (len(rows) / feed.rows) if feed.rows else 0.0,
+                    "share_low": wilson_interval(len(rows), feed.rows).low if feed.rows else 0.0,
+                    "share_high": wilson_interval(len(rows), feed.rows).high if feed.rows else 1.0,
                     "fields": fields,
                     "examples": examples,
                     "locations": locations,
@@ -137,9 +146,14 @@ def build_report(result: ValidationResult) -> dict[str, Any]:
                 "findings": sum(r["findings"] for r in fam),
             }
         )
+    undeclared = [
+        f.file for f in result.validated() if (f.header or {}).get("synthetic") is not True
+    ]
+    notice = SYNTHETIC_NOTICE if not undeclared else NOT_DECLARED_NOTICE
     return {
         "report_id": report_id(result),
-        "notice": SYNTHETIC_NOTICE,
+        "notice": notice,
+        "files_not_declared_synthetic": undeclared,
         "contract_version": CURRENT_VERSION,
         "engine_version": __version__,
         "files": files,

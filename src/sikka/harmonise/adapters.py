@@ -134,18 +134,19 @@ def adapt_crash(
     """Return the adapted crash fields and the lineage of how they were obtained."""
     rule_ids = {f["rule_id"] for f in findings}
     record = dict(raw)
-    lineage = new_lineage(
-        producer, file, row, raw.get("crash_id") if isinstance(raw.get("crash_id"), str) else None
-    )
+    personal = {str(f.get("field")) for f in findings if f["rule_id"].startswith("SK-P")}
+    quarantined = bool(personal)
+    crash_id = raw.get("crash_id")
+    record_id = crash_id if isinstance(crash_id, str) and "crash_id" not in personal else None
+    lineage = new_lineage(producer, file, row, record_id)
     lineage.findings = [
         {
             "rule_id": f["rule_id"],
             "field": f.get("field"),
-            "detail": None if f["rule_id"].startswith("SK-P") else f.get("detail"),
+            "detail": None if quarantined else f.get("detail"),
         }
         for f in findings
     ]
-    personal = {str(f.get("field")) for f in findings if f["rule_id"].startswith("SK-P")}
     drop_personal(record, personal, lineage)
     apply_aliases(record, lineage)
 

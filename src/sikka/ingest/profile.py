@@ -2,14 +2,22 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 import duckdb
 
+from sikka.contract import PROHIBITED_PATTERNS
 from sikka.ingest.parsers import contract_types
 from sikka.ingest.staging import StagedFeed, _quote
 
 ENUM_TOP = 8
+WITHHELD = "(value withheld: looks like personal data)"
+_PERSONAL = [re.compile(p) for p in PROHIBITED_PATTERNS.values()]
+
+
+def looks_personal(value: object) -> bool:
+    return isinstance(value, str) and any(p.search(value) for p in _PERSONAL)
 
 
 def profile_feed(con: duckdb.DuckDBPyConnection, feed: StagedFeed) -> dict[str, Any]:
@@ -56,6 +64,8 @@ def profile_feed(con: duckdb.DuckDBPyConnection, feed: StagedFeed) -> dict[str, 
                 f"SELECT {f}, count(*) AS n FROM {table} WHERE {f} IS NOT NULL "
                 f"GROUP BY {f} ORDER BY n DESC, {f} LIMIT {ENUM_TOP}"
             ).fetchall()
-            stats["top_values"] = [{"value": v, "count": int(n)} for v, n in top]
+            stats["top_values"] = [
+                {"value": WITHHELD if looks_personal(v) else v, "count": int(n)} for v, n in top
+            ]
         out["fields"].append(stats)
     return out
