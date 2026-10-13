@@ -6,6 +6,7 @@ check behaves the same on Windows, macOS and Linux.
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 import time
@@ -23,7 +24,8 @@ class Step:
 
 def fast_check_steps(*, with_coverage: bool = True) -> list[Step]:
     py = sys.executable
-    pytest_argv = [py, "-m", "pytest", "-q", "-m", "not slow and not perf"]
+    workers = str(max(1, min(4, os.cpu_count() or 1)))
+    pytest_argv = [py, "-m", "pytest", "-q", "-n", workers, "-m", "not slow and not perf"]
     if with_coverage:
         pytest_argv += [
             "--cov=sikka",
