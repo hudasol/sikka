@@ -1,0 +1,373 @@
+{
+ "fileType": "Plan",
+ "version": 1,
+ "groundStation": "QGroundControl",
+ "geoFence": {
+  "circles": [],
+  "polygons": [],
+  "version": 2
+ },
+ "rallyPoints": {
+  "points": [],
+  "version": 2
+ },
+ "mission": {
+  "version": 2,
+  "firmwareType": 12,
+  "vehicleType": 2,
+  "cruiseSpeed": 12.0,
+  "hoverSpeed": 5,
+  "globalPlanAltitudeMode": 1,
+  "plannedHomePosition": [
+   24.877199,
+   53.228761,
+   0
+  ],
+  "items": [
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 22,
+    "doJumpId": 1,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.877199,
+     53.228761,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 2,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.8775463,
+     53.2303583,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 3,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.8778937,
+     53.2319557,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 4,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.878241,
+     53.233553,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 5,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.8785887,
+     53.23515,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 6,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.8789363,
+     53.236747,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 7,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.879284,
+     53.238344,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 8,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.87963,
+     53.2399417,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 9,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.879976,
+     53.2415393,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 10,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.880322,
+     53.243137,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 11,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.8806643,
+     53.2447357,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 12,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.8810067,
+     53.2463343,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 13,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.881349,
+     53.247933,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 14,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.881686,
+     53.2495327,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 15,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.882023,
+     53.2511323,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 16,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.88236,
+     53.252732,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 16,
+    "doJumpId": 17,
+    "frame": 3,
+    "params": [
+     0,
+     0,
+     0,
+     null,
+     24.882753,
+     53.254624,
+     60.0
+    ],
+    "Altitude": 60.0,
+    "AltitudeMode": 1,
+    "AMSLAltAboveTerrain": null
+   },
+   {
+    "type": "SimpleItem",
+    "autoContinue": true,
+    "command": 20,
+    "doJumpId": 18,
+    "frame": 2,
+    "params": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  ]
+ },
+ "sikka": {
+  "mission_id": "M04",
+  "disclaimer": "for simulation and review only; real flights need the operator's own safety case and the regulator's approval",
+  "synthetic": true
+ }
+}

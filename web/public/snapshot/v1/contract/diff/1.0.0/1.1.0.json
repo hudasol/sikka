@@ -1,0 +1,1 @@
+{"changes":[{"detail":"new optional boolean field","feed":"crash_records","field":"work_zone","impact":"minor","kind":"added"}],"compatible":true,"declared_bump":"minor","new":"1.1.0","old":"1.0.0","required_bump":"minor"}

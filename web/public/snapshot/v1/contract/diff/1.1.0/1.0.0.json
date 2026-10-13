@@ -1,0 +1,1 @@
+{"changes":[{"detail":"field removed","feed":"crash_records","field":"work_zone","impact":"major","kind":"removed"}],"compatible":false,"declared_bump":"minor","new":"1.0.0","old":"1.1.0","required_bump":"major"}
