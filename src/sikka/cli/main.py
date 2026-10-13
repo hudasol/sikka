@@ -4,14 +4,16 @@ from __future__ import annotations
 
 import json
 import sys
+from pathlib import Path
 
 import typer
 
 from sikka import __version__
 from sikka.cli.checks import fast_check_steps, run_steps
 from sikka.cli.docs import collect_artefacts, stale_artefacts, write_artefacts
+from sikka.conformance import Source, build_report, render_html, run_validation
 from sikka.contract import diff_versions, render_diff_text, resolve_version
-from sikka.core import DEFAULT_SEED, Paths
+from sikka.core import DEFAULT_SEED, Paths, stable_json_dumps
 from sikka.synth import FAULTS, WorldConfig, build_world, inject, sample_files, write_world
 
 app = typer.Typer(
@@ -126,3 +128,50 @@ def generate(
     if samples:
         updated = write_artefacts(paths.root, sample_files())
         typer.echo(f"sample feeds: {len(updated)} files updated")
+
+
+@app.command()
+def validate(
+    files: list[Path] = typer.Argument(..., help="Feed files to validate."),
+    context: str = typer.Option(
+        "samples", help="Reference feeds for cross feed rules: 'samples' or 'none'."
+    ),
+    out: Path = typer.Option(Path("build/reports"), help="Folder for the JSON and HTML report."),
+) -> None:
+    """Validate feeds against the contract and write a JSON and an HTML report."""
+    paths = Paths()
+    missing = [str(f) for f in files if not f.is_file()]
+    if missing:
+        typer.echo(f"not found: {missing}", err=True)
+        raise typer.Exit(2)
+    names = {f.name for f in files}
+    references: list[Source] = []
+    if context == "samples":
+        clean = paths.samples / "clean"
+        references = [
+            Source.from_path(p)
+            for p in sorted(clean.iterdir())
+            if p.is_file() and p.name not in names
+        ]
+    result = run_validation([Source.from_path(f) for f in files], references)
+    try:
+        report = build_report(result)
+    finally:
+        result.close()
+    out.mkdir(parents=True, exist_ok=True)
+    stem = out / report["report_id"]
+    stem.with_suffix(".json").write_text(stable_json_dumps(report, indent=1) + "\n", "utf-8")
+    stem.with_suffix(".html").write_text(render_html(report), "utf-8")
+    typer.echo(report["notice"])
+    for fam in report["families"]:
+        typer.echo(
+            f"{fam['family']} {fam['name']:<28} rules failing {fam['rules_failing']:>2}  "
+            f"findings {fam['findings']}"
+        )
+    for s in report["scores"]:
+        if s["family"] == "ALL":
+            typer.echo(
+                f"{s['producer_id']}: {100 * s['estimate']:.1f} percent of records pass every "
+                f"family (95 percent interval {100 * s['low']:.1f} to {100 * s['high']:.1f})"
+            )
+    typer.echo(f"report {report['report_id']} written to {out}")

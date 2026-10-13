@@ -54,20 +54,20 @@ Arabic title: سجل مقاطع الطرق. Schema: `contract/v1.0.0/road_segmen
 
 | Field | Type | Unit | Allowed values | Required | Description | الوصف | Example | Rules |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `segment_id` | identifier |  |  | yes | Stable identifier of the road segment. | معرّف ثابت لمقطع الطريق. | `SEG-C1-001` |  |
-| `road_name_en` | string |  |  | yes | Road name in English. | اسم الطريق باللغة الإنجليزية. | `Corridor One` |  |
-| `road_name_ar` | string |  |  | yes | Road name in Arabic. | اسم الطريق باللغة العربية. | `الممر الأول` |  |
-| `road_class` | enum |  | motorway, trunk, primary, secondary | yes | Functional class of the road. | التصنيف الوظيفي للطريق. | `motorway` |  |
-| `length_m` | number | m | greater than 0 | yes | Segment length along the centre line. | طول المقطع على امتداد خط المنتصف. | `4200.0` |  |
-| `lane_count` | integer | lanes | 1 to 12 | yes | Number of through lanes in the direction(s) covered. | عدد المسارات المستمرة في الاتجاه أو الاتجاهات المشمولة. | `4` |  |
-| `speed_limit_kmh` | integer | km/h | 20 to 160 | yes | Posted speed limit. | الحد الأقصى المعلن للسرعة. | `120` |  |
-| `direction` | enum |  | both, forward, reverse | yes | Traffic direction the segment row describes. | اتجاه حركة المرور الذي يصفه سجل المقطع. | `both` |  |
-| `owner_producer_id` | identifier |  |  | yes | Producer responsible for maintaining this segment record. | الجهة المنتجة المسؤولة عن تحديث سجل هذا المقطع. | `PRODUCER_A` |  |
-| `geometry` | object |  |  | yes | Centre line geometry as a GeoJSON LineString. | الشكل الهندسي لخط المنتصف بصيغة GeoJSON LineString. | `{"coordinates":[[54.4,24.45],[54.41,24.46]],"type":"LineString"}` |  |
-| `geometry.type` | constant |  | LineString | yes | GeoJSON geometry type. Always LineString. | نوع الشكل الهندسي وفق GeoJSON، وهو دائما LineString. | `LineString` |  |
-| `geometry.coordinates` | list of positions | degrees |  | yes | Ordered positions as [lon, lat] pairs in decimal degrees. | مواقع مرتبة على شكل أزواج [خط الطول، خط العرض] بالدرجات العشرية. | `[[54.4,24.45],[54.41,24.46]]` |  |
-| `valid_from` | timestamp |  |  | yes | Start of validity of this segment definition, in UTC. | بداية سريان تعريف هذا المقطع بالتوقيت العالمي المنسق. | `2020-01-01T00:00:00Z` |  |
-| `valid_to` | timestamp |  |  | no | End of validity, in UTC. Absent while the definition is current. | نهاية سريان التعريف بالتوقيت العالمي المنسق. يُحذف الحقل ما دام التعريف ساريا. | `2027-01-01T00:00:00Z` |  |
+| `segment_id` | identifier |  |  | yes | Stable identifier of the road segment. | معرّف ثابت لمقطع الطريق. | `SEG-C1-001` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-S010`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `road_name_en` | string |  |  | yes | Road name in English. | اسم الطريق باللغة الإنجليزية. | `Corridor One` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V012`, `SK-X004` |
+| `road_name_ar` | string |  |  | yes | Road name in Arabic. | اسم الطريق باللغة العربية. | `الممر الأول` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V012`, `SK-X004` |
+| `road_class` | enum |  | motorway, trunk, primary, secondary | yes | Functional class of the road. | التصنيف الوظيفي للطريق. | `motorway` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `length_m` | number | m | greater than 0 | yes | Segment length along the centre line. | طول المقطع على امتداد خط المنتصف. | `4200.0` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `lane_count` | integer | lanes | 1 to 12 | yes | Number of through lanes in the direction(s) covered. | عدد المسارات المستمرة في الاتجاه أو الاتجاهات المشمولة. | `4` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `speed_limit_kmh` | integer | km/h | 20 to 160 | yes | Posted speed limit. | الحد الأقصى المعلن للسرعة. | `120` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `direction` | enum |  | both, forward, reverse | yes | Traffic direction the segment row describes. | اتجاه حركة المرور الذي يصفه سجل المقطع. | `both` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `owner_producer_id` | identifier |  |  | yes | Producer responsible for maintaining this segment record. | الجهة المنتجة المسؤولة عن تحديث سجل هذا المقطع. | `PRODUCER_A` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `geometry` | object |  |  | yes | Centre line geometry as a GeoJSON LineString. | الشكل الهندسي لخط المنتصف بصيغة GeoJSON LineString. | `{"coordinates":[[54.4,24.45],[54.41,24.46]],"type":"LineString"}` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `geometry.type` | constant |  | LineString | yes | GeoJSON geometry type. Always LineString. | نوع الشكل الهندسي وفق GeoJSON، وهو دائما LineString. | `LineString` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `geometry.coordinates` | list of positions | degrees |  | yes | Ordered positions as [lon, lat] pairs in decimal degrees. | مواقع مرتبة على شكل أزواج [خط الطول، خط العرض] بالدرجات العشرية. | `[[54.4,24.45],[54.41,24.46]]` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V003`, `SK-V005`, `SK-V006` |
+| `valid_from` | timestamp |  |  | yes | Start of validity of this segment definition, in UTC. | بداية سريان تعريف هذا المقطع بالتوقيت العالمي المنسق. | `2020-01-01T00:00:00Z` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S011`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `valid_to` | timestamp |  |  | no | End of validity, in UTC. Absent while the definition is current. | نهاية سريان التعريف بالتوقيت العالمي المنسق. يُحذف الحقل ما دام التعريف ساريا. | `2027-01-01T00:00:00Z` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S011`, `SK-V001`, `SK-V005`, `SK-V006` |
 
 ## Crash records (`crash_records`)
 
@@ -75,21 +75,21 @@ Arabic title: سجلات الحوادث. Schema: `contract/v1.0.0/crash_records.
 
 | Field | Type | Unit | Allowed values | Required | Description | الوصف | Example | Rules |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `crash_id` | identifier |  |  | yes | Identifier of the crash within the producer's feed. | معرّف الحادث ضمن ملف الجهة المنتجة. | `B-2023-000123` |  |
-| `producer_id` | identifier |  |  | yes | Producer that reported the crash. | الجهة المنتجة التي أبلغت عن الحادث. | `PRODUCER_B` |  |
-| `occurred_at` | timestamp |  |  | yes | When the crash occurred, in UTC. | وقت وقوع الحادث بالتوقيت العالمي المنسق. | `2023-05-14T17:42:00Z` |  |
-| `reported_at` | timestamp |  |  | yes | When the record entered the producer's system, in UTC. | وقت إدخال السجل في نظام الجهة المنتجة بالتوقيت العالمي المنسق. | `2023-05-14T19:05:00Z` |  |
-| `lat` | number | degrees | -90 to 90 | yes | Latitude of the crash location, WGS84. | خط عرض موقع الحادث وفق WGS84. | `24.4521` |  |
-| `lon` | number | degrees | -180 to 180 | yes | Longitude of the crash location, WGS84. | خط طول موقع الحادث وفق WGS84. | `54.4033` |  |
-| `segment_ref` | identifier |  |  | no | Segment the producer assigned the crash to, if any. | المقطع الذي نسبت إليه الجهة المنتجة الحادث، إن وجد. | `SEG-C1-001` |  |
-| `direction` | enum |  | forward, reverse | no | Travel direction of the first vehicle relative to the segment, if known. | اتجاه سير المركبة الأولى بالنسبة إلى المقطع، إن كان معروفا. | `forward` |  |
-| `severity` | enum |  | fatal, serious_injury, minor_injury, property_damage_only | yes | Most severe injury outcome of the crash. | أشد نتيجة إصابة نتجت عن الحادث. | `minor_injury` |  |
-| `vehicles_involved` | integer | vehicles | 1 to 20 | yes | Number of vehicles involved. | عدد المركبات المشاركة في الحادث. | `2` |  |
-| `collision_type` | enum |  | rear_end, side_impact, head_on, rollover, run_off_road, pedestrian, fixed_object, other | yes | Manner of collision. | نوع التصادم. | `rear_end` |  |
-| `contributing_factors` | list of enum |  | speeding, tailgating, sudden_swerving, fatigue, distraction, mechanical_failure, weather, other | yes | Coded contributing factors. Empty list when none were coded. | العوامل المساهمة المرمّزة. قائمة فارغة إذا لم يُرمّز أي عامل. | `["tailgating"]` |  |
-| `weather` | enum |  | clear, rain, fog, dust_sand, strong_wind, other | yes | Weather at the time of the crash. | حالة الطقس وقت وقوع الحادث. | `clear` |  |
-| `light_condition` | enum |  | daylight, dark_lit, dark_unlit, dawn_dusk | yes | Light condition at the time of the crash. | حالة الإضاءة وقت وقوع الحادث. | `daylight` |  |
-| `road_surface` | enum |  | dry, wet, sand_covered, damaged, other | yes | Road surface condition at the time of the crash. | حالة سطح الطريق وقت وقوع الحادث. | `dry` |  |
+| `crash_id` | identifier |  |  | yes | Identifier of the crash within the producer's feed. | معرّف الحادث ضمن ملف الجهة المنتجة. | `B-2023-000123` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-S010`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-X001`, `SK-X003` |
+| `producer_id` | identifier |  |  | yes | Producer that reported the crash. | الجهة المنتجة التي أبلغت عن الحادث. | `PRODUCER_B` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `occurred_at` | timestamp |  |  | yes | When the crash occurred, in UTC. | وقت وقوع الحادث بالتوقيت العالمي المنسق. | `2023-05-14T17:42:00Z` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S011`, `SK-T003`, `SK-T004`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V007`, `SK-X001`, `SK-X002` |
+| `reported_at` | timestamp |  |  | yes | When the record entered the producer's system, in UTC. | وقت إدخال السجل في نظام الجهة المنتجة بالتوقيت العالمي المنسق. | `2023-05-14T19:05:00Z` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S011`, `SK-T002`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V007` |
+| `lat` | number | degrees | -90 to 90 | yes | Latitude of the crash location, WGS84. | خط عرض موقع الحادث وفق WGS84. | `24.4521` | `SK-P001`, `SK-P002`, `SK-R002`, `SK-R003`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V003`, `SK-V004`, `SK-V005`, `SK-V006`, `SK-X001` |
+| `lon` | number | degrees | -180 to 180 | yes | Longitude of the crash location, WGS84. | خط طول موقع الحادث وفق WGS84. | `54.4033` | `SK-P001`, `SK-P002`, `SK-R002`, `SK-R003`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V003`, `SK-V004`, `SK-V005`, `SK-V006`, `SK-X001` |
+| `segment_ref` | identifier |  |  | no | Segment the producer assigned the crash to, if any. | المقطع الذي نسبت إليه الجهة المنتجة الحادث، إن وجد. | `SEG-C1-001` | `SK-P001`, `SK-P002`, `SK-R001`, `SK-R003`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-X005` |
+| `direction` | enum |  | forward, reverse | no | Travel direction of the first vehicle relative to the segment, if known. | اتجاه سير المركبة الأولى بالنسبة إلى المقطع، إن كان معروفا. | `forward` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `severity` | enum |  | fatal, serious_injury, minor_injury, property_damage_only | yes | Most severe injury outcome of the crash. | أشد نتيجة إصابة نتجت عن الحادث. | `minor_injury` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `vehicles_involved` | integer | vehicles | 1 to 20 | yes | Number of vehicles involved. | عدد المركبات المشاركة في الحادث. | `2` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `collision_type` | enum |  | rear_end, side_impact, head_on, rollover, run_off_road, pedestrian, fixed_object, other | yes | Manner of collision. | نوع التصادم. | `rear_end` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `contributing_factors` | list of enum |  | speeding, tailgating, sudden_swerving, fatigue, distraction, mechanical_failure, weather, other | yes | Coded contributing factors. Empty list when none were coded. | العوامل المساهمة المرمّزة. قائمة فارغة إذا لم يُرمّز أي عامل. | `["tailgating"]` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `weather` | enum |  | clear, rain, fog, dust_sand, strong_wind, other | yes | Weather at the time of the crash. | حالة الطقس وقت وقوع الحادث. | `clear` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `light_condition` | enum |  | daylight, dark_lit, dark_unlit, dawn_dusk | yes | Light condition at the time of the crash. | حالة الإضاءة وقت وقوع الحادث. | `daylight` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `road_surface` | enum |  | dry, wet, sand_covered, damaged, other | yes | Road surface condition at the time of the crash. | حالة سطح الطريق وقت وقوع الحادث. | `dry` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
 
 ## Traffic station counts (`traffic_counts`)
 
@@ -97,17 +97,17 @@ Arabic title: أعداد محطات العد المروري. Schema: `contract/v
 
 | Field | Type | Unit | Allowed values | Required | Description | الوصف | Example | Rules |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `station_id` | identifier |  |  | yes | Identifier of the counting station. | معرّف محطة العد المروري. | `STN-C1-004` |  |
-| `segment_ref` | identifier |  |  | yes | Segment the station measures. | المقطع الذي تقيسه المحطة. | `SEG-C1-004` |  |
-| `interval_start` | timestamp |  |  | yes | Start of the counting interval, in UTC. | بداية فترة العد بالتوقيت العالمي المنسق. | `2024-02-01T06:00:00Z` |  |
-| `interval_minutes` | integer | min | 1 to 60 | yes | Length of the counting interval. | طول فترة العد. | `15` |  |
-| `vehicle_count` | integer | vehicles | at least 0 | yes | Vehicles counted in the interval, all classes and lanes. | عدد المركبات المحسوبة في الفترة لجميع الفئات والمسارات. | `516` |  |
-| `mean_speed_kmh` | number | km/h | 0 to 250 | yes | Mean spot speed of counted vehicles. | متوسط السرعة اللحظية للمركبات المحسوبة. | `104.5` |  |
-| `occupancy_pct` | number | % | 0 to 100 | yes | Share of the interval the detector was occupied. | نسبة زمن الفترة التي كان فيها الكاشف مشغولا. | `7.5` |  |
-| `class_counts` | object |  |  | no | Counts by vehicle class, when the station classifies vehicles. | أعداد المركبات حسب الفئة، عندما تصنّف المحطة المركبات. | `{"bus":8,"car":410,"heavy_goods":35,"light_goods":60,"motorcycle":3}` |  |
-| `class_counts.car` | integer | vehicles | at least 0 | no | Passenger cars. | السيارات الخاصة. | `410` |  |
-| `class_counts.light_goods` | integer | vehicles | at least 0 | no | Light goods vehicles. | مركبات نقل البضائع الخفيفة. | `60` |  |
-| `class_counts.heavy_goods` | integer | vehicles | at least 0 | no | Heavy goods vehicles. | مركبات نقل البضائع الثقيلة. | `35` |  |
-| `class_counts.bus` | integer | vehicles | at least 0 | no | Buses and coaches. | الحافلات. | `8` |  |
-| `class_counts.motorcycle` | integer | vehicles | at least 0 | no | Motorcycles. | الدراجات النارية. | `3` |  |
-| `quality_flag` | enum |  | ok, estimated, suspect | yes | Producer's own quality flag for the interval. | مؤشر الجودة الذي تضعه الجهة المنتجة للفترة. | `ok` |  |
+| `station_id` | identifier |  |  | yes | Identifier of the counting station. | معرّف محطة العد المروري. | `STN-C1-004` | `SK-P001`, `SK-P002`, `SK-R004`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-S010`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `segment_ref` | identifier |  |  | yes | Segment the station measures. | المقطع الذي تقيسه المحطة. | `SEG-C1-004` | `SK-P001`, `SK-P002`, `SK-R001`, `SK-R004`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S009`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `interval_start` | timestamp |  |  | yes | Start of the counting interval, in UTC. | بداية فترة العد بالتوقيت العالمي المنسق. | `2024-02-01T06:00:00Z` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-S010`, `SK-S011`, `SK-T001`, `SK-T004`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V011`, `SK-V013` |
+| `interval_minutes` | integer | min | 1 to 60 | yes | Length of the counting interval. | طول فترة العد. | `15` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `vehicle_count` | integer | vehicles | at least 0 | yes | Vehicles counted in the interval, all classes and lanes. | عدد المركبات المحسوبة في الفترة لجميع الفئات والمسارات. | `516` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V010` |
+| `mean_speed_kmh` | number | km/h | 0 to 250 | yes | Mean spot speed of counted vehicles. | متوسط السرعة اللحظية للمركبات المحسوبة. | `104.5` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V002`, `SK-V005`, `SK-V006`, `SK-V008`, `SK-V010` |
+| `occupancy_pct` | number | % | 0 to 100 | yes | Share of the interval the detector was occupied. | نسبة زمن الفترة التي كان فيها الكاشف مشغولا. | `7.5` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006`, `SK-V009`, `SK-V010` |
+| `class_counts` | object |  |  | no | Counts by vehicle class, when the station classifies vehicles. | أعداد المركبات حسب الفئة، عندما تصنّف المحطة المركبات. | `{"bus":8,"car":410,"heavy_goods":35,"light_goods":60,"motorcycle":3}` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `class_counts.car` | integer | vehicles | at least 0 | no | Passenger cars. | السيارات الخاصة. | `410` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `class_counts.light_goods` | integer | vehicles | at least 0 | no | Light goods vehicles. | مركبات نقل البضائع الخفيفة. | `60` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `class_counts.heavy_goods` | integer | vehicles | at least 0 | no | Heavy goods vehicles. | مركبات نقل البضائع الثقيلة. | `35` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `class_counts.bus` | integer | vehicles | at least 0 | no | Buses and coaches. | الحافلات. | `8` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `class_counts.motorcycle` | integer | vehicles | at least 0 | no | Motorcycles. | الدراجات النارية. | `3` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |
+| `quality_flag` | enum |  | ok, estimated, suspect | yes | Producer's own quality flag for the interval. | مؤشر الجودة الذي تضعه الجهة المنتجة للفترة. | `ok` | `SK-P001`, `SK-P002`, `SK-S005`, `SK-S006`, `SK-S007`, `SK-S008`, `SK-V001`, `SK-V005`, `SK-V006` |

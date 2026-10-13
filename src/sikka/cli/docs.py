@@ -4,17 +4,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from sikka.conformance import render_rules_md, rules_by_field
 from sikka.contract import contract_artefacts
-
-
-def rules_by_field() -> dict[str, list[str]]:
-    """Map ``feed.field`` to rule ids. Filled in once the rule registry exists."""
-    return {}
 
 
 def collect_artefacts() -> dict[str, str]:
     """Every generated text artefact, keyed by path relative to the repository root."""
-    return dict(contract_artefacts(rules_by_field()))
+    files = dict(contract_artefacts(rules_by_field()))
+    files["docs/RULES.md"] = render_rules_md()
+    return files
 
 
 def write_artefacts(root: Path, files: dict[str, str]) -> list[str]:
