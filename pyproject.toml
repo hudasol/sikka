@@ -1,0 +1,118 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sikka"
+version = "0.1.0"
+description = "Open data contract checker and blackspot ranking tool for road crash and traffic feeds (synthetic data only, proposal seed)."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.13"
+authors = [{ name = "hudasol" }]
+dependencies = [
+  "pydantic>=2.9",
+  "typer>=0.12",
+  "numpy>=2.1",
+  "scipy>=1.14",
+  "statsmodels>=0.14.4",
+  "pandas>=2.2",
+  "duckdb>=1.1",
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+  "python-multipart>=0.0.12",
+  "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.7",
+  "mypy>=1.13",
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "hypothesis>=6.115",
+  "import-linter>=2.1",
+  "httpx>=0.27",
+  "pip-audit>=2.7",
+  "pandas-stubs>=2.2",
+]
+
+[project.scripts]
+sikka = "sikka.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sikka"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+extend-exclude = ["web", ".sikka"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "N", "C4", "PT"]
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["N802", "N806"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+mypy_path = "src"
+packages = ["sikka"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["scipy.*", "statsmodels.*", "duckdb.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+  "slow: long running tests excluded from the fast check",
+  "perf: performance budget tests",
+]
+
+[tool.coverage.run]
+source = ["sikka"]
+branch = true
+
+[tool.coverage.report]
+show_missing = false
+skip_covered = true
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError", "if __name__ == .__main__.:"]
+
+[tool.importlinter]
+root_package = "sikka"
+
+[[tool.importlinter.contracts]]
+name = "Layers point downward only"
+type = "layers"
+layers = [
+  "sikka.cli",
+  "sikka.evaluation",
+  "sikka.api",
+  "sikka.tasking",
+  "sikka.analytics",
+  "sikka.harmonise",
+  "sikka.conformance",
+  "sikka.ingest",
+  "sikka.synth",
+  "sikka.contract",
+  "sikka.core",
+]
+
+[[tool.importlinter.contracts]]
+name = "Product layers never read the synthetic world or its hidden truth"
+type = "forbidden"
+source_modules = [
+  "sikka.ingest",
+  "sikka.conformance",
+  "sikka.harmonise",
+  "sikka.analytics",
+  "sikka.tasking",
+  "sikka.api",
+]
+forbidden_modules = ["sikka.synth"]
