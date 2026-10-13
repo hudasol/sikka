@@ -11,7 +11,8 @@ from sikka import __version__
 from sikka.cli.checks import fast_check_steps, run_steps
 from sikka.cli.docs import collect_artefacts, stale_artefacts, write_artefacts
 from sikka.contract import diff_versions, render_diff_text, resolve_version
-from sikka.core import Paths
+from sikka.core import DEFAULT_SEED, Paths
+from sikka.synth import FAULTS, WorldConfig, build_world, inject, sample_files, write_world
 
 app = typer.Typer(
     name="sikka",
@@ -97,3 +98,31 @@ def docs_build(
     for rel in written:
         typer.echo(f"wrote {rel}")
     typer.echo(f"{len(written)} of {len(files)} artefacts updated")
+
+
+@app.command()
+def generate(
+    seed: int = typer.Option(DEFAULT_SEED, help="Seed of the synthetic world."),
+    faults: str = typer.Option("", help="Comma separated fault ids to inject, or 'all'."),
+    rate: float = typer.Option(0.05, help="Injection rate for the chosen faults."),
+    out: str = typer.Option("", help="Output folder. Default: build/world-SEED."),
+    samples: bool = typer.Option(True, help="Also rewrite the committed sample feeds."),
+) -> None:
+    """Generate a synthetic world with feeds and a hidden ground truth sidecar."""
+    paths = Paths()
+    chosen = sorted(FAULTS) if faults == "all" else [f for f in faults.split(",") if f]
+    unknown = [f for f in chosen if f not in FAULTS]
+    if unknown:
+        typer.echo(f"unknown fault ids: {unknown}", err=True)
+        raise typer.Exit(2)
+    world = build_world(WorldConfig(seed=seed))
+    if chosen:
+        world = inject(world, dict.fromkeys(chosen, rate), seed)
+    target = paths.root / (out or f"build/world-{seed}")
+    written = write_world(world, target)
+    typer.echo(
+        f"synthetic world seed {seed}: {len(written)} files in {target.relative_to(paths.root)}"
+    )
+    if samples:
+        updated = write_artefacts(paths.root, sample_files())
+        typer.echo(f"sample feeds: {len(updated)} files updated")
