@@ -2,7 +2,7 @@
 
 Road crash and traffic data are held by several entities: road authorities, police, emirate level authorities and health services. Each keeps its own formats, identifiers, time conventions and units, so the same crash can be reported several times in different ways, and some crashes are reported by nobody. Public statements on federal roads have named data sharing between entities and the lack of a common framework as challenges ([docs/CONTEXT.md](docs/CONTEXT.md)). Without a shared contract and honest uncertainty, a list of "most dangerous road segments" can reflect who reports what rather than where crashes happen.
 
-Sikka is an open source proposal seed that explores one answer on **synthetic data only**. It defines an open data contract for three feeds (road segments, crash records, traffic station counts), checks feeds from several producers against it with 39 explained rules, harmonises them into one canonical model with lineage for every record, resolves crashes reported more than once (abstaining when the evidence is weak), ranks road segments by potential for safety improvement with Empirical Bayes and rank intervals that account for data quality, and plans drone survey missions where the ranking is least certain. It was prepared by a student and has no endorsement from any entity.
+Sikka is an open source proposal seed that explores one answer on **synthetic data only**. It defines an open data contract for three feeds (road segments, crash records, traffic station counts), checks feeds from several producers against it with 39 explained rules, harmonises them into one canonical model with lineage for every record, resolves crashes reported more than once (abstaining when the evidence is weak), ranks road segments by potential for safety improvement with Empirical Bayes and rank intervals that account for data quality, and plans drone survey missions where the ranking is least certain. It was prepared by a student and has no endorsement from any entity. Not every part works as hoped: on the synthetic world, Empirical Bayes did not beat a simple crash rate at finding planted blackspots, the data quality step did not widen the rank intervals, and value of information tasking reduced rank uncertainty only slightly. All of this is reported in [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## Run it
 
@@ -14,7 +14,7 @@ py -3.13 -m venv .venv; .\.venv\Scripts\pip install -r requirements.lock; .\.ven
 npm --prefix web install; npm --prefix web run dev
 ```
 
-Then open http://localhost:5173. On macOS or Linux use `python3.13 -m venv .venv` and `.venv/bin/` instead of `.\.venv\Scripts\`.
+The second command keeps running (it is the live API), so run the third one in a second terminal. Then open http://localhost:5173 (the web app uses port 5173 and stops if it is taken, because the API only accepts that origin). On macOS or Linux use `python3.13 -m venv .venv` and `.venv/bin/` instead of `.\.venv\Scripts\`.
 
 **Static demo** (no backend, deployable on any free static host): `npm --prefix web run build` writes `web/dist`, which reads the precomputed snapshot in `web/public/snapshot` (rebuilt with `sikka snapshot`).
 
