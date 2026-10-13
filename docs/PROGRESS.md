@@ -13,8 +13,8 @@ Status of the build phases. Each phase is tagged when its gate holds.
 | P6 | Preregistration, then L5 analytics | done | v0.7.0 | `docs/PREREGISTRATION.md` committed before any analytics code; EB matches two hand worked examples; abstention reasons tested case by case; ranking of 240 segments with 4,000 draws passes the 10 second performance test |
 | P7 | Evaluation E1 to E4 | done | v0.8.0 | `sikka eval` on seeds 2001 to 2020 wrote `results/e1` to `e4`; `docs/EVALUATION.md` is generated from them and a test fails if it is stale; 23 predictions hit and 2 missed (P3.2, P3.6), all reported |
 | P8 | Full web app | done | v0.9.0 | Nine screens in English and Arabic, light and dark; 83 Vitest tests; 12 Playwright tests with axe (WCAG 2.2 AA tags) pass on the static build with no foreign requests and no console errors; screenshots reviewed in all four combinations |
-| P9 | L6 tasking and E5 | next | | |
-| P10 | Hardening, review, documentation | planned | | |
+| P9 | L6 tasking and E5 | done | v0.10.0 | Every planned mission's `.plan` passes the structural validator (API test); the validator rejects every single structural defect (property test); E5 ran on seeds 2001 to 2020 and its three predictions missed, as reported in EVALUATION |
+| P10 | Hardening, review, documentation | next | | |
 
 ## In progress
 
@@ -22,7 +22,7 @@ Nothing in progress.
 
 ## Next
 
-P9: tasking layer, exports with a validated .plan, E5 and the Tasking screen.
+P10: performance measurements, independent review, fixes, final documentation and the private build report.
 
 ## Blockers
 
