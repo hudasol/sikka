@@ -1,7 +1,7 @@
 {
   "name": "sikka-web",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Web app for Sikka. Synthetic data only. A proposal seed, not an official service.",
   "license": "Apache-2.0",
   "type": "module",

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sikka"
-version = "0.1.0"
+version = "1.0.0"
 description = "Open data contract checker and blackspot ranking tool for road crash and traffic feeds (synthetic data only, proposal seed)."
 readme = "README.md"
 license = "Apache-2.0"
