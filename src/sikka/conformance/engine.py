@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import io
+import tempfile
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
@@ -87,6 +88,23 @@ class ValidationResult:
         self.con.close()
 
 
+DUCKDB_MEMORY_LIMIT = "2GB"
+DUCKDB_THREADS = 4
+
+
+def connect() -> duckdb.DuckDBPyConnection:
+    """In memory DuckDB with a bounded memory budget that spills to a temp folder."""
+    spill = Path(tempfile.gettempdir()) / "sikka-duckdb"
+    spill.mkdir(parents=True, exist_ok=True)
+    return duckdb.connect(
+        config={
+            "memory_limit": DUCKDB_MEMORY_LIMIT,
+            "threads": DUCKDB_THREADS,
+            "temp_directory": str(spill),
+        }
+    )
+
+
 def _missing_context(rule: Rule, ctx: RuleContext) -> str | None:
     if "registry" in rule.needs and not ctx.has_registry:
         return "no road segment registry in the run"
@@ -123,7 +141,7 @@ def run_validation(
     """Validate ``sources``; ``references`` give context (registry, other producers) only."""
     started = time.perf_counter()
     config = config or RuleConfig()
-    con = duckdb.connect()
+    con = connect()
     feeds: list[StagedFeed] = []
     for i, (source, is_ref) in enumerate(
         [(s, False) for s in sources] + [(s, True) for s in references or []]
