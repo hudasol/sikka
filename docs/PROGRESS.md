@@ -10,8 +10,8 @@ Status of the build phases. Each phase is tagged when its gate holds.
 | P3 | L2 ingestion and L3 conformance | done | v0.4.0 | 39 rules in six families, each with a unit and a property based test; every fault F01 to F25 maps to at least one registered rule (test); `sikka eval --smoke` writes `build/eval-smoke/e1_fault_detection.json` |
 | P4 | Walking skeleton: API, web shell, static snapshot | done | v0.5.0 | API tests for every endpoint and the problem+json contract pass; 75 web unit tests and 12 Playwright tests with axe pass on the static build; live mode checked in a browser with `sikka serve` (overview and sample validation) |
 | P5 | L4 harmonisation and lineage | done | v0.6.0 | Harmonisation tests pass; `GET /v1/lineage/{id}` serves every canonical crash, exposure estimate and segment; an E2 smoke run on seed 1001 scores cluster level precision, recall and abstention against the ground truth (numbers are reported in P7, not here) |
-| P6 | Preregistration, then L5 analytics | next | | |
-| P7 | Evaluation E1 to E4 | planned | | |
+| P6 | Preregistration, then L5 analytics | done | v0.7.0 | `docs/PREREGISTRATION.md` committed before any analytics code; EB matches two hand worked examples; abstention reasons tested case by case; ranking of 240 segments with 4,000 draws passes the 10 second performance test |
+| P7 | Evaluation E1 to E4 | next | | |
 | P8 | Full web app | planned | | |
 | P9 | L6 tasking and E5 | planned | | |
 | P10 | Hardening, review, documentation | planned | | |
@@ -22,7 +22,7 @@ Nothing in progress.
 
 ## Next
 
-P6: commit docs/PREREGISTRATION.md first, then the safety performance function, Empirical Bayes, rank intervals, quality propagation, abstention, baselines and sensitivity.
+P7: run E1 to E4 on seeds 2001 to 2020 exactly as preregistered, render docs/EVALUATION.md from results/*.json with hits and misses, and add the test that ties document numbers to the result files.
 
 ## Blockers
 
