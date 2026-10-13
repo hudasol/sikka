@@ -96,13 +96,15 @@ def connect() -> duckdb.DuckDBPyConnection:
     """In memory DuckDB with a bounded memory budget that spills to a temp folder."""
     spill = Path(tempfile.gettempdir()) / "sikka-duckdb"
     spill.mkdir(parents=True, exist_ok=True)
-    return duckdb.connect(
+    con = duckdb.connect(
         config={
             "memory_limit": DUCKDB_MEMORY_LIMIT,
             "threads": DUCKDB_THREADS,
             "temp_directory": str(spill),
         }
     )
+    con.execute("SET enable_progress_bar = false")
+    return con
 
 
 def _missing_context(rule: Rule, ctx: RuleContext) -> str | None:
