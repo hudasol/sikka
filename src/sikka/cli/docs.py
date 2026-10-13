@@ -6,12 +6,28 @@ from pathlib import Path
 
 from sikka.conformance import render_rules_md, rules_by_field
 from sikka.contract import contract_artefacts
+from sikka.core import Paths, stable_json_dumps
+from sikka.evaluation.predictions import judge
+from sikka.evaluation.render import load_results, render_evaluation
 
 
 def collect_artefacts() -> dict[str, str]:
     """Every generated text artefact, keyed by path relative to the repository root."""
     files = dict(contract_artefacts(rules_by_field()))
     files["docs/RULES.md"] = render_rules_md()
+    results = load_results(Paths().results)
+    if results:
+        files["docs/EVALUATION.md"] = render_evaluation(results)
+        files["results/predictions.json"] = (
+            stable_json_dumps(
+                {
+                    "notice": "Synthetic data only. Verdicts for the preregistered predictions.",
+                    "predictions": judge(results),
+                },
+                indent=1,
+            )
+            + "\n"
+        )
     return files
 
 

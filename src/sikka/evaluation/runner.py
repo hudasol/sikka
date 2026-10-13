@@ -12,6 +12,7 @@ from sikka.evaluation.e1 import run_e1
 from sikka.evaluation.e2 import run_e2
 from sikka.evaluation.e3 import run_e3
 from sikka.evaluation.e4 import run_e4
+from sikka.evaluation.e5 import run_e5
 
 EXPERIMENT_SEED_BASE = 2000
 SMOKE_SEED = 1001
@@ -65,6 +66,8 @@ def run_experiments(
             written.append(_write(out_dir, "e3_blackspot_ranking", run_e3(chosen, workers=workers)))
         elif name == "e4":
             written.append(_write(out_dir, "e4_robustness", run_e4(chosen, workers=workers)))
+        elif name == "e5":
+            written.append(_write(out_dir, "e5_tasking", run_e5(chosen, workers=workers)))
         else:
             raise ValueError(f"unknown experiment {name!r}")
     return written
