@@ -9,7 +9,6 @@ from __future__ import annotations
 import pandas as pd
 
 from sikka.conformance.context import RuleContext
-from sikka.conformance.fields import top_level
 from sikka.conformance.registry import Example, Rule, register
 from sikka.conformance.rules.structural import ALL, sql_list, union
 from sikka.contract import PROHIBITED_PATTERNS
@@ -49,23 +48,33 @@ register(
 )
 
 
-def p002(ctx: RuleContext) -> pd.DataFrame:
-    ft = ctx.feed.feed_type
-    assert ft is not None
-    allowed = sql_list(list(top_level(ft)))
-    named = [n for n in ("road_name_en", "road_name_ar") if n in top_level(ft)]
-    value_sources = [
+def p002(ctx: RuleContext, *, prefilter: bool = True) -> pd.DataFrame:
+    """Scan every value of every field, contract or not, nested objects and lists included.
+
+    The patterns are first run once over the raw line. A raw line without a backslash
+    and without a number in exponent form holds every decoded value verbatim, between
+    characters that are not word characters, so a value can only match when its line
+    matches. Lines with escapes or exponents always get the field by field scan.
+    """
+    combined = "|".join(f"(?:{p})" for _, p in sorted(PROHIBITED_PATTERNS.items()))
+    combined = combined.replace("'", "''")
+    candidates = (
+        f"SELECT _row, _raw, _keys FROM {ctx.table} WHERE strpos(_raw, chr(92)) > 0 OR "
+        f"regexp_matches(_raw, '[0-9][eE][-+]?[0-9]') OR regexp_matches(_raw, '{combined}')"
+        if prefilter
+        else f"SELECT _row, _raw, _keys FROM {ctx.table}"
+    )
+    value_sources = (
         f"SELECT _row, k, json_extract_string(_raw, '$.\"' || replace(k, '\"', '') || '\"') AS v "
-        f"FROM (SELECT _row, _raw, unnest(_keys) AS k FROM {ctx.table}) WHERE k NOT IN {allowed}"
-    ]
-    value_sources += [f"SELECT _row, '{n}' AS k, {n} AS v FROM {ctx.table}" for n in named]
+        f"FROM (SELECT _row, _raw, unnest(_keys) AS k FROM ({candidates}))"
+    )
     selects = []
     for label, pattern in sorted(PROHIBITED_PATTERNS.items()):
         safe = pattern.replace("'", "''")
         selects.append(
             f"SELECT _row, NULL AS series, k AS field, 'value matches the {label} pattern; "
-            f"record quarantined' AS detail FROM ({' UNION ALL '.join(value_sources)}) WHERE v "
-            f"IS NOT NULL AND regexp_matches(v, '{safe}')"
+            f"record quarantined' AS detail FROM ({value_sources}) WHERE v IS NOT NULL AND "
+            f"regexp_matches(v, '{safe}')"
         )
     frame = union(ctx, selects)
     return frame.drop_duplicates(subset=["_row", "field"]).reset_index(drop=True)
@@ -77,8 +86,8 @@ register(
         "P",
         "No personal data patterns in values",
         "error",
-        "Unknown fields and name fields hold no value that looks like a UAE phone number, an "
-        "identity card number or an email address.",
+        "No value in any field, including identifiers, enumerations and lists, looks like a "
+        "UAE phone number, an identity card number or an email address.",
         "Personal data can arrive under an innocent field name such as contact or reference.",
         "Remove the value at the source. The record is quarantined until then.",
         ALL,

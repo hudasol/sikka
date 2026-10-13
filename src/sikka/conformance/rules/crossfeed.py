@@ -120,13 +120,21 @@ def x003(ctx: RuleContext) -> pd.DataFrame:
         f"{x_km('lon__n')} AS x, {y_km('lat__n')} AS y, severity FROM {ctx.table} WHERE "
         f"occurred_at__ts IS NOT NULL AND lat__n IS NOT NULL AND lon__n IS NOT NULL"
     )
+    # Two records within the window fall into the same or a neighbouring time bucket of
+    # the window's width, so an equality join on the bucket (each record of ``a`` is
+    # repeated for its own bucket and both neighbours) finds every candidate pair exactly
+    # once. A join on ranges alone compares every pair of rows.
+    bucket = f"CAST(floor(ts / {win}) AS BIGINT)"
+    a_side = f"SELECT *, {bucket} + d AS tb FROM ({pts}), (VALUES (-1), (0), (1)) AS v(d)"
+    b_side = f"SELECT *, {bucket} AS tb FROM ({pts})"
     return union(
         ctx,
         [
             f"SELECT a._row, NULL AS series, 'crash_id' AS field, 'near duplicate of row ' || "
-            f"min(b._row) AS detail FROM ({pts}) a JOIN ({pts}) b ON b.ts BETWEEN a.ts - {win} "
+            f"min(b._row) AS detail FROM ({a_side}) a JOIN ({b_side}) b ON a.tb = b.tb AND "
+            f"a.severity IS NOT DISTINCT FROM b.severity AND b.ts BETWEEN a.ts - {win} "
             f"AND a.ts + {win} AND b.x BETWEEN a.x - {km} AND a.x + {km} AND b.y BETWEEN a.y - "
-            f"{km} AND a.y + {km} AND a.severity IS NOT DISTINCT FROM b.severity AND "
+            f"{km} AND a.y + {km} AND "
             f"(coalesce(b.rts, 0), b._row) < (coalesce(a.rts, 0), a._row) WHERE "
             f"sqrt(power(a.x - b.x, 2) + power(a.y - b.y, 2)) <= {km} GROUP BY a._row"
         ],

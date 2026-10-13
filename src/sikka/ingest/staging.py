@@ -58,16 +58,19 @@ def json_path(field: str) -> str:
 
 
 def typed_columns(feed_type: str | None) -> list[str]:
-    """SQL select list for the typed table of a feed type."""
+    """SQL select list for the typed table of a feed type.
+
+    It reads from :func:`typed_source`, which parses each line once and extracts every
+    contract path into the lists ``_s`` (values as text) and ``_t`` (JSON types).
+    """
     cols = ["_row", "_raw", "json_keys(_raw) AS _keys"]
     if feed_type is None:
         return cols
     ts_regex = UTC_TIMESTAMP_PATTERN.replace("'", "''")
-    for field, kind in contract_types(feed_type).items():
-        path = json_path(field)
+    for i, (field, kind) in enumerate(contract_types(feed_type).items(), 1):
         name = field
-        t = f"json_type(_raw, '{path}')"
-        s = f"json_extract_string(_raw, '{path}')"
+        t = f"_t[{i}]"
+        s = f"_s[{i}]"
         cols.append(f"{s} AS {_quote(name)}")
         cols.append(f"{t} AS {_quote(name + '__t')}")
         if kind in {"number", "integer"}:
@@ -82,6 +85,19 @@ def typed_columns(feed_type: str | None) -> list[str]:
                 f"AS {_quote(name + '__ts')}"
             )
     return cols
+
+
+def typed_source(feed_type: str | None, raw_table: str) -> str:
+    """Valid rows of ``raw_table`` with every contract path extracted in one parse."""
+    if feed_type is None:
+        return f"SELECT _row, _raw FROM {raw_table} WHERE json_valid(_raw)"
+    paths = ", ".join(
+        "'" + json_path(f).replace("'", "''") + "'" for f in contract_types(feed_type)
+    )
+    return (
+        f"SELECT _row, _raw, json_extract_string(_raw, [{paths}]) AS _s, "
+        f"json_type(_raw, [{paths}]) AS _t FROM {raw_table} WHERE json_valid(_raw)"
+    )
 
 
 def stage(
@@ -117,9 +133,8 @@ def stage(
             flush()
     flush()
     select = ", ".join(typed_columns(parsed.feed_type))
-    con.execute(
-        f"CREATE OR REPLACE TABLE {key} AS SELECT {select} FROM {raw} WHERE json_valid(_raw)"
-    )
+    source = typed_source(parsed.feed_type, raw)
+    con.execute(f"CREATE OR REPLACE TABLE {key} AS SELECT {select} FROM ({source})")
     con.execute(
         f"CREATE OR REPLACE TABLE {key}_invalid AS SELECT _row FROM {raw} "
         "WHERE NOT json_valid(_raw)"
