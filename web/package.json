@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5173 --strictPort",
     "dev:static": "vite --mode static",
     "build": "tsc --noEmit && vite build --mode static",
     "build:live": "tsc --noEmit && vite build",

@@ -292,10 +292,12 @@ def run_all(
         ("docs build", ["docs", "build"]),
         ("snapshot", ["snapshot"]),
         ("check", ["check"]),
+        ("slow and performance tests", ["-m", "pytest", "-q", "-m", "slow or perf"]),
     ]
     for name, args in steps:
-        typer.echo(f"==> sikka {name}")
-        code = subprocess.call([sys.executable, "-m", "sikka.cli", *args], cwd=paths.root)
+        typer.echo(f"==> {name}")
+        command = args if args[0] == "-m" else ["-m", "sikka.cli", *args]
+        code = subprocess.call([sys.executable, *command], cwd=paths.root)
         if code != 0:
             typer.echo(f"sikka {name} failed with exit code {code}", err=True)
             raise typer.Exit(code)

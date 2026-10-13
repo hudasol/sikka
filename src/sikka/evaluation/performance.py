@@ -23,7 +23,15 @@ ROWS = 1_000_000
 
 
 def big_crash_feed(samples: Path, path: Path, rows: int = ROWS) -> None:
-    """Repeat the clean producer B records with unique ids until ``rows`` lines."""
+    """Repeat the clean producer B records with unique ids until ``rows`` lines.
+
+    Each repetition shifts both timestamps by a whole number of hours, so copies are
+    not near duplicates of each other (which would make the feed unlike real data).
+    """
+    from datetime import timedelta
+
+    from sikka.core import format_utc, parse_utc
+
     source = (samples / "clean" / "crash_records_producer_b.ndjson").read_text("utf-8")
     lines = source.splitlines()
     header = json.loads(lines[0])
@@ -32,8 +40,12 @@ def big_crash_feed(samples: Path, path: Path, rows: int = ROWS) -> None:
     with path.open("w", encoding="utf-8", newline="\n") as out:
         out.write(json.dumps(header) + "\n")
         for i in range(rows):
-            record = dict(records[i % len(records)])
+            copy, k = divmod(i, len(records))
+            record = dict(records[k])
+            shift = timedelta(hours=copy)
             record["crash_id"] = f"PB-{i + 1:09d}"
+            record["occurred_at"] = format_utc(parse_utc(record["occurred_at"]) + shift)
+            record["reported_at"] = format_utc(parse_utc(record["reported_at"]) + shift)
             out.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
@@ -42,8 +54,7 @@ def measure(paths: Paths | None = None) -> dict[str, Any]:
     work = paths.build / "perf"
     work.mkdir(parents=True, exist_ok=True)
     big = work / "crash_records_1m.ndjson"
-    if not big.is_file():
-        big_crash_feed(paths.samples, big)
+    big_crash_feed(paths.samples, big)
     refs = [
         Source.from_path(p)
         for p in sorted((paths.samples / "clean").iterdir())
